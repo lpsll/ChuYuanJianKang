@@ -1,0 +1,10 @@
+package com.htlc.cyjk.app.util;
+
+public interface Constant {
+    /*core*/
+    String REQUEST_SUCCESS = "1";
+    String REQUEST_ERROR = "0";
+    /*timer*/
+    int VERIFICATION_TIME = 60;
+
+}

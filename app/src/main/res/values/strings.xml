@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">出院健康</string>
+
+    <string name="fragment_first">自我管理</string>
+    <string name="fragment_first_title">自我管理</string>
+    <string-array name="fragment_first_children">
+        <item>病情体征</item>
+        <item>日常</item>
+        <item>用药情况</item>
+    </string-array>
+    <string name="fragment_second">我的医生</string>
+    <string name="fragment_second_title">通讯录</string>
+    <string name="fragment_third">健康知识</string>
+    <string name="fragment_fourth">我的</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ChuYuanJianKang.iml" filepath="$PROJECT_DIR$/ChuYuanJianKang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library_strip/library_strip.iml" filepath="$PROJECT_DIR$/library_strip/library_strip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pull-to-refresh/pull-to-refresh.iml" filepath="$PROJECT_DIR$/pull-to-refresh/pull-to-refresh.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,49 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+    <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@android:color/transparent</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabPaddingStart">0dp</item>
+        <item name="tabPaddingEnd">0dp</item>
+        <item name="tabBackground">@android:color/white</item>
+    </style>
+    <style name="TitleBarRelative">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">88px</item>
+        <item name="android:background">@color/bg_blue</item>
+    </style>
+    <style name="TitleBarRelativeMiddleText">
+        <item name="android:id">@id/text_title</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">32px</item>
+    </style>
+    <!--<style name="TitleBarRelativeLeftImage">
+        <item name="android:id">@id/image_back</item>
+        <item name="android:layout_width">75px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingLeft">28px</item>
+        <item name="android:paddingRight">28px</item>
+        <item name="android:paddingTop">28px</item>
+        <item name="android:paddingBottom">28px</item>
+        <item name="android:src">@mipmap/icon_back</item>
+    </style>-->
+    <style name="ScrollView">
+        <item name="android:id">@id/scroll_view</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:fillViewport">true</item>
+        <item name="android:background">@color/bg_gray</item>
+        <item name="ptrAnimationStyle">flip</item>
+    </style>
+    <style name="ScrollViewRoot">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+</resources>
