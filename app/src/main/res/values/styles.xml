@@ -15,7 +15,7 @@
         <item name="android:background">@color/bg_blue</item>
     </style>
     <style name="TitleBarRelativeMiddleText">
-        <item name="android:id">@id/text_title</item>
+        <item name="android:id">@id/textTitle</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
@@ -33,10 +33,12 @@
         <item name="android:src">@mipmap/icon_back</item>
     </style>-->
     <style name="ScrollView">
-        <item name="android:id">@id/scroll_view</item>
+        <item name="android:id">@id/scrollView</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:scrollbars">none</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:overScrollMode">never</item>
         <item name="android:fillViewport">true</item>
         <item name="android:background">@color/bg_gray</item>
         <item name="ptrAnimationStyle">flip</item>
@@ -46,4 +48,23 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">vertical</item>
     </style>
+    <style name="GridView">
+        <item name="android:id">@id/gridView</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+    </style>
+    <style name="ListView">
+        <item name="android:id">@id/listView</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+    </style>
+
 </resources>

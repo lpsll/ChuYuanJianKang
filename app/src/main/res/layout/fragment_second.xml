@@ -15,7 +15,7 @@
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
-        android:id="@+id/scroll_view"
+        android:id="@+id/scrollView"
         style="@style/ScrollView"
         >
         <com.zhy.autolayout.AutoLinearLayout

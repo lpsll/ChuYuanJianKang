@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.htlc.cyjk.R;
-import com.htlc.cyjk.app.adapter.FirstChildAdapter;
+import com.htlc.cyjk.app.adapter.FourthAdapter;
 import com.htlc.cyjk.app.util.LogUtil;
 
 import java.util.ArrayList;
@@ -20,16 +20,18 @@ import java.util.ArrayList;
 /**
  * Created by sks on 2016/1/27.
  */
-public class FirstChildFragment extends HomeFragment{
+public class FourthFragment extends HomeFragment{
     private PullToRefreshScrollView mScrollView;
-    private GridView mGridView;
+
+    private ListView mListView;
     private ArrayList mList = new ArrayList();
     private BaseAdapter mAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_first_child,null);
+        View view = inflater.inflate(R.layout.fragment_fourth,null);
         setupView(view);
+        
         return view;
     }
 
@@ -41,11 +43,11 @@ public class FirstChildFragment extends HomeFragment{
                 mScrollView.getRefreshableView().smoothScrollTo(0, 0);
             }
         });
-        mScrollView.setMode(PullToRefreshBase.Mode.DISABLED);
+        mScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         mScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                LogUtil.i(FirstChildFragment.this, "Home fragment 刷新。。。。。。");
+                LogUtil.i(FourthFragment.this, "Home fragment 刷新。。。。。。");
                 if (refreshView.isShownHeader()) {
                     LogUtil.i("refreshView", "pull-to-refresh-------------------------------------------");
                     initData();
@@ -57,10 +59,9 @@ public class FirstChildFragment extends HomeFragment{
             }
         });
 
-        //---------------------------------------
-        mGridView = (GridView) view.findViewById(R.id.gridView);
-        mAdapter = new FirstChildAdapter(mList, getActivity());
-        mGridView.setAdapter(mAdapter);
+        mListView = (ListView) view.findViewById(R.id.listView);
+        mAdapter = new FourthAdapter(mList, getActivity());
+        mListView.setAdapter(mAdapter);
         initData();
     }
 

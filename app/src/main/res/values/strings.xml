@@ -11,5 +11,7 @@
     <string name="fragment_second">我的医生</string>
     <string name="fragment_second_title">通讯录</string>
     <string name="fragment_third">健康知识</string>
+    <string name="fragment_third_title">健康知识</string>
     <string name="fragment_fourth">我的</string>
+    <string name="fragment_fourth_title">个人中心</string>
 </resources>

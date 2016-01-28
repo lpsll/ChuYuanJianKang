@@ -21,7 +21,13 @@ public class SecondFragment extends HomeFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second,null);
-        mScrollView = (PullToRefreshScrollView) view.findViewById(R.id.scroll_view);
+        setupView(view);
+        
+        return view;
+    }
+
+    private void setupView(View view) {
+        mScrollView = (PullToRefreshScrollView) view.findViewById(R.id.scrollView);
         mScrollView.getRefreshableView().post(new Runnable() {
             @Override
             public void run() {
@@ -43,8 +49,6 @@ public class SecondFragment extends HomeFragment{
                 }
             }
         });
-        
-        return view;
     }
 
     private void initData() {

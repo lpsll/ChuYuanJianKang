@@ -7,7 +7,10 @@ import android.support.v4.view.ViewPager;
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.adapter.HomePagerAdapter;
 import com.htlc.cyjk.app.fragment.FirstFragment;
+import com.htlc.cyjk.app.fragment.FourthFragment;
 import com.htlc.cyjk.app.fragment.HomeFragment;
+import com.htlc.cyjk.app.fragment.SecondFragment;
+import com.htlc.cyjk.app.fragment.ThirdFragment;
 
 import java.util.ArrayList;
 
@@ -29,9 +32,9 @@ public class MainActivity extends BaseActivity {
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         ArrayList<HomeFragment> pageFragments = new ArrayList<>();
         pageFragments.add(HomeFragment.newInstance(FirstFragment.class, getString(R.string.fragment_first), R.drawable.tab_first_selector));
-        pageFragments.add(HomeFragment.newInstance(FirstFragment.class, getString(R.string.fragment_second),  R.drawable.tab_second_selector));
-        pageFragments.add(HomeFragment.newInstance(FirstFragment.class, getString(R.string.fragment_third),  R.drawable.tab_third_selector));
-        pageFragments.add(HomeFragment.newInstance(FirstFragment.class, getString(R.string.fragment_fourth),  R.drawable.tab_fourth_selector));
+        pageFragments.add(HomeFragment.newInstance(SecondFragment.class, getString(R.string.fragment_second),  R.drawable.tab_second_selector));
+        pageFragments.add(HomeFragment.newInstance(ThirdFragment.class, getString(R.string.fragment_third),  R.drawable.tab_third_selector));
+        pageFragments.add(HomeFragment.newInstance(FourthFragment.class, getString(R.string.fragment_fourth),  R.drawable.tab_fourth_selector));
 
         HomePagerAdapter pagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), pageFragments);
         mViewPager.setAdapter(pagerAdapter);

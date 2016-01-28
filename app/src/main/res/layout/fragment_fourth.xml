@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        style="@style/TitleBarRelative">
+        <TextView
+            android:id="@+id/text_title"
+            style="@style/TitleBarRelativeMiddleText"
+            android:text="@string/fragment_fourth_title"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/scrollView"
+        style="@style/ScrollView"
+        >
+        <com.zhy.autolayout.AutoLinearLayout
+            style="@style/ScrollViewRoot">
+            <!--********************************-->
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:background="@mipmap/fragment_fourth_bg"
+                android:layout_height="300px">
+                <com.htlc.cyjk.app.widget.CircleImageView
+                    android:id="@+id/imageHead"
+                    android:layout_width="158px"
+                    android:layout_height="158px"
+                    app:civ_border_color="@android:color/white"
+                    app:civ_border_width="4px"
+                    app:civ_border_overlay="true"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/adapter_first_child_temperature"/>
+                <TextView
+                    android:layout_below="@+id/imageHead"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="32px"
+                    android:text="昵称独立访客据阿克苏"/>
+
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+            <com.htlc.cyjk.app.widget.ScrollListView
+                style="@style/ListView"/>
+            <!--********************************-->
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+</com.zhy.autolayout.AutoLinearLayout>

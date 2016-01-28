@@ -24,7 +24,6 @@ import java.util.ArrayList;
  * Created by sks on 2016/1/27.
  */
 public class FirstFragment extends HomeFragment {
-    private PullToRefreshScrollView mScrollView;
 
     private PagerSlidingTabStrip mIndicator;
     private ViewPager mViewPager;
@@ -40,28 +39,6 @@ public class FirstFragment extends HomeFragment {
     }
 
     private void setupView(View view) {
-        mScrollView = (PullToRefreshScrollView) view.findViewById(R.id.scroll_view);
-        mScrollView.getRefreshableView().post(new Runnable() {
-            @Override
-            public void run() {
-                mScrollView.getRefreshableView().smoothScrollTo(0, 0);
-            }
-        });
-        mScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-        mScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
-            @Override
-            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                LogUtil.i(FirstFragment.this, "Home fragment 刷新。。。。。。");
-                if (refreshView.isShownHeader()) {
-                    LogUtil.i("refreshView", "pull-to-refresh-------------------------------------------");
-                    initData();
-
-                } else if (refreshView.isShownFooter()) {//上拉加载
-                    LogUtil.i("refreshView", "pull-to-load-more------------------------------------------");
-                    getMoreData();
-                }
-            }
-        });
         //------------------------------------------
         mIndicator = (PagerSlidingTabStrip) view.findViewById(R.id.indicator);
         mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
@@ -139,13 +116,5 @@ public class FirstFragment extends HomeFragment {
         mIndicator.setDividerColor(this.getResources().getColor(R.color.divider_gray));
         //设置背景颜色
         mIndicator.setBackgroundColor(this.getResources().getColor(android.R.color.white));
-    }
-
-    private void initData() {
-
-    }
-
-    public void getMoreData() {
-
     }
 }

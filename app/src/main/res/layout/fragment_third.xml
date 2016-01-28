@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.zhy.autolayout.AutoRelativeLayout
+        style="@style/TitleBarRelative">
+        <TextView
+            android:id="@+id/text_title"
+            style="@style/TitleBarRelativeMiddleText"
+            android:text="@string/fragment_third_title"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:id="@+id/scrollView"
         style="@style/ScrollView"
@@ -13,18 +21,9 @@
         <com.zhy.autolayout.AutoLinearLayout
             style="@style/ScrollViewRoot">
             <!--********************************-->
-            <com.htlc.cyjk.app.widget.ScrollGridView
-                android:id="@+id/gridView"
-                android:paddingTop="30px"
-                android:paddingBottom="30px"
-                android:paddingLeft="30px"
-                android:paddingRight="30px"
-                android:numColumns="2"
-                android:verticalSpacing="20px"
-                android:horizontalSpacing="30px"
-                style="@style/GridView"
-                />
-
+            <com.htlc.cyjk.app.widget.ScrollListView
+                android:id="@+id/listView"
+                style="@style/ListView"/>
             <!--********************************-->
         </com.zhy.autolayout.AutoLinearLayout>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
