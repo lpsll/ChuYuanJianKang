@@ -22,6 +22,21 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">32px</item>
     </style>
+    <style name="TitleBarRelativeLeftText">
+        <item name="android:id">@id/textLeft</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">30px</item>
+        <item name="android:paddingRight">30px</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">28px</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+    <style name="TitleBarRelativeRightText" parent="TitleBarRelativeLeftText">
+        <item name="android:id">@id/textRight</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
     <!--<style name="TitleBarRelativeLeftImage">
         <item name="android:id">@id/image_back</item>
         <item name="android:layout_width">75px</item>
@@ -66,5 +81,18 @@
         <item name="android:listSelector">@android:color/transparent</item>
         <item name="android:cacheColorHint">@android:color/transparent</item>
     </style>
-
+    <style name="TextButton">
+        <item name="android:id">@id/textButton</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">40px</item>
+        <item name="android:layout_marginRight">40px</item>
+        <item name="android:layout_marginTop">30px</item>
+        <item name="android:layout_marginBottom">30px</item>
+        <item name="android:padding">20px</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">30px</item>
+        <item name="android:background">@mipmap/button_bg</item>
+    </style>
 </resources>

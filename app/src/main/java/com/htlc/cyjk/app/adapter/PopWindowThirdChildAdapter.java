@@ -16,11 +16,11 @@ import java.util.ArrayList;
 /**
  * Created by sks on 2016/1/28.
  */
-public class FourthAdapter extends BaseAdapter{
+public class PopWindowThirdChildAdapter extends BaseAdapter{
     private Activity mActivity;
     private ArrayList mList;
 
-    public FourthAdapter(ArrayList list, Activity activity) {
+    public PopWindowThirdChildAdapter(ArrayList list, Activity activity) {
         this.mList = list;
         this.mActivity = activity;
     }
@@ -45,23 +45,20 @@ public class FourthAdapter extends BaseAdapter{
         ViewHolder holder = null;
         if(convertView == null){
             holder = new ViewHolder();
-            convertView = View.inflate(mActivity, R.layout.adapter_fourth_fragment, null);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
-            holder.textView = (TextView) convertView.findViewById(R.id.textView);
+            convertView = View.inflate(mActivity, R.layout.adapter_pop_window_third_child_fragment, null);
+            holder.textUnit = (TextView) convertView.findViewById(R.id.textUnit);
             convertView.setTag(holder);
             //对于listview，注意添加这一行，即可在item上使用高度
             AutoUtils.autoSize(convertView);
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
+        String bean = (String) mList.get(position);
         //具体数据处理
-        FourthAdapterBean bean = (FourthAdapterBean) mList.get(position);
-        holder.imageView.setImageResource(bean.imageId);
-        holder.textView.setText(bean.name);
+        holder.textUnit.setText(bean);
         return convertView;
     }
     class ViewHolder{
-        ImageView imageView;
-        TextView textView;
+        TextView textUnit;
     }
 }

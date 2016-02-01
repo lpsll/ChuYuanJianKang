@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.htlc.cyjk.R;
-import com.htlc.cyjk.app.bean.FourthAdapterBean;
+import com.htlc.cyjk.app.util.LogUtil;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ import java.util.ArrayList;
 /**
  * Created by sks on 2016/1/28.
  */
-public class FourthAdapter extends BaseAdapter{
+public class ThirdChildFootAdapter extends BaseAdapter{
     private Activity mActivity;
     private ArrayList mList;
 
-    public FourthAdapter(ArrayList list, Activity activity) {
+    public ThirdChildFootAdapter(ArrayList list, Activity activity) {
         this.mList = list;
         this.mActivity = activity;
     }
@@ -32,7 +32,7 @@ public class FourthAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return mList.get(position);
     }
 
     @Override
@@ -42,10 +42,11 @@ public class FourthAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        LogUtil.e(this,"mlist.size="+mList.size());
         ViewHolder holder = null;
         if(convertView == null){
             holder = new ViewHolder();
-            convertView = View.inflate(mActivity, R.layout.adapter_fourth_fragment, null);
+            convertView = View.inflate(mActivity, R.layout.adapter_third_child_foot_fragment, null);
             holder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
             holder.textView = (TextView) convertView.findViewById(R.id.textView);
             convertView.setTag(holder);
@@ -55,9 +56,6 @@ public class FourthAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
         //具体数据处理
-        FourthAdapterBean bean = (FourthAdapterBean) mList.get(position);
-        holder.imageView.setImageResource(bean.imageId);
-        holder.textView.setText(bean.name);
         return convertView;
     }
     class ViewHolder{

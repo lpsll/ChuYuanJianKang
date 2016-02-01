@@ -8,21 +8,37 @@
 
     <com.zhy.autolayout.AutoRelativeLayout
         style="@style/TitleBarRelative">
+
         <TextView
             android:id="@+id/text_title"
             style="@style/TitleBarRelativeMiddleText"
             android:text="@string/fragment_second_title"/>
     </com.zhy.autolayout.AutoRelativeLayout>
 
-    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
-        android:id="@+id/scrollView"
-        style="@style/ScrollView"
-        >
-        <com.zhy.autolayout.AutoLinearLayout
-            style="@style/ScrollViewRoot">
-            <!--********************************-->
+    <com.zhy.autolayout.AutoFrameLayout
+        style="@style/ScrollViewRoot">
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            style="@style/ListView"
+            app:ptrAnimationStyle="flip"/>
 
-            <!--********************************-->
-        </com.zhy.autolayout.AutoLinearLayout>
-    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+        <TextView
+            android:id="@+id/textDialog"
+            android:layout_width="160px"
+            android:layout_height="160px"
+            android:layout_gravity="center"
+            android:background="@color/bg_blue"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="60px"
+            android:visibility="invisible"/>
+
+        <com.htlc.cyjk.app.widget.SideBar
+            android:id="@+id/sideBar"
+            android:layout_width="30px"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center"
+            android:paddingBottom="5px"
+            android:paddingTop="5px"/>
+    </com.zhy.autolayout.AutoFrameLayout>
+
 </com.zhy.autolayout.AutoLinearLayout>

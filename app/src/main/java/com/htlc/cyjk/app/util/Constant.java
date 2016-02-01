@@ -7,4 +7,7 @@ public interface Constant {
     /*timer*/
     int VERIFICATION_TIME = 60;
 
+    int ScreenHeight = 1334;
+    int ScreenWidth = 750;
+
 }

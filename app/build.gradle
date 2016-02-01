@@ -30,4 +30,5 @@ dependencies {
     compile 'com.android.support:design:23+'
     compile project(':pull-to-refresh')
     compile project(':library_strip')
+    compile 'com.bigkoo:pickerview:2.0.8'
 }

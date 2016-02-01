@@ -8,11 +8,19 @@
 
     <com.zhy.autolayout.AutoRelativeLayout
         style="@style/TitleBarRelative">
+        <TextView
+            android:id="@+id/textLeft"
+            style="@style/TitleBarRelativeLeftText"
+            android:text="删除"/>
 
         <TextView
             android:id="@+id/textTitle"
             style="@style/TitleBarRelativeMiddleText"
             android:text="@string/fragment_first_title"/>
+        <TextView
+            android:id="@+id/textRight"
+            style="@style/TitleBarRelativeRightText"
+            android:text="保存"/>
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <com.zhy.autolayout.AutoLinearLayout

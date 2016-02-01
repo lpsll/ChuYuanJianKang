@@ -16,6 +16,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.adapter.FirstPagerAdaptor;
+import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.LogUtil;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
  * Created by sks on 2016/1/27.
  */
 public class FirstFragment extends HomeFragment {
+    public TextView mTextRight, mTextLeft;
 
     private PagerSlidingTabStrip mIndicator;
     private ViewPager mViewPager;
@@ -39,12 +41,14 @@ public class FirstFragment extends HomeFragment {
     }
 
     private void setupView(View view) {
+        mTextLeft = (TextView) view.findViewById(R.id.textLeft);
+        mTextRight = (TextView) view.findViewById(R.id.textRight);
         //------------------------------------------
         mIndicator = (PagerSlidingTabStrip) view.findViewById(R.id.indicator);
         mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
         mList.add(FirstChildFragment.class);
         mList.add(FirstChildFragment.class);
-        mList.add(FirstChildFragment.class);
+        mList.add(ThirdChildFragment.class);
         initTab();
         mAdapter = new FirstPagerAdaptor(getChildFragmentManager(), mList);
         mViewPager.setAdapter(mAdapter);
@@ -64,9 +68,16 @@ public class FirstFragment extends HomeFragment {
                     if (i == position) {
                         LogUtil.i("OrdersFragment", "i == position    " + position);
                         textView.setTextColor(getResources().getColor(R.color.text_blue));
+                        if(i==2){
+                            mTextRight.setVisibility(View.VISIBLE);
+                            mTextLeft.setVisibility(View.VISIBLE);
+                        }else {
+                            mTextRight.setVisibility(View.INVISIBLE);
+                            mTextLeft.setVisibility(View.INVISIBLE);
+                        }
                     } else {
                         textView.setEnabled(true);
-                        textView.setTextColor(getResources().getColor(R.color.text_gray));
+                        textView.setTextColor(getResources().getColor(R.color.text_black));
                     }
                 }
             }
@@ -80,7 +91,7 @@ public class FirstFragment extends HomeFragment {
             if (i == 0) {
                 textView.setTextColor(getResources().getColor(R.color.text_blue));
             } else {
-                textView.setTextColor(getResources().getColor(R.color.text_gray));
+                textView.setTextColor(getResources().getColor(R.color.text_black));
             }
         }
     }
@@ -103,7 +114,7 @@ public class FirstFragment extends HomeFragment {
          pstsShouldExpand   如果设置为true，每个标签是相同的控件，均匀平分整个屏幕，默认是false
          pstsTextAllCaps    如果为true，所有标签都是大写字母，默认为true
          */
-        mIndicator.setTextSize(28);
+        mIndicator.setTextSize(CommonUtil.dp2px(getActivity(),14));
 //        mIndicator.setTextColor(this.getResources().getColor(R.color.black_blue_color_selector));
 //        mIndicator.setTextColorResource(R.color.text_color_red_gray_selector);
         //设置下划线

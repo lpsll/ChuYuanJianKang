@@ -8,10 +8,23 @@
         <item>日常</item>
         <item>用药情况</item>
     </string-array>
+    <string-array name="fragment_third_child_adapter_unit">
+        <item>片</item>
+        <item>瓶</item>
+        <item>袋</item>
+        <item>毫升</item>
+    </string-array>
     <string name="fragment_second">我的医生</string>
     <string name="fragment_second_title">通讯录</string>
     <string name="fragment_third">健康知识</string>
     <string name="fragment_third_title">健康知识</string>
     <string name="fragment_fourth">我的</string>
+    <string-array name="fragment_fourth_children">
+        <item>个人信息</item>
+        <item>缴费</item>
+        <item>设置</item>
+        <item>消息</item>
+        <item>推荐码</item>
+    </string-array>
     <string name="fragment_fourth_title">个人中心</string>
 </resources>

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by sks on 2016/1/27.
  */
-public class FirstChildFragment extends HomeFragment{
+public class FirstChildFragment extends BaseFragment{
     private PullToRefreshScrollView mScrollView;
     private GridView mGridView;
     private ArrayList mList = new ArrayList();
