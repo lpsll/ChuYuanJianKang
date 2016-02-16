@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">出院健康</string>
+    <string name="common_modify">修改</string>
 
     <string name="fragment_first">自我管理</string>
     <string name="fragment_first_title">自我管理</string>
@@ -27,4 +28,32 @@
         <item>推荐码</item>
     </string-array>
     <string name="fragment_fourth_title">个人中心</string>
+
+    <string name="activity_person">个人信息</string>
+    <string name="activity_person_head">头像</string>
+    <string name="activity_person_name">姓名</string>
+    <string name="activity_person_gender">性别</string>
+    <string name="activity_person_age">年龄</string>
+    <string name="activity_person_department">科室</string>
+    <string name="activity_person_doctor">主治医师</string>
+    <string name="activity_person_tel">电话</string>
+    <string name="activity_person_address">地址</string>
+    <string name="activity_person_discharge_summary">出院小结</string>
+
+    <string name="activity_pay">缴费</string>
+    <string name="activity_pay_length">请选择开通时长</string>
+    <string name="activity_pay_way">请选择支付方式</string>
+    <string name="activity_pay_pay">支付</string>
+
+    <string name="activity_setting">设置</string>
+    <string-array name="activity_setting_children">
+        <item>清除缓存</item>
+        <item>查看版本</item>
+        <item>退出</item>
+    </string-array>
+
+    <string name="activity_message_center">消息中心</string>
+
+    <string name="activity_recommendation">推荐码</string>
+    <string name="activity_recommendation_binding">绑定</string>
 </resources>

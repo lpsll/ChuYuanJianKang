@@ -9,7 +9,6 @@
     <com.zhy.autolayout.AutoRelativeLayout
         style="@style/TitleBarRelative">
         <TextView
-            android:id="@+id/text_title"
             style="@style/TitleBarRelativeMiddleText"
             android:text="@string/fragment_fourth_title"/>
     </com.zhy.autolayout.AutoRelativeLayout>

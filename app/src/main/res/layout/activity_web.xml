@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <com.zhy.autolayout.AutoRelativeLayout
+        style="@style/TitleBarRelative">
+        <ImageView
+            style="@style/TitleBarRelativeLeftImage"/>
+        <TextView
+            style="@style/TitleBarRelativeMiddleText"
+            android:text="@string/app_name"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</com.zhy.autolayout.AutoLinearLayout>

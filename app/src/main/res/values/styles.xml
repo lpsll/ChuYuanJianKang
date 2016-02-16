@@ -37,16 +37,16 @@
         <item name="android:id">@id/textRight</item>
         <item name="android:layout_alignParentRight">true</item>
     </style>
-    <!--<style name="TitleBarRelativeLeftImage">
-        <item name="android:id">@id/image_back</item>
+    <style name="TitleBarRelativeLeftImage">
+        <item name="android:id">@id/imageBack</item>
         <item name="android:layout_width">75px</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:paddingLeft">28px</item>
         <item name="android:paddingRight">28px</item>
         <item name="android:paddingTop">28px</item>
         <item name="android:paddingBottom">28px</item>
-        <item name="android:src">@mipmap/icon_back</item>
-    </style>-->
+        <item name="android:src">@mipmap/arrow_left</item>
+    </style>
     <style name="ScrollView">
         <item name="android:id">@id/scrollView</item>
         <item name="android:layout_width">match_parent</item>
@@ -75,7 +75,7 @@
     <style name="ListView">
         <item name="android:id">@id/listView</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:fadingEdge">none</item>
         <item name="android:listSelector">@android:color/transparent</item>
@@ -94,5 +94,32 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">30px</item>
         <item name="android:background">@mipmap/button_bg</item>
+    </style>
+    <style name="CircleCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/circle_checkbox</item>
+    </style>
+    <style name="PersonActivityLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">30px</item>
+        <item name="android:paddingRight">30px</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+    <style name="PersonActivityLinearLabelText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">28px</item>
+        <item name="android:paddingTop">27px</item>
+        <item name="android:paddingBottom">27px</item>
+    </style>
+    <style name="PersonActivityLinearEditText" parent="PersonActivityLinearLabelText">
+        <item name="android:gravity">right|end</item>
+        <item name="android:editable">false</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/text_gray</item>
     </style>
 </resources>

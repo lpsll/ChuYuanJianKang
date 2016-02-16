@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_gray">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        style="@style/TitleBarRelative">
+
+        <ImageView
+            android:id="@+id/imageBack"
+            style="@style/TitleBarRelativeLeftImage"/>
+
+        <TextView
+            style="@style/TitleBarRelativeMiddleText"
+            android:text="@string/activity_person"/>
+
+        <TextView
+            style="@style/TitleBarRelativeRightText"
+            android:text="@string/common_modify"
+            android:visibility="visible"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_height="150px"
+        style="@style/PersonActivityLinearLayout"
+      >
+        <TextView
+            style="@style/PersonActivityLinearLabelText"
+            android:text="@string/activity_person_head"
+           />
+        <com.htlc.cyjk.app.widget.CircleImageView
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:src="@drawable/simple_head"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+    <include layout="@layout/layout_divider_horizontal"/>
+
+    <!--name-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_marginTop="30px"
+        style="@style/PersonActivityLinearLayout"
+        >
+        <TextView
+            style="@style/PersonActivityLinearLabelText"
+            android:text="@string/activity_person_name"
+            />
+        <EditText
+            style="@style/PersonActivityLinearEditText"
+            android:text="昵称"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <include layout="@layout/layout_divider_horizontal"/>
+    <!--gender-->
+    <com.zhy.autolayout.AutoLinearLayout
+        style="@style/PersonActivityLinearLayout"
+        >
+        <TextView
+            style="@style/PersonActivityLinearLabelText"
+            android:text="@string/activity_person_gender"
+            />
+        <EditText
+            style="@style/PersonActivityLinearEditText"
+            android:text="男"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <include layout="@layout/layout_divider_horizontal"/>
+    <!--age-->
+    <com.zhy.autolayout.AutoLinearLayout
+        style="@style/PersonActivityLinearLayout"
+        >
+        <TextView
+            style="@style/PersonActivityLinearLabelText"
+            android:text="@string/activity_person_age"
+            />
+        <EditText
+            style="@style/PersonActivityLinearEditText"
+            android:text="0"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <include layout="@layout/layout_divider_horizontal"/>
+
+    <!--department-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_marginTop="30px"
+        style="@style/PersonActivityLinearLayout"
+        >
+        <TextView
+            style="@style/PersonActivityLinearLabelText"
+            android:text="@string/activity_person_department"
+            />
+        <EditText
+            style="@style/PersonActivityLinearEditText"
+            android:text="妇科"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <include layout="@layout/layout_divider_horizontal"/>
+    <!--doctor-->
+    <com.zhy.autolayout.AutoLinearLayout
+        style="@style/PersonActivityLinearLayout"
+        >
+        <TextView
+            style="@style/PersonActivityLinearLabelText"
+            android:text="@string/activity_person_doctor"
+            />
+        <EditText
+            style="@style/PersonActivityLinearEditText"
+            android:text="李xx"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <include layout="@layout/layout_divider_horizontal"/>
+
+    <!--tel-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_marginTop="30px"
+        style="@style/PersonActivityLinearLayout"
+        >
+        <TextView
+            style="@style/PersonActivityLinearLabelText"
+            android:text="@string/activity_person_tel"
+            />
+        <EditText
+            style="@style/PersonActivityLinearEditText"
+            android:text="18828283434"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <include layout="@layout/layout_divider_horizontal"/>
+    <!--address-->
+    <com.zhy.autolayout.AutoLinearLayout
+        style="@style/PersonActivityLinearLayout"
+        >
+        <TextView
+            style="@style/PersonActivityLinearLabelText"
+            android:text="@string/activity_person_doctor"
+            />
+        <EditText
+            style="@style/PersonActivityLinearEditText"
+            android:text="黄浦江路1号"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <include layout="@layout/layout_divider_horizontal"/>
+
+    <!--tel-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_marginTop="30px"
+        style="@style/PersonActivityLinearLayout"
+        >
+        <TextView
+            style="@style/PersonActivityLinearLabelText"
+            android:text="@string/activity_person_discharge_summary"
+            />
+        <ImageView
+            android:layout_width="14px"
+            android:layout_height="25px"
+            android:src="@mipmap/arrow_right"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+    <include layout="@layout/layout_divider_horizontal"/>
+
+</com.zhy.autolayout.AutoLinearLayout>

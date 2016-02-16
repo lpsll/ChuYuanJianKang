@@ -4,13 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/bg_gray">
 
     <com.zhy.autolayout.AutoRelativeLayout
         style="@style/TitleBarRelative">
+        <ImageView
+            style="@style/TitleBarRelativeLeftImage"/>
         <TextView
             style="@style/TitleBarRelativeMiddleText"
-            android:text="@string/fragment_third_title"/>
+            android:text="@string/activity_message_center"/>
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView

@@ -1,12 +1,7 @@
-package com.htlc.cyjk.app.fragment;
+package com.htlc.cyjk.app.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -14,31 +9,29 @@ import android.widget.ScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.htlc.cyjk.R;
-import com.htlc.cyjk.app.activity.WebActivity;
+import com.htlc.cyjk.app.adapter.MessageCenterAdapter;
 import com.htlc.cyjk.app.adapter.ThirdAdapter;
 import com.htlc.cyjk.app.util.LogUtil;
 
 import java.util.ArrayList;
 
 /**
- * Created by sks on 2016/1/27.
+ * Created by sks on 2016/2/15.
  */
-public class ThirdFragment extends HomeFragment implements AdapterView.OnItemClickListener {
+public class MessageCenterActivity extends BaseActivity{
     private PullToRefreshScrollView mScrollView;
 
     private ListView mListView;
     private BaseAdapter mAdapter;
     private ArrayList mList = new ArrayList();
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_third,null);
-        setupView(view);
-        return view;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_message_center);
+        setupView();
     }
-
-    private void setupView(View view) {
-        mScrollView = (PullToRefreshScrollView) view.findViewById(R.id.scrollView);
+    private void setupView() {
+        mScrollView = (PullToRefreshScrollView) findViewById(R.id.scrollView);
         mScrollView.getRefreshableView().post(new Runnable() {
             @Override
             public void run() {
@@ -49,7 +42,7 @@ public class ThirdFragment extends HomeFragment implements AdapterView.OnItemCli
         mScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                LogUtil.i(ThirdFragment.this, "Home fragment 刷新。。。。。。");
+                LogUtil.i(MessageCenterActivity.this, "刷新。。。。。。");
                 if (refreshView.isShownHeader()) {
                     LogUtil.i("refreshView", "pull-to-refresh-------------------------------------------");
                     initData();
@@ -61,10 +54,9 @@ public class ThirdFragment extends HomeFragment implements AdapterView.OnItemCli
             }
         });
 
-        mListView = (ListView) view.findViewById(R.id.listView);
-        mAdapter = new ThirdAdapter(mList, getActivity());
+        mListView = (ListView) findViewById(R.id.listView);
+        mAdapter = new MessageCenterAdapter(mList, this);
         mListView.setAdapter(mAdapter);
-        mListView.setOnItemClickListener(this);
         initData();
     }
 
@@ -78,15 +70,5 @@ public class ThirdFragment extends HomeFragment implements AdapterView.OnItemCli
 
     public void getMoreData() {
         mScrollView.onRefreshComplete();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Object bean = mList.get(position);
-        LogUtil.e(this, "position:" + position);
-        Intent intent = new Intent(getActivity(), WebActivity.class);
-        intent.putExtra(WebActivity.Title,"百度一下");
-        intent.putExtra(WebActivity.Url, "http://www.baidu.com/");
-        startActivity(intent);
     }
 }

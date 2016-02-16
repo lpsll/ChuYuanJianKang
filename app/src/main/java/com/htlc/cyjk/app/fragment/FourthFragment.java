@@ -1,7 +1,9 @@
 package com.htlc.cyjk.app.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,11 @@ import android.widget.ScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.htlc.cyjk.R;
+import com.htlc.cyjk.app.activity.MessageCenterActivity;
+import com.htlc.cyjk.app.activity.PayActivity;
+import com.htlc.cyjk.app.activity.PersonActivity;
+import com.htlc.cyjk.app.activity.RecommendationActivity;
+import com.htlc.cyjk.app.activity.SettingActivity;
 import com.htlc.cyjk.app.adapter.FourthAdapter;
 import com.htlc.cyjk.app.bean.FourthAdapterBean;
 import com.htlc.cyjk.app.util.CommonUtil;
@@ -48,21 +55,7 @@ public class FourthFragment extends HomeFragment implements AdapterView.OnItemCl
                 mScrollView.getRefreshableView().smoothScrollTo(0, 0);
             }
         });
-        mScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-        mScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
-            @Override
-            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                LogUtil.i(FourthFragment.this, "Home fragment 刷新。。。。。。");
-                if (refreshView.isShownHeader()) {
-                    LogUtil.i("refreshView", "pull-to-refresh-------------------------------------------");
-                    initData();
-
-                } else if (refreshView.isShownFooter()) {//上拉加载
-                    LogUtil.i("refreshView", "pull-to-load-more------------------------------------------");
-                    getMoreData();
-                }
-            }
-        });
+        mScrollView.setMode(PullToRefreshBase.Mode.DISABLED);
 
         mListView = (ListView) view.findViewById(R.id.listView);
         mAdapter = new FourthAdapter(mList, getActivity());
@@ -83,9 +76,6 @@ public class FourthFragment extends HomeFragment implements AdapterView.OnItemCl
         mAdapter.notifyDataSetChanged();
     }
 
-    public void getMoreData() {
-
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -93,14 +83,24 @@ public class FourthFragment extends HomeFragment implements AdapterView.OnItemCl
         LogUtil.e(this, bean.name);
         switch (position){
             case 0:
+                Intent intent0 = new Intent(getActivity(), PersonActivity.class);
+                startActivity(intent0);
                 break;
             case 1:
+                Intent intent1 = new Intent(getActivity(), PayActivity.class);
+                startActivity(intent1);
                 break;
             case 2:
+                Intent intent2 = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent2);
                 break;
             case 3:
+                Intent intent3 = new Intent(getActivity(), MessageCenterActivity.class);
+                startActivity(intent3);
                 break;
             case 4:
+                Intent intent4 = new Intent(getActivity(), RecommendationActivity.class);
+                startActivity(intent4);
                 break;
         }
     }

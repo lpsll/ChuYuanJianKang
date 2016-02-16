@@ -6,4 +6,5 @@ package com.htlc.cyjk.app.bean;
 public class FourthAdapterBean {
     public int imageId;
     public String name;
+    public boolean haveEmpty;
 }
