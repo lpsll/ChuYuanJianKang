@@ -1,6 +1,51 @@
 <resources>
     <string name="app_name">出院健康</string>
     <string name="common_modify">修改</string>
+    <string name="common_finish">完成</string>
+    <string name="common_username_hint">请输入手机号</string>
+    <string name="common_password_hint">请输入密码</string>
+    <string name="common_verification_hint">请输入验证码</string>
+    <string name="common_get_verification">获取验证码</string>
+    <string name="common_male">男</string>
+    <string name="common_female">女</string>
+    <string name="common_camera">相机</string>
+    <string name="common_album">相册</string>
+    <string name="common_cancel">取消</string>
+
+    <string name="activity_login">登录</string>
+    <string name="activity_login_forget_password">忘记密码?</string>
+    <string name="activity_login_register_hint">没有帐号?</string>
+    <string name="activity_login_register">立即注册</string>
+
+    <string name="activity_register">注册</string>
+    <string name="activity_register_protocol_hint">同意</string>
+    <string name="activity_register_protocol">《雏鹰软件用户协议》</string>
+
+    <string name="activity_perfect_info">完善注册信息</string>
+    <string name="activity_perfect_name_hint">姓名</string>
+    <string name="activity_perfect_age_hint">年龄</string>
+    <string name="activity_perfect_gender_hint">性别</string>
+    <string name="activity_perfect_job_hint">请选择职业</string>
+    <string name="activity_perfect_address_hint">请选择地区</string>
+    <string name="activity_perfect_discharge_summary_hint">请输入出院小结</string>
+
+    <string name="activity_discharge_summary">出院小结</string>
+    <string name="activity_discharge_summary_name">姓名:</string>
+    <string name="activity_discharge_summary_age">年龄:</string>
+    <string name="activity_discharge_summary_gender">性别:</string>
+    <string name="activity_discharge_summary_job">职业:</string>
+    <string name="activity_discharge_summary_start_time">入院时间:</string>
+    <string name="activity_discharge_summary_end_time">出院时间:</string>
+    <string name="activity_discharge_summary_total_time">住院天数:</string>
+    <string name="activity_discharge_summary_in_diagnosis">入院诊断:</string>
+    <string name="activity_discharge_summary_out_diagnosis">出院诊断:</string>
+    <string name="activity_discharge_summary_effect">治疗结果:</string>
+    <string name="activity_discharge_summary_special_item">各种特殊检查号:</string>
+    <string name="activity_discharge_summary_in_status">入院情况:</string>
+    <string name="activity_discharge_summary_at_status">住院情况:</string>
+    <string name="activity_discharge_summary_out_status">出院情况:</string>
+    <string name="activity_discharge_summary_out_consideration">出院医嘱:</string>
+
 
     <string name="fragment_first">自我管理</string>
     <string name="fragment_first_title">自我管理</string>
@@ -16,7 +61,8 @@
         <item>毫升</item>
     </string-array>
     <string name="fragment_second">我的医生</string>
-    <string name="fragment_second_title">通讯录</string>
+    <string name="fragment_second_contact">通讯录</string>
+    <string name="fragment_second_chat_list">聊天</string>
     <string name="fragment_third">健康知识</string>
     <string name="fragment_third_title">健康知识</string>
     <string name="fragment_fourth">我的</string>

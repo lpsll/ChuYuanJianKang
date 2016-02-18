@@ -1,102 +1,83 @@
 package com.htlc.cyjk.app.fragment;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.ScrollView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.htlc.cyjk.R;
-import com.htlc.cyjk.app.adapter.FourthAdapter;
-import com.htlc.cyjk.app.adapter.SecondAdapter;
-import com.htlc.cyjk.app.bean.FourthAdapterBean;
-import com.htlc.cyjk.app.util.CommonUtil;
-import com.htlc.cyjk.app.util.LogUtil;
-import com.htlc.cyjk.app.widget.SideBar;
-import com.htlc.cyjk.model.ContactBean;
 
-import java.util.ArrayList;
+import io.rong.imkit.fragment.ConversationListFragment;
+import io.rong.imlib.model.Conversation;
 
 /**
  * Created by sks on 2016/1/27.
  */
-public class SecondFragment extends HomeFragment implements AdapterView.OnItemClickListener {
+public class SecondFragment extends HomeFragment implements View.OnClickListener {
 
-    private PullToRefreshListView mListView;
-    private ArrayList mList = new ArrayList();
-    private BaseAdapter mAdapter;
-    private TextView mTextDialog;
-    private SideBar mSideBar;
 
+//    private FrameLayout mFrameContainer;
+    private TextView mTextChart, mTextContact;
+    private LinearLayout mLinearTitleContainer;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second, null);
         setupView(view);
-
         return view;
     }
 
     private void setupView(View view) {
-        mListView = (PullToRefreshListView) view.findViewById(R.id.listView);
-        mAdapter = new SecondAdapter(mList, getActivity());
-        mListView.setAdapter(mAdapter);
-        mListView.setOnItemClickListener(this);
+        mLinearTitleContainer = (LinearLayout) view.findViewById(R.id.linearTitleContainer);
+        mTextChart = (TextView) view.findViewById(R.id.textChart);
+        mTextContact = (TextView) view.findViewById(R.id.textContact);
+        mTextChart.setOnClickListener(this);
+        mTextContact.setOnClickListener(this);
+//        mFrameContainer = (FrameLayout) view.findViewById(R.id.frameContainer);
 
-        mTextDialog = (TextView) view.findViewById(R.id.textDialog);
-        mSideBar = (SideBar) view.findViewById(R.id.sideBar);
-        mSideBar.setTextView(mTextDialog);
-        mSideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
-            @Override
-            public void onTouchingLetterChanged(String s) {
-                int position = ((SecondAdapter) mAdapter).getFirstPositionOfType(s);
-                LogUtil.e(SecondFragment.this, "onTouchingLetterChanged---position=?" + position + ";---type=?" + s);
-                if (position != -1) {
-                    mListView.getRefreshableView().setSelection(position+1);
-                }
-            }
-        });
-        initData();
+        changeFragment(new ContactFragment());
     }
 
-    private void initData() {
-        String name = "Larno";
-        String[] type = {"A", "B", "C"};
-        for (int i = 0; i < 20; i++) {
-            ContactBean bean = new ContactBean();
-            bean.name = name;
-            bean.type = type[0];
-            mList.add(bean);
-        }
-        for (int i = 0; i < 10; i++) {
-            ContactBean bean = new ContactBean();
-            bean.name = name;
-            bean.type = type[1];
-            mList.add(bean);
-        }
-        for (int i = 0; i < 15; i++) {
-            ContactBean bean = new ContactBean();
-            bean.name = name;
-            bean.type = type[2];
-            mList.add(bean);
-        }
-        mAdapter.notifyDataSetChanged();
+    private void changeFragment(Fragment fragment) {
+        FragmentManager manager = getChildFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.frameContainer, fragment);
+        transaction.commit();
     }
 
-    public void getMoreData() {
-
-    }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.textChart:
+                mTextChart.setEnabled(false);
+                mTextContact.setEnabled(true);
+                mLinearTitleContainer.setBackgroundResource(R.mipmap.fragment_chat_list_title_bg);
+                ConversationListFragment fragment = new ConversationListFragment();
+                Uri uri = Uri.parse("rong://" + getActivity().getApplicationInfo().packageName).buildUpon()
+                        .appendPath("conversationlist")
+                        .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false") //设置私聊会话非聚合显示
+                        .appendQueryParameter(Conversation.ConversationType.GROUP.getName(), "true")//设置群组会话聚合显示
+                        .appendQueryParameter(Conversation.ConversationType.DISCUSSION.getName(), "false")//设置讨论组会话非聚合显示
+                        .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "false")//设置系统会话非聚合显示
+                        .build();
+                fragment.setUri(uri);
+                changeFragment(fragment);
+                break;
+            case R.id.textContact:
+                mTextChart.setEnabled(true);
+                mTextContact.setEnabled(false);
+                mLinearTitleContainer.setBackgroundResource(R.mipmap.fragment_contact_title_bg);
+                changeFragment(new ContactFragment());
+                break;
+        }
     }
 }

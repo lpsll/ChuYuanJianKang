@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        style="@style/TitleBarRelative">
+
+        <ImageView
+            android:id="@+id/imageBack"
+            style="@style/TitleBarRelativeLeftImage"/>
+
+        <TextView
+            style="@style/TitleBarRelativeMiddleText"
+            android:text="@string/activity_perfect_info"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/scrollView"
+        style="@style/ScrollView"
+        >
+
+        <com.zhy.autolayout.AutoLinearLayout
+            style="@style/ScrollViewRoot">
+            <!--********************************-->
+            <ImageView
+                android:id="@+id/imageHead"
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50px"
+                android:src="@mipmap/activity_perfect_info_head"/>
+            <!--姓名-->
+            <EditText
+                android:id="@+id/editName"
+                style="@style/EditInput"
+                android:layout_marginTop="50px"
+                android:hint="@string/activity_perfect_name_hint"
+                />
+            <!--手机号-->
+            <EditText
+                android:id="@+id/editUsername"
+                style="@style/EditInput"
+                android:layout_marginTop="30px"
+                android:hint="@string/common_username_hint"
+                android:inputType="number"/>
+            <!--年龄-->
+            <EditText
+                android:id="@+id/editAge"
+                style="@style/EditInput"
+                android:layout_marginTop="30px"
+                android:hint="@string/activity_perfect_age_hint"
+                android:inputType="number"/>
+            <!--性别-->
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textHintGender"
+                    style="@style/EditInput"
+                    android:layout_marginTop="30px"
+                    android:hint="@string/activity_perfect_gender_hint"
+                    android:inputType="number"/>
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textHintGender"
+                    android:layout_alignRight="@+id/textHintGender"
+                    android:layout_alignTop="@+id/textHintGender"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20px"
+                    android:paddingRight="20px">
+
+                    <RadioButton
+                        android:id="@+id/radioButton0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:button="@drawable/square_checkbox"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:paddingLeft="20px"
+                        android:paddingRight="20px"
+                        android:text="@string/common_male"
+                        android:textColor="@color/text_gray_dark"
+                        android:textSize="26px"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:button="@drawable/square_checkbox"
+                        android:gravity="center"
+                        android:paddingLeft="20px"
+                        android:paddingRight="20px"
+                        android:text="@string/common_female"
+                        android:textColor="@color/text_gray_dark"
+                        android:textSize="26px"/>
+                </RadioGroup>
+            </com.zhy.autolayout.AutoRelativeLayout>
+            <!--职业-->
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textHintJob"
+                    style="@style/EditInput"
+                    android:textColor="@color/text_gray_dark"
+                    android:layout_marginTop="30px"
+                    android:text="@string/activity_perfect_job_hint"
+                    />
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/linearJob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textHintJob"
+                    android:layout_alignRight="@+id/textHintJob"
+                    android:layout_alignTop="@+id/textHintJob"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20px"
+                    android:paddingRight="20px">
+
+                    <TextView
+                        android:id="@+id/textJob"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20px"
+                        android:paddingLeft="30px"
+                        android:paddingRight="30px"
+                        android:paddingTop="20px"
+                        android:text="请选择"
+                        android:textColor="@color/text_gray_dark"
+                        android:textSize="26px"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/arrow_down"/>
+
+                </com.zhy.autolayout.AutoLinearLayout>
+            </com.zhy.autolayout.AutoRelativeLayout>
+            <!--地址-->
+            <TextView
+                android:id="@+id/textAddress"
+                android:textColor="@color/text_gray_dark"
+                style="@style/EditInput"
+                android:layout_marginTop="30px"
+                android:text="@string/activity_perfect_address_hint"
+                />
+            <!--小结-->
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/relativeDischargeSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textDischargeSummaryHint"
+                    style="@style/EditInput"
+                    android:textColor="@color/text_gray_dark"
+                    android:layout_marginTop="30px"
+                    android:text="@string/activity_perfect_discharge_summary_hint"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textDischargeSummaryHint"
+                    android:layout_alignRight="@+id/textDischargeSummaryHint"
+                    android:layout_alignTop="@+id/textDischargeSummaryHint"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:src="@mipmap/arrow_right"/>
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+            <TextView
+                android:layout_marginTop="60px"
+                android:id="@+id/textButtonFinish"
+                style="@style/TextButton"
+                android:text="@string/common_finish"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+</com.zhy.autolayout.AutoLinearLayout>

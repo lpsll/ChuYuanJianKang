@@ -31,4 +31,5 @@ dependencies {
     compile project(':pull-to-refresh')
     compile project(':library_strip')
     compile 'com.bigkoo:pickerview:2.0.8'
+    compile project(':IMKit')
 }

@@ -81,6 +81,19 @@
         <item name="android:listSelector">@android:color/transparent</item>
         <item name="android:cacheColorHint">@android:color/transparent</item>
     </style>
+    <style name="EditInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">40px</item>
+        <item name="android:layout_marginRight">40px</item>
+        <item name="android:paddingBottom">20px</item>
+        <item name="android:paddingTop">20px</item>
+        <item name="android:paddingLeft">30px</item>
+        <item name="android:paddingRight">30px</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">26px</item>
+        <item name="android:background">@drawable/edit_rectangle_shape</item>
+    </style>
     <style name="TextButton">
         <item name="android:id">@id/textButton</item>
         <item name="android:layout_width">match_parent</item>
@@ -95,8 +108,38 @@
         <item name="android:textSize">30px</item>
         <item name="android:background">@mipmap/button_bg</item>
     </style>
+    <style name="TextButton.White" parent="TextButton">
+        <item name="android:layout_marginTop">0px</item>
+        <item name="android:layout_marginBottom">0px</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:background">@mipmap/button_white_bg</item>
+    </style>
+
+    <style name="TransparentAlertDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">bottom</item>
+    </style>
+    <style name="LinearLayoutWithText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">40px</item>
+        <item name="android:layout_marginRight">40px</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">30px</item>
+        <item name="android:paddingRight">30px</item>
+        <item name="android:paddingTop">20px</item>
+        <item name="android:paddingBottom">20px</item>
+        <item name="android:background">@drawable/edit_rectangle_shape</item>
+    </style>
     <style name="CircleCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/circle_checkbox</item>
+    </style>
+    <style name="EyeCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/eye_checkbox</item>
+    </style>
+    <style name="SquareCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/square_checkbox</item>
     </style>
     <style name="PersonActivityLinearLayout">
         <item name="android:layout_width">match_parent</item>

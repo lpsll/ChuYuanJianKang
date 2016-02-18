@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        style="@style/TitleBarRelative">
+
+        <ImageView
+            android:id="@+id/imageBack"
+            style="@style/TitleBarRelativeLeftImage"/>
+
+        <TextView
+            style="@style/TitleBarRelativeMiddleText"
+            android:text="@string/activity_register"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <EditText
+        style="@style/EditInput"
+        android:layout_marginTop="150px"
+        android:hint="@string/common_username_hint"
+        android:inputType="number"/>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editVerification"
+            style="@style/EditInput"
+            android:layout_marginTop="30px"
+            android:hint="@string/common_verification_hint"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/textButtonGetVerification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editVerification"
+            android:layout_alignRight="@+id/editVerification"
+            android:layout_alignTop="@+id/editVerification"
+            android:background="@mipmap/button_get_verification_bg"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="@string/common_get_verification"
+            android:textColor="@android:color/white"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editPassword"
+            style="@style/EditInput"
+            android:layout_marginTop="30px"
+            android:hint="@string/common_password_hint"
+            android:inputType="number"/>
+
+        <CheckBox
+            style="@style/EyeCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editPassword"
+            android:layout_alignRight="@+id/editPassword"
+            android:layout_alignTop="@+id/editPassword"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <TextView
+        android:id="@+id/textButtonRegister"
+        style="@style/TextButton"
+        android:layout_marginTop="200px"
+        android:text="@string/activity_register"/>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="70px">
+
+        <CheckBox
+            style="@style/SquareCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:text="@string/activity_register_protocol_hint"
+            android:textColor="@color/text_gray_dark"
+            android:textSize="20px"/>
+
+        <TextView
+            android:id="@+id/textButtonProtocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_register_protocol"
+            android:textColor="@color/text_red"
+            android:textSize="20px"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

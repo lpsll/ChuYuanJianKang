@@ -10,18 +10,25 @@
         android:supportsRtl="true"
         android:name="com.htlc.cyjk.app.App"
         android:theme="@style/AppTheme">
-        <activity android:name="com.htlc.cyjk.app.activity.MainActivity">
+        <activity android:name="com.htlc.cyjk.app.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".app.activity.LoginActivity"/>
+        <activity android:name=".app.activity.RegisterActivity"/>
+        <activity android:name=".app.activity.PerfectInfoActivity"/>
+        <activity android:name=".app.activity.DischargeSummaryActivity"/>
+
+        <activity android:name=".app.activity.MainActivity"/>
         <activity android:name=".app.activity.PersonActivity"/>
         <activity android:name=".app.activity.PayActivity"/>
         <activity android:name=".app.activity.SettingActivity"/>
         <activity android:name=".app.activity.MessageCenterActivity"/>
         <activity android:name=".app.activity.RecommendationActivity"/>
         <activity android:name=".app.activity.WebActivity"/>
+
 
         <meta-data android:name="design_width" android:value="750">
         </meta-data>
