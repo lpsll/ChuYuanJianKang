@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<title>血糖</title>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/temp.css"/>
+		<script src="../../js/config.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/highcharts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/illness/xueTang.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <div class="backBtn" onclick="AndroidBack()">
+			    <a style="color: white;" class=" mui-icon mui-icon-left-nav mui-pull-left" ></a>
+			</div>
+		    <h1 class="mui-title">血糖</h1>
+			<a onclick="saveData()" class="mui-action-menu mui-icon  mui-pull-right"><font size="3" color="#FFFFFF">保存</font></a>
+		</header>
+		<div class="mui-content">
+			<div class="DataImg">
+				<div id="DataImgDraw"  style="width: 100%;height: 100%;">
+				</div>
+			</div>
+		    <!--背景图div-->
+		    <div class="PicBg">
+		    	<img style="width: 100%;" src="../../img/illness/xueTang.png"/>
+		    </div>
+		   	<!--内容--> 
+		   	<div class="inpBox" style="">
+		   		<div class="HpreBox">
+			   		<label for="Hpre" class="lab">血糖值</label><input type="number" class="HpreInp" name="Hpre" id="Temp" value=""/>
+		   		</div>
+		   		
+		   		<div class="HpreBox HistData" >
+		   			<div id="SelectCtrBtn" onclick="showSelectList()">
+				   		<span class="HistText" >测量时段</span><span id="selectIcon" style="margin-top: 1px;" class="HistBtnIcon mui-icon mui-icon-arrowdown"></span><span id="TitleText" style="margin-right: 5px; color: #C8CACA; float: right;">请选择</span>
+		   			</div>
+		   			
+		   			<div class="SelectList" id="selectMenu">
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">早餐前</span><input onclick="getSelectValue()" mText="早餐前"  class="select" type="radio" name="gender" value="1">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">早餐后</span><input onclick="getSelectValue()" mText="早餐后" class="select" type="radio" name="gender" value="2">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">午餐前</span><input onclick="getSelectValue()" mText="午餐前" class="select" type="radio" name="gender" value="3">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">午餐后</span><input onclick="getSelectValue()" mText="午餐后" class="select" type="radio" name="gender" value="4">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">晚餐前</span><input onclick="getSelectValue()" mText="晚餐前" class="select" type="radio" name="gender" value="5">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">晚餐后</span><input onclick="getSelectValue()" mText="晚餐后" class="select" type="radio" name="gender" value="6">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">晚上三点</span><input onclick="getSelectValue()" mText="晚上三点" class="select" type="radio" name="gender" value="7">	
+		   				</div>
+		   				
+						
+		   			</div>
+		   		
+		   		</div>
+		   		
+		   		<div class="HpreBox">
+			   		<label for="Hpre" class="lab">测量时间</label><div  onclick="getAndroidDate()" val="" class="HpreInp" style="padding-left: 15px; height: 40px;line-height: 40px;"  id="TempTime"></div>
+		   		</div>
+		   		
+		   		<div class="HpreBox HistData" onclick="checkHistory()" >
+		   			<span class="HistText">查看历史数据</span>
+		   			<span class="HistBtnIcon mui-icon mui-icon-arrowright"></span> 
+		   		</div>
+
+
+		   	</div>
+			<div style="position:relative;width:100%;height:50px"></div>
+		    
+		    
+		    
+		</div>
+		
+	</body>
+</html>

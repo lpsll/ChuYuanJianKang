@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<title>饮食</title>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/temp.css"/>
+		<script src="../../js/config.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/highcharts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/illness/yinShi.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <div class="backBtn" onclick="AndroidBack()">
+			    <a style="color: white;" class=" mui-icon mui-icon-left-nav mui-pull-left" ></a>
+			</div>
+		    <h1 class="mui-title">饮食</h1>
+			<a onclick="saveData()" class="mui-action-menu mui-icon  mui-pull-right"><font size="3" color="#FFFFFF">保存</font></a>
+		</header>
+		<div class="mui-content">
+			<div class="DataImg">
+				<div id="DataImgDraw" style="width: 100%;height: 100%;">
+					
+				</div>
+			</div>
+		    <!--背景图div-->
+		    <div class="PicBg">
+		    	<img style="width: 100%;" src="../../img/illness/yinShi.png"/>
+		    </div>
+		   	<!--内容--> 
+		   	<div class="inpBox">
+		   		<div class="HpreBox HistData" >
+		   			<div id="SelectCtrBtn" onclick="showSelectList()">
+				   		<span class="HistText" >饮食情况</span><span id="selectIcon" style="margin-top: 1px;" class="HistBtnIcon mui-icon mui-icon-arrowdown"></span><span id="TitleText" style="margin-right: 5px; color: #C8CACA; float: right;">请选择</span>
+		   			</div>
+		   			
+		   			<div class="SelectList" id="selectMenu">
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">无</span><input onclick="getSelectValue()" mText="无"  class="select" type="radio" name="gender" value="1">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">油腻</span><input onclick="getSelectValue()" mText="油腻" class="select" type="radio" name="gender" value="2">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">一般</span><input onclick="getSelectValue()" mText="一般" class="select" type="radio" name="gender" value="3">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">清淡</span><input onclick="getSelectValue()" mText="清淡" class="select" type="radio" name="gender" value="4">	
+		   				</div>
+		   				
+						
+		   			</div>
+		   		
+		   		</div>
+		   		
+		   		<div class="HpreBox HistData" >
+		   			<div id="SelectCtrBtn" onclick="showSelectList2()">
+				   		<span class="HistText" >食盐情况</span><span id="selectIcon2" style="margin-top: 1px;" class="HistBtnIcon mui-icon mui-icon-arrowdown"></span><span id="TitleText2" style="margin-right: 5px; color: #C8CACA; float: right;">请选择</span>
+		   			</div>
+		   			
+		   			<div class="SelectList" id="selectMenu2">
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">无</span><input onclick="getSelectValue2()" mText="无"  class="select" type="radio" name="gender2" value="1">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">咸</span><input onclick="getSelectValue2()" mText="咸" class="select" type="radio" name="gender2" value="2">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">一般</span><input onclick="getSelectValue2()" mText="一般" class="select" type="radio" name="gender2" value="3">	
+		   				</div>
+		   				<div class="selectBox mui-input-row mui-radio">
+		   					<span class="sText">淡</span><input onclick="getSelectValue2()" mText="淡" class="select" type="radio" name="gender2" value="4">	
+		   				</div>
+		   				
+						
+		   			</div>
+		   		
+		   		</div>
+		   	
+		   		
+		   		<div class="HpreBox HistData" onclick="checkHistory()">
+		   			<span class="HistText">查看历史数据</span>
+		   			<span class="HistBtnIcon mui-icon mui-icon-arrowright"></span> 
+		   		</div>
+
+		   	</div>
+			<div style="position:relative;width:100%;height:50px"></div>
+		    
+		    
+		    
+		</div>
+		
+	</body>
+</html>

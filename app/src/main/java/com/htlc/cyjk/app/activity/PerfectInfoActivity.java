@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -19,12 +20,22 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.OptionsPickerView;
+import com.bigkoo.pickerview.adapter.ArrayWheelAdapter;
+import com.bigkoo.pickerview.listener.OnItemSelectedListener;
 import com.htlc.cyjk.R;
+import com.htlc.cyjk.app.App;
+import com.htlc.cyjk.app.bean.CityBean;
+import com.htlc.cyjk.app.db.ProvinceDao;
+import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.LogUtil;
+import com.htlc.cyjk.app.util.ToastUtil;
 import com.htlc.cyjk.app.widget.PickPhotoDialog;
+import com.htlc.cyjk.core.ActionCallbackListener;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -35,14 +46,25 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
 
     private ImageView mImageHead;
     private RadioGroup mRadioGroup;
-    private TextView mTextAddress, mTextButtonFinish;
+    private TextView mTextAddress, mTextButtonFinish, mTextHintJob;
     private LinearLayout mLinearJob;
+    private RelativeLayout mRelativeJob;
     private RelativeLayout mRelativeDischargeSummary;
-    private EditText mEditUsername, mEditAge;
+    private EditText mEditUsername, mEditAge, mEditName;
     private PickPhotoDialog mPickPhotoDialog;
+
+    private OptionsPickerView mPickViePwOptions;
+    private ArrayList<CityBean> provinces = new ArrayList<CityBean>();
+    private ArrayList<CityBean> citys = new ArrayList<CityBean>();
+    private ArrayList<CityBean> countys = new ArrayList<CityBean>();
+    private ArrayList<String> jobs = new ArrayList<String>();
 
     private boolean isFemale;
     private File mImageFile;
+    private String mAddress;
+    private String mAddressId;
+    private String mJob;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,12 +80,16 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
                 finish();
             }
         });
+        mEditName = (EditText) findViewById(R.id.editName);
         mEditUsername = (EditText) findViewById(R.id.editUsername);
+        mEditUsername.setText(application.getUserBean().username);
         mEditAge = (EditText) findViewById(R.id.editAge);
+        mTextHintJob = (TextView) findViewById(R.id.textHintJob);
 
         mImageHead = (ImageView) findViewById(R.id.imageHead);
         mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         mLinearJob = (LinearLayout) findViewById(R.id.linearJob);
+        mRelativeJob = (RelativeLayout) findViewById(R.id.relativeJob);
         mTextAddress = (TextView) findViewById(R.id.textAddress);
         mRelativeDischargeSummary = (RelativeLayout) findViewById(R.id.relativeDischargeSummary);
         mTextButtonFinish = (TextView) findViewById(R.id.textButtonFinish);
@@ -72,6 +98,7 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
         mImageHead.setOnClickListener(this);
         mRadioGroup.setOnCheckedChangeListener(this);
         mLinearJob.setOnClickListener(this);
+        mRelativeJob.setOnClickListener(this);
         mTextAddress.setOnClickListener(this);
         mRelativeDischargeSummary.setOnClickListener(this);
         mTextButtonFinish.setOnClickListener(this);
@@ -79,48 +106,187 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imageHead:
-                LogUtil.e(this,"imageHead");
+                LogUtil.e(this, "imageHead");
                 showPickPhotoDialog();
                 break;
             case R.id.linearJob:
-                LogUtil.e(this,"linearJob");
+                LogUtil.e(this, "linearJob");
+                break;
+            case R.id.relativeJob:
+                LogUtil.e(this, "relativeJob");
+                selectJob();
                 break;
             case R.id.textAddress:
-                LogUtil.e(this,"textAddress");
+                LogUtil.e(this, "textAddress");
+                selectAddress();
                 break;
             case R.id.relativeDischargeSummary:
-                LogUtil.e(this,"relativeDischargeSummary");
-                Intent intent = new Intent(this, DischargeSummaryActivity.class);
-                startActivity(intent);
+                LogUtil.e(this, "relativeDischargeSummary");
+                goDischargeSummary();
                 break;
             case R.id.textButtonFinish:
-                LogUtil.e(this,"textButtonFinish");
+                LogUtil.e(this, "textButtonFinish");
                 commit();
                 break;
         }
     }
-    
+
+    private void goDischargeSummary() {
+        String name = mEditName.getText().toString().trim();
+        String age = mEditAge.getText().toString().trim();
+        if(TextUtils.isEmpty(name)){
+            ToastUtil.showToast(App.app,"请填写姓名");
+            return;
+        }
+        if(TextUtils.isEmpty(age)){
+            ToastUtil.showToast(App.app,"请填写年龄");
+            return;
+        }
+        if(TextUtils.isEmpty(mJob)){
+            ToastUtil.showToast(App.app,"请选择工作");
+            return;
+        }
+        Intent intent = new Intent(this, DischargeSummaryActivity.class);
+        intent.putExtra(DischargeSummaryActivity.Name, name);
+        intent.putExtra(DischargeSummaryActivity.Age, age);
+        intent.putExtra(DischargeSummaryActivity.Job, mJob);
+        intent.putExtra(DischargeSummaryActivity.Sex, isFemale);
+        startActivity(intent);
+    }
+
+    private void selectJob() {
+        //选项选择器
+        mPickViePwOptions = new OptionsPickerView(this);
+        jobs.clear();
+        String[] jobArray = CommonUtil.getResourceStringArray(R.array.activity_perfect_info_jobs);
+        for (int i = 0; i < jobArray.length; i++) {
+            jobs.add(jobArray[i]);
+        }
+        //三级不联动效果  false
+        mPickViePwOptions.setPicker(jobs);
+        mPickViePwOptions.setCyclic(false);
+        //设置默认选中的三级项目
+        //监听确定选择按钮
+        mPickViePwOptions.setSelectOptions(0);
+        mPickViePwOptions.setOnOptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3) {
+                mJob = jobs.get(options1);
+                mTextHintJob.setText(mJob);
+            }
+        });
+        mPickViePwOptions.show();
+    }
+
+    private void selectAddress() {
+        //选项选择器
+        mPickViePwOptions = new OptionsPickerView(this);
+        provinces.clear();
+        citys.clear();
+        countys.clear();
+        provinces.addAll(new ProvinceDao().getProvinces());
+        citys.addAll(new ProvinceDao().getCities(provinces.get(0).area_code));
+        countys.addAll(new ProvinceDao().getCounties(citys.get(0).area_code));
+
+        //三级不联动效果  false
+        mPickViePwOptions.setPicker(provinces, citys, countys, false);
+        mPickViePwOptions.getWheelOptions().getWv_option1().setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int index) {
+                ArrayList<CityBean> temp = new ProvinceDao().getCities(provinces.get(index).area_code);
+                ArrayWheelAdapter adapter = new ArrayWheelAdapter(temp);
+                citys.clear();
+                citys.addAll(temp);
+                mPickViePwOptions.getWheelOptions().getWv_option2().setAdapter(adapter);
+
+                if (citys.size() == 0) {
+                    mPickViePwOptions.getWheelOptions().getWv_option3().setAdapter(new ArrayWheelAdapter(new ArrayList<CityBean>()));
+                    return;
+                }
+                ArrayList<CityBean> temp1 = new ProvinceDao().getCounties(citys.get(0).area_code);
+                ArrayWheelAdapter adapter1 = new ArrayWheelAdapter(temp1);
+                countys.clear();
+                countys.addAll(temp1);
+                mPickViePwOptions.getWheelOptions().getWv_option3().setAdapter(adapter1);
+
+            }
+        });
+        mPickViePwOptions.getWheelOptions().getWv_option2().setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int index) {
+                ArrayList<CityBean> temp = new ProvinceDao().getCounties(citys.get(index).area_code);
+                ArrayWheelAdapter adapter = new ArrayWheelAdapter(temp);
+                countys.clear();
+                countys.addAll(temp);
+                mPickViePwOptions.getWheelOptions().getWv_option3().setAdapter(adapter);
+            }
+        });
+        //设置选择的三级单位
+//        pwOptions.setLabels("省", "市", "区");
+//        mPickViePwOptions.setTitle("选择城市");
+        mPickViePwOptions.setCyclic(false, false, false);
+        //设置默认选中的三级项目
+        //监听确定选择按钮
+        mPickViePwOptions.setSelectOptions(0, 0, 0);
+        mPickViePwOptions.setOnOptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                //返回的分别是三个级别的选中位置
+                mAddress = provinces.get(options1).area_name + citys.get(option2).area_name + countys.get(options3).area_name;
+                mAddressId = countys.get(options3).area_code + "";
+                mTextAddress.setText(mAddress);
+            }
+        });
+        mPickViePwOptions.show();
+    }
+
 
     /**
      * 提交数据
      */
     private void commit() {
+        String name = mEditName.getText().toString().trim();
+        String age = mEditAge.getText().toString().trim();
+        String userId = application.getUserBean().userid;
+        String username = application.getUserBean().username;
+        String job = mTextHintJob.getText().toString().trim();
+        showProgressHUD();
+        appAction.postPersonInfo(userId, username, name, isFemale ? "1" : "0", age, job, mAddressId, mImageFile, new ActionCallbackListener<Void>() {
+            @Override
+            public void onSuccess(Void data) {
+                dismissProgressHUD();
+                goMain();
+            }
 
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                dismissProgressHUD();
+                if(handleNetworkOnFailure(errorEvent, message)) return;
+                ToastUtil.showToast(PerfectInfoActivity.this, message);
+            }
+        });
+    }
+
+    private void goMain() {
+        MainActivity.start(this, null);
+        finish();
     }
 
     /**
      * 性别选择
+     *
      * @param group
      * @param checkedId
      */
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if(checkedId==R.id.radioButton0){
+        if (checkedId == R.id.radioButton0) {
             isFemale = false;
         }
-        if(checkedId==R.id.radioButton1){
+        if (checkedId == R.id.radioButton1) {
             isFemale = true;
         }
     }
@@ -173,6 +339,7 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
         win.setAttributes(params);
 
     }
+
     private void takePhoto() {
 
         /**
@@ -190,6 +357,7 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
         startActivityForResult(intent, 2);
 
     }
+
     private void pickPhotoByAlbum() {
         /**
          * 刚开始，我自己也不知道ACTION_PICK是干嘛的，后来直接看Intent源码，
@@ -211,17 +379,18 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
                 "image/*");
         startActivityForResult(intent, 1);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             // 如果是直接从相册获取
             case 1:
-                if(Activity.RESULT_OK != resultCode) return;
+                if (Activity.RESULT_OK != resultCode) return;
                 startPhotoZoom(data.getData());
                 break;
             // 如果是调用相机拍照时
             case 2:
-                if(Activity.RESULT_OK != resultCode) return;
+                if (Activity.RESULT_OK != resultCode) return;
                 startPhotoZoom(Uri.fromFile(mImageFile));
                 break;
             // 取得裁剪后的图片
@@ -273,6 +442,7 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
 
         startActivityForResult(intent, 3);
     }
+
     /**
      * 保存裁剪之后的图片数据
      *

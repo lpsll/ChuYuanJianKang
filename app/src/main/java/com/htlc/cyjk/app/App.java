@@ -4,31 +4,44 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.Constant;
 import com.htlc.cyjk.app.util.LogUtil;
+import com.htlc.cyjk.app.util.RongIMUtil;
 import com.htlc.cyjk.app.util.SharedPreferenceUtil;
 import com.htlc.cyjk.core.AppAction;
 import com.htlc.cyjk.core.AppActionImpl;
+import com.htlc.cyjk.model.ContactBean;
+import com.htlc.cyjk.model.UserBean;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import java.util.ArrayList;
+
+import cn.jpush.android.api.JPushInterface;
+import io.rong.imkit.RongContext;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.widget.provider.CameraInputProvider;
+import io.rong.imkit.widget.provider.ImageInputProvider;
+import io.rong.imkit.widget.provider.InputProvider;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.UserInfo;
 
 /**
  * Created by sks on 2015/12/29.
  */
-public class App extends Application{
+public class App extends Application {
     private AppAction appAction;
     public static App app;
-    private boolean isOnline = false;//用户是否在线
     private boolean isLogin = false;//用户是否登录了
+    private ArrayList<ContactBean> mContactList = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -37,76 +50,62 @@ public class App extends Application{
         appAction = new AppActionImpl(this);
         initImageLoader(this);
         initRongIM();
-        initLoginStatus();
+        initJPush();
 
+    }
+    private void initJPush() {
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+        JPushInterface.stopPush(getApplicationContext());
+    }
+
+    public void initRongIMUserInfoProvider() {
+        /**
+         * 设置用户信息的提供者，供 RongIM 调用获取用户名称和头像信息。
+         *
+         * @param userInfoProvider 用户信息提供者。
+         * @param isCacheUserInfo  设置是否由 IMKit 来缓存用户信息。<br>
+         *                         如果 App 提供的 UserInfoProvider。
+         *                         每次都需要通过网络请求用户数据，而不是将用户数据缓存到本地内存，会影响用户信息的加载速度；<br>
+         *                         此时最好将本参数设置为 true，由 IMKit 将用户信息缓存到本地内存中。
+         * @see UserInfoProvider
+         */
+        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+
+            @Override
+            public UserInfo getUserInfo(String userId) {
+
+                return findUserById(userId);//根据 userId 去你的用户系统里查询对应的用户信息返回给融云 SDK。
+            }
+
+        }, true);
     }
 
     /**
      * 初始化登录状态
      */
-    private void initLoginStatus() {
+    public void initLoginStatus() {
         String username = SharedPreferenceUtil.getString(CommonUtil.getApplication(), Constant.USERNAME, "");
         String password = SharedPreferenceUtil.getString(CommonUtil.getApplication(), Constant.PASSWORD, "");
         String user_id = SharedPreferenceUtil.getString(CommonUtil.getApplication(), Constant.USER_ID, "");
-        String token = SharedPreferenceUtil.getString(CommonUtil.getApplication(), Constant.TOKEN, "");
-        if(TextUtils.isEmpty(username)){
+        String token = SharedPreferenceUtil.getString(CommonUtil.getApplication(), Constant.TOKEN, "ss");
+        if (TextUtils.isEmpty(username)) {
             return;
         }
-        if(TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             return;
         }
-        if(TextUtils.isEmpty(user_id)){
+        if (TextUtils.isEmpty(user_id)) {
             return;
         }
-        if(TextUtils.isEmpty(token)){
+        if (TextUtils.isEmpty(token)) {
             return;
         }
-        LogUtil.e(this,"isLogin = true");
-        isLogin = true;
+        RongIMUtil.connect(token);
+        LogUtil.e(this, "isLogin = true");
+        setIsLogin(true);
     }
-    /**
-     * 建立与融云服务器的连接
-     *
-     * @param token
-     */
-    private void connect(String token) {
 
-        if (getApplicationInfo().packageName.equals(App.getCurProcessName(getApplicationContext()))) {
-
-            /**
-             * IMKit SDK调用第二步,建立与服务器的连接
-             */
-            RongIM.connect(token, new RongIMClient.ConnectCallback() {
-
-                /**
-                 * Token 错误，在线上环境下主要是因为 Token 已经过期，您需要向 App Server 重新请求一个新的 Token
-                 */
-                @Override
-                public void onTokenIncorrect() {
-                    Log.d("LoginActivity", "--onTokenIncorrect");
-                }
-
-                /**
-                 * 连接融云成功
-                 * @param userid 当前 token
-                 */
-                @Override
-                public void onSuccess(String userid) {
-                    Log.d("LoginActivity", "--onSuccess" + userid);
-                    isOnline = true;
-                }
-
-                /**
-                 * 连接融云失败
-                 * @param errorCode 错误码，可到官网 查看错误码对应的注释
-                 */
-                @Override
-                public void onError(RongIMClient.ErrorCode errorCode) {
-                    Log.d("LoginActivity", "--onError" + errorCode);
-                }
-            });
-        }
-    }
 
     /**
      * 融云初始化
@@ -123,8 +122,43 @@ public class App extends Application{
              * IMKit SDK调用第一步 初始化
              */
             RongIM.init(this);
+            //扩展功能自定义
+            InputProvider.ExtendProvider[] provider = {
+                    new ImageInputProvider(RongContext.getInstance()),//图片
+                    new CameraInputProvider(RongContext.getInstance()),//相机
+            };
+            RongIM.getInstance().resetInputExtensionProvider(Conversation.ConversationType.PRIVATE, provider);
         }
     }
+
+    /**
+     * 返回用户  name,photo
+     * @param userId
+     * @return
+     */
+    private UserInfo findUserById(String userId) {
+        if(userId.equals(getUserBean().userid)){
+            UserBean userBean = getUserBean();
+            return new UserInfo(userBean.userid,userBean.name,Uri.parse(userBean.photo));
+        }
+        for (ContactBean bean : mContactList) {
+            if(userId.equals(bean.userid)){
+                UserInfo userInfo = new UserInfo(bean.userid,bean.name, Uri.parse(bean.photo));
+                return userInfo;
+            }
+        }
+        return null;
+    }
+
+    public void setContactList(ArrayList<ContactBean> conctactList) {
+        mContactList.clear();
+        mContactList.addAll(conctactList);
+    }
+
+    public ArrayList<ContactBean> getContactList() {
+        return mContactList;
+    }
+
     /**
      * 获得当前进程的名字
      *
@@ -169,16 +203,11 @@ public class App extends Application{
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());
     }
+
     public AppAction getAppAction() {
         return appAction;
     }
-    public boolean isOnline() {
-        return isOnline;
-    }
 
-    public void setIsOnline(boolean isOnline) {
-        this.isOnline = isOnline;
-    }
 
     public boolean isLogin() {
         return isLogin;
@@ -186,5 +215,60 @@ public class App extends Application{
 
     public void setIsLogin(boolean isLogin) {
         this.isLogin = isLogin;
+        if(isLogin){
+            JPushInterface.resumePush(getApplicationContext());
+        }else {
+            JPushInterface.stopPush(getApplicationContext());
+        }
+    }
+
+    public void setUserBean(UserBean userBean) {
+        if (!TextUtils.isEmpty(userBean.username)) {
+            SharedPreferenceUtil.putString(this, Constant.USERNAME, userBean.username);
+        }
+        if (!TextUtils.isEmpty(userBean.password)) {
+            SharedPreferenceUtil.putString(this, Constant.PASSWORD, userBean.password);
+        }
+        if (!TextUtils.isEmpty(userBean.token)) {
+            SharedPreferenceUtil.putString(this, Constant.TOKEN, userBean.token);
+        }
+        if (!TextUtils.isEmpty(userBean.userid)) {
+            SharedPreferenceUtil.putString(this, Constant.USER_ID, userBean.userid);
+        }
+        if (!TextUtils.isEmpty(userBean.name)) {
+            SharedPreferenceUtil.putString(this, Constant.NAME, userBean.name);
+        }
+        if (!TextUtils.isEmpty(userBean.photo)) {
+            SharedPreferenceUtil.putString(this, Constant.IMAGE, userBean.photo);
+        }
+        if (!TextUtils.isEmpty(userBean.flag)) {
+            SharedPreferenceUtil.putString(this, Constant.USER_INFO_FLAG, userBean.flag);
+        }
+
+
+    }
+
+    public void clearUserBean() {
+        RongIM.getInstance().logout();
+        setIsLogin(false);
+        SharedPreferenceUtil.remove(this, Constant.USERNAME);
+        SharedPreferenceUtil.remove(this, Constant.PASSWORD);
+        SharedPreferenceUtil.remove(this, Constant.TOKEN);
+        SharedPreferenceUtil.remove(this, Constant.USER_ID);
+        SharedPreferenceUtil.remove(this, Constant.NAME);
+        SharedPreferenceUtil.remove(this, Constant.IMAGE);
+        SharedPreferenceUtil.remove(this, Constant.USER_INFO_FLAG);
+    }
+
+    public UserBean getUserBean() {
+        UserBean bean = new UserBean();
+        bean.username = SharedPreferenceUtil.getString(this,Constant.USERNAME,"");
+        bean.password = SharedPreferenceUtil.getString(this,Constant.PASSWORD,"");
+        bean.userid = SharedPreferenceUtil.getString(this,Constant.USER_ID,"");
+        bean.name = SharedPreferenceUtil.getString(this,Constant.NAME,"");
+        bean.photo = SharedPreferenceUtil.getString(this,Constant.IMAGE,"");
+        bean.token = SharedPreferenceUtil.getString(this,Constant.TOKEN,"");
+        bean.flag = SharedPreferenceUtil.getString(this,Constant.USER_INFO_FLAG,"");
+        return bean;
     }
 }

@@ -1,0 +1,622 @@
+.mui-bar {
+	background-color: #498EDB !important;
+	border: 0px solid #498EDB !important;
+	box-shadow: inherit;
+}
+
+.inpBox{
+	position:relative;
+
+	margin-bottom:100px !important;
+	padding-bottom:100px !important;
+}
+
+
+
+.mui-action-back {
+	color: #ffffff;
+}
+
+.mui-title {
+	color: #FFFFFF;
+	font-size: 18px;
+}
+
+.PicBg {
+	position: relative;
+}
+.XQblock{
+	background-color: white;
+	width: 90%;
+	margin-left: 5%;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+.XQtitle{
+	font-size: 14px;
+	
+}
+.XQvalue{
+	font-size: 14px;
+	color: #B7B7B7;
+}
+.marleftxt{
+	margin-right: 14px;
+}
+.marleft{
+	margin-right: 28px;
+}
+.LoadBtnCls{
+	position: fixed;
+	width: 100%;
+	height: 38px;
+	text-align: center;
+	line-height: 38px;
+	background-color: #E7E8E8;
+	color: #989898;
+	font-size: 14px;
+	/*margin-top: 10px;*/
+	bottom: 0px;
+}
+
+
+
+.HpreInp {
+	width: 70% !important;
+	border: 0 !important;
+	margin-bottom: 0px !important;
+	border: 0px solid white !important;
+	float: right;
+	margin-right: 15px;
+	font-size: 14px;
+	overflow: hidden;
+}
+.BQageInput{
+	position: absolute;
+	width:90% !important;
+	margin-bottom: 0px !important;
+	margin-top: 1px;
+	border: 0px solid palegreen !important;
+	height: 35px !important;
+	float: left;
+	left: 0;
+	font-size: 12px !important;
+	color: #A4A4A4 !important;
+	overflow: hidden;
+	margin-right: 0px !important;
+}
+.setMecDiv{
+	position: relative;
+	margin-left: 10px;
+	width: 50%;
+	height: 34px;
+	margin-top: 1px;
+	float: left;
+	overflow: hidden;
+	color: black !important;
+	margin-right: 10px; 
+}
+.lab {
+	float: left;
+	margin-top: 10px;
+}
+.BQLab{
+	float: left;
+}
+
+.HpreBox {
+	position: relative;
+	font-size: 14px;
+	background-color: white;
+	width: 90%;
+	padding-left: 10px;
+	margin-left: 5%;
+	border-radius: 5px;
+	margin-bottom: 15px;
+	float: left;
+}
+
+.HistData {
+	padding: 10px !important;
+}
+
+.HistBtnIcon {
+	font-size: 18px;
+	float: right;
+	color: #C4C5C5;
+}
+
+.DataImg {
+	position: absolute;
+	z-index: 9;
+	background-color: #498EDB;
+	width: 90%;
+	margin-left: 5%;
+	height: 150px;
+	margin-top: 10px;
+}
+
+.SelectList {
+	width: 100%;
+	display: none;
+}
+
+.sText {
+	margin-left: 3px;
+}
+
+.select {
+	float: right;
+	margin-right: 3px;
+	margin-top: -3px;
+}
+
+.selectBox {
+	margin-top: 5px;
+	font-size: 14px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #C4C5C5;
+}
+
+.mui-checkbox input[type=checkbox]:before {
+	font-size: 18px !important;
+}
+
+input[type=checkbox]:checked:before {
+	color: #007AFF !important;
+}
+
+.selectCard {
+	background-color: white;
+	width: 100%;
+	height: 40px;
+}
+
+.selectLine {
+	/*float: right;*/
+	margin-top: 0px !important;
+	color: #CCCCCC;
+	font-size: 14px;
+}
+
+.act {
+	color: #498EDB !important;
+}
+
+.selectDiv {
+	float: left;
+	font-size: 14px;
+	color: #3e3a39;
+	width: 19%;
+	height: 100%;
+	text-align: center;
+	line-height: 40px;
+}
+
+.DrawBox {
+	position: relative;
+	width: 100%;
+	background-color: white;
+	margin-top: 8px;
+	/*height: 305px;*/
+	padding-top: 40px;
+	overflow: hidden;
+	padding-bottom: 20px;
+}
+
+.tiZhengDraw {
+	width: 90%;
+	height: 180px;
+	margin-left: 5%;
+}
+.mar{
+	margin-bottom: 50px;
+}
+
+.tiZhengInfo {
+	position: relative;
+	width: 80%;
+	height: 38px;
+	margin-left: 10%;
+	margin-top: 15px;
+}
+
+.tizhengInfoText {
+	float: left;
+	line-height: 16px;
+}
+
+.tzLeft {
+	margin: 0px 20px 10px 5px;
+}
+
+.tzRight {
+	margin-left: 30px;
+}
+
+.tzInfoDate {
+	font-size: 13px;
+	color: #3E3A39;
+}
+
+.tzInfoTemp {
+	font-size: 10px;
+	color: #989898;
+}
+
+.tzInfoState {
+	font-size: 10px;
+	color: #D10A0A;
+}
+
+.backBtn {
+	overflow: hidden;
+	position: absolute;
+	width: 50px;
+	padding-left: 10px;
+	margin-left: -10px;
+	/*background-color: pink;*/
+	/*width: 100px;*/
+}
+
+.ListCard {
+	background-color: white;
+	width: 90%;
+	margin-left: 5%;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+
+ul,
+li {
+	list-style-type: none;
+	padding-left: 7px !important;
+}
+
+.TabList {
+	background-color: white;
+	height: 44px;
+	line-height: 44px;
+	font-size: 14px;
+	border-bottom: 1px solid #E7E8E8;
+}
+
+.TabMaList {
+	background-color: white;
+	padding-bottom: 12px;
+	padding-top: 10px;
+	font-size: 14px;
+	border-bottom: 1px solid #E7E8E8;
+}
+
+.TabName {
+	margin-left: 20px;
+}
+
+.TabValue {
+	margin-left: 50px;
+	color: #989898;
+}
+
+.TabValueD {
+	margin-left: 2px;
+	color: #989898;
+}
+
+.PatMadListBox {
+	margin-left: 22px;
+	float: left;
+	color: #989898;
+	font-size: 14px;
+	width: 60%;
+}
+
+.MadList {
+	position: relative;
+	clear: both;
+	margin-bottom: -8px;
+	top: -14px;
+	width: 100%;
+}
+
+.MadInfo {
+	/*background-color: lawngreen;*/
+	/*	display: block;*/
+}
+
+.MadUl {
+	position: relative;
+	padding: 0 !important;
+	width: 100%;
+	right: 0;
+}
+
+.MadNum {
+	position: relative;
+	float: right;
+}
+
+.TabInfo {
+	margin-top: 10px;
+	margin-left: 13%;
+	padding-bottom: 15px;
+	overflow: hidden;
+}
+
+.TabInfoList {
+	width: 50%;
+	float: left;
+	margin-bottom: 5px;
+}
+
+.BlockSpan {
+	display: block;
+}
+
+.SpanFont {
+	font-size: 12px;
+	color: #989898;
+}
+
+.SpanRFont {
+	font-size: 12px;
+	color: #D10A0A;
+}
+
+.TabDraw {
+	background-color: pink;
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 10px;
+	height: 200px;
+}
+
+.TabJie {
+	margin: -5px 5px 0px 20px;
+}
+
+.SpanBlackFont {
+	font-size: 12px;
+}
+
+.BotmMag {
+	margin-bottom: 15px;
+}
+
+.TelBtn {
+	/*height: 60px;*/
+}
+
+.TelCallBtn {
+	display: block;
+	background-color: #007AFF;
+	/*padding: 5px 40% 5px 30%;*/
+	border-radius: 5px;
+	width: 90%;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	margin: 10px 5% 10px 5%;
+}
+
+.TelCallBtn:link {
+	color: white;
+}
+
+.TimeName {
+	position: relative;
+	/*top: 15px;*/
+	margin-left: 15px;
+	font-size: 14px;
+}
+
+.TimeInputDiv {
+	position: relative;
+	background-color: white;
+	width: 46%;
+	margin-right: 3%;
+	float: left;
+	border: 1px solid #CCCCCC;
+	height: 100%;
+	border-radius: 5px;
+	line-height: 38px;
+}
+
+.TimeInputBox {
+	overflow: hidden;
+	padding-left: 5%;
+	height: 38px;
+	margin-bottom: 10px;
+}
+
+.mui-scroll {
+	padding-top: 10px;
+}
+
+.InLable {
+	margin-left: 14px;
+	font-size: 14px;
+}
+
+.TimeValue {
+	font-size: 12px;
+}
+
+.MidInput {
+	background-color: white;
+	height: 100%;
+	width: 90%;
+	margin-left: 5%;
+	height: 38px;
+	line-height: 38px;
+	padding-left: 14px;
+	border-radius: 5px;
+	border: 1px solid #CCCCCC;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.SpanFontWhite {
+	font-size: 12px;
+	color: #A4A4A4;
+	float: left;
+}
+
+/*.SelectSex {
+	
+}*/
+
+.SelectSex {
+	float: left;
+	font-size: 12px;
+	color: #CCCCCC;
+}
+
+.selectBtn {
+	/*margin-left: 50%;*/
+	float: right;
+	margin-right: 10px;
+}
+
+.SBtn {
+	margin-left: 0px;
+}
+
+.LiWid {
+	width: 50px;
+	padding: 0 !important;
+	float: left !important;
+}
+
+.flotCla {
+	float: right !important;
+	margin: 0 7px 0 0px;
+	padding-left: 0px !important;
+}
+
+.LiWid input {
+	float: left !important;
+	position: inherit !important;
+	top: 0px !important;
+	right: 0px !important;
+	margin-top: 9px !important;
+	width: 24px !important;
+}
+
+.LiWid label {
+	float: left !important;
+	width: 20px !important;
+	padding-right: 0 !important;
+	font-size: 12px;
+	color: #a4a4a4;
+}
+
+.MidDiv {
+	text-align: center;
+}
+
+#MidBtn {
+	background: #007AFF !important;
+	color: #fff;
+	font-size: 14px;
+	width: 90%;
+	border: none;
+	height: 35px;
+	line-height: 35px;
+	padding: 0px;
+}
+
+.InfoDraw {
+	position: relative;
+
+	width: 90%;
+	margin: 15px 5% 15px 5%;
+	height: 210px;
+	text-align: center;
+	padding-top: 5px;
+}
+.XueYa{
+	position: relative;
+	height: 180px;
+
+}
+.TitleDiv{
+
+	height: 20px;
+	width: 40%;
+	margin-left: 30%;
+	margin-bottom: 10px;
+	/*top: 5px;*/
+	background-color: #C6C6C6;
+	color: white;
+	font-size: 12px;
+	border-radius: 3px;
+	
+	
+}
+
+.SelectIcon {
+	line-height: 38px;
+	float: right !important;
+	right: 10px;
+	position: absolute;
+	top: 0px;
+}
+
+
+
+.yaopinContent {
+	width: 92%;
+	margin-left: 4%;
+	border: 1px solid #ddd;
+	background: #fff;
+	border-radius: 6px;
+	padding: 2px 15px;
+	margin-top: 20px;
+}
+
+.ypTitle {
+
+	font-size: 14px;
+}
+
+.ypTitleLeft {
+	color:#3E3A39;
+	float:left;
+}
+.ypTitleRight{
+	float:right;
+	color:#C9CACA;
+}
+.ypCon ul{
+	margin: 0px !important;
+	padding: 0px !important;
+}
+.ypCon ul li{
+	margin: 0px !important;
+	padding: 0px !important;
+	height:30px;
+	line-height: 30px;
+	font-size: 14px;
+}
+.ypconleft{
+	color:#3E3A39;
+	float:left;
+}
+.ypconright{
+	float:right;
+	color:#C9CACA;
+}
+.mui-control-item{
+	position: relative !important;
+	top: -10px !important;
+	padding-bottom: 3px !important;
+	padding-top: 3px !important;
+}
+.TitleBgc{
+	padding-top: 6px !important;
+}
+
+

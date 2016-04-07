@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@mipmap/pop_window_bg"
+    android:background="@drawable/edit_rectangle_shape"
     android:divider="@null"
     android:dividerHeight="0px"
     style="@style/ListView">
+    <!--android:background="@mipmap/pop_window_bg"-->
 </ListView>

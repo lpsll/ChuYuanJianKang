@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.bean.FourthAdapterBean;
+import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.model.ContactBean;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
@@ -59,13 +61,15 @@ public class SecondAdapter extends BaseAdapter{
         //具体数据处理
         ContactBean bean = (ContactBean) mList.get(position);
 //        holder.imageView.setImageResource(bean.imageId);
-        holder.textType.setText(bean.type);
+        holder.textType.setText(bean.head);
+        LogUtil.e(this,"首字母："+bean.head);
         holder.textView.setText(bean.name);
+        ImageLoader.getInstance().displayImage(bean.photo,holder.imageView);
         if(position == 0){
             holder.textType.setVisibility(View.VISIBLE);
         }else {
-            String temp = ((ContactBean)mList.get(position-1)).type;
-            if(temp.equals(bean.type)){
+            String temp = ((ContactBean)mList.get(position-1)).head;
+            if(temp.equals(bean.head)){
                 holder.textType.setVisibility(View.GONE);
             }else {
                 holder.textType.setVisibility(View.VISIBLE);
@@ -80,7 +84,7 @@ public class SecondAdapter extends BaseAdapter{
 
     public int getFirstPositionOfType(String type){
         for (int i = 0; i < getCount(); i++) {
-            String tempType = ((ContactBean)mList.get(i)).type;
+            String tempType = ((ContactBean)mList.get(i)).head;
             if (tempType.equals(type)) {
                 return i;
             }

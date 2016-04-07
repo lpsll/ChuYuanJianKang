@@ -17,6 +17,7 @@
         android:paddingTop="25px">
 
         <TextView
+            android:id="@+id/textTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2016-01-01 18:20"
@@ -24,6 +25,7 @@
             android:textSize="26px"/>
 
         <TextView
+            android:id="@+id/textDrugName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100px"

@@ -47,7 +47,7 @@ public class FirstFragment extends HomeFragment {
         mIndicator = (PagerSlidingTabStrip) view.findViewById(R.id.indicator);
         mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
         mList.add(FirstChildFragment.class);
-        mList.add(FirstChildFragment.class);
+        mList.add(SecondChildFragment.class);
         mList.add(ThirdChildFragment.class);
         initTab();
         mAdapter = new FirstPagerAdaptor(getChildFragmentManager(), mList);

@@ -11,8 +11,21 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
+    signingConfigs {
         release {
+            storeFile file("larno-key-store.jks")
+            storePassword "20140312"
+            keyAlias "larno"
+            keyPassword "20140312"
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -30,6 +43,11 @@ dependencies {
     compile 'com.android.support:design:23+'
     compile project(':pull-to-refresh')
     compile project(':library_strip')
-    compile 'com.bigkoo:pickerview:2.0.8'
     compile project(':IMKit')
+    compile project(':pickerview')
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.kaopiz:kprogresshud:1.0.5'
+    compile files('libs/jpush-android-2.1.0.jar')
+    compile files('libs/alipaySingle-20160111.jar')
+
 }

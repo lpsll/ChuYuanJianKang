@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     >
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
+    <ListView
         style="@style/ListView"
-        app:ptrAnimationStyle="flip"/>
+        />
 
     <TextView
         android:id="@+id/textDialog"

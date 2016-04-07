@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.util.LogUtil;
+import com.htlc.cyjk.model.MedicalHistoryItemBean;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
@@ -47,8 +48,8 @@ public class ThirdChildFootAdapter extends BaseAdapter{
         if(convertView == null){
             holder = new ViewHolder();
             convertView = View.inflate(mActivity, R.layout.adapter_third_child_foot_fragment, null);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
-            holder.textView = (TextView) convertView.findViewById(R.id.textView);
+            holder.textTime = (TextView) convertView.findViewById(R.id.textTime);
+            holder.textDrugName = (TextView) convertView.findViewById(R.id.textDrugName);
             convertView.setTag(holder);
             //对于listview，注意添加这一行，即可在item上使用高度
             AutoUtils.autoSize(convertView);
@@ -56,10 +57,12 @@ public class ThirdChildFootAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
         //具体数据处理
+        MedicalHistoryItemBean bean = (MedicalHistoryItemBean) mList.get(position);
+        holder.textTime.setText(bean.date);
+        holder.textDrugName.setText(bean.drug.get(0).medicine);
         return convertView;
     }
     class ViewHolder{
-        ImageView imageView;
-        TextView textView;
+        TextView textTime,textDrugName;
     }
 }

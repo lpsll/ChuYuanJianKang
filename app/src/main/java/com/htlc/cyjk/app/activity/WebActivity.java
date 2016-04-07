@@ -19,8 +19,11 @@ import com.htlc.cyjk.R;
  * Created by sks on 2016/1/5.
  */
 public class WebActivity extends BaseActivity implements View.OnClickListener {
+    private View mImageBack;
+
     public static final String Title = "Title";
     public static final String Url = "Url";
+
 
     private String mTitle, mUrl;
     private WebView mWebView;
@@ -43,6 +46,13 @@ public class WebActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void setupView() {
+        mImageBack = findViewById(R.id.imageBack);
+        mImageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mTextTitle = (TextView) findViewById(R.id.textTitle);
         mTextTitle.setText(mTitle);
         mWebView = (WebView) findViewById(R.id.webView);

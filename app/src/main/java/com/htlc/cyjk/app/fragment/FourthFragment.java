@@ -3,14 +3,17 @@ package com.htlc.cyjk.app.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -24,6 +27,9 @@ import com.htlc.cyjk.app.adapter.FourthAdapter;
 import com.htlc.cyjk.app.bean.FourthAdapterBean;
 import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.LogUtil;
+import com.htlc.cyjk.core.ActionCallbackListener;
+import com.htlc.cyjk.model.UserBean;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -34,6 +40,8 @@ public class FourthFragment extends HomeFragment implements AdapterView.OnItemCl
     private PullToRefreshScrollView mScrollView;
 
     private ListView mListView;
+    private ImageView mImageHead;
+    private TextView mTextName;
     private ArrayList mList = new ArrayList();
     private BaseAdapter mAdapter;
     private int[] itemImageIds;
@@ -47,6 +55,12 @@ public class FourthFragment extends HomeFragment implements AdapterView.OnItemCl
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        myCenter();
+    }
+
     private void setupView(View view) {
         mScrollView = (PullToRefreshScrollView) view.findViewById(R.id.scrollView);
         mScrollView.getRefreshableView().post(new Runnable() {
@@ -57,11 +71,29 @@ public class FourthFragment extends HomeFragment implements AdapterView.OnItemCl
         });
         mScrollView.setMode(PullToRefreshBase.Mode.DISABLED);
 
+        mImageHead = (ImageView) view.findViewById(R.id.imageHead);
+        mTextName = (TextView) view.findViewById(R.id.textName);
+        refreshHeadAndName();
+
         mListView = (ListView) view.findViewById(R.id.listView);
         mAdapter = new FourthAdapter(mList, getActivity());
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
         initData();
+    }
+
+    private void refreshHeadAndName() {
+        String imageHeadUrl = baseActivity.application.getUserBean().photo;
+        String name = baseActivity.application.getUserBean().name;
+        String username = baseActivity.application.getUserBean().username;
+        if(!TextUtils.isEmpty(imageHeadUrl)){
+            ImageLoader.getInstance().displayImage(imageHeadUrl,mImageHead);
+        }
+        if(!TextUtils.isEmpty(name)){
+            mTextName.setText(name);
+        }else {
+            mTextName.setText(username);
+        }
     }
 
     private void initData() {
@@ -76,6 +108,22 @@ public class FourthFragment extends HomeFragment implements AdapterView.OnItemCl
         mAdapter.notifyDataSetChanged();
     }
 
+
+    private void myCenter(){
+        String userId = baseActivity.application.getUserBean().userid;
+        baseActivity.appAction.myCenter(userId, new ActionCallbackListener<UserBean>() {
+            @Override
+            public void onSuccess(UserBean data) {
+                baseActivity.application.setUserBean(data);
+                refreshHeadAndName();
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                if(handleNetworkOnFailure(errorEvent, message)) return;
+            }
+        });
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

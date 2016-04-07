@@ -17,7 +17,7 @@
             android:text="@string/activity_perfect_info"/>
     </com.zhy.autolayout.AutoRelativeLayout>
 
-    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+    <ScrollView
         android:id="@+id/scrollView"
         style="@style/ScrollView"
         >
@@ -25,7 +25,7 @@
         <com.zhy.autolayout.AutoLinearLayout
             style="@style/ScrollViewRoot">
             <!--********************************-->
-            <ImageView
+            <com.htlc.cyjk.app.widget.CircleImageView
                 android:id="@+id/imageHead"
                 android:layout_width="150px"
                 android:layout_height="150px"
@@ -45,6 +45,7 @@
                 style="@style/EditInput"
                 android:layout_marginTop="30px"
                 android:hint="@string/common_username_hint"
+                android:enabled="false"
                 android:inputType="number"/>
             <!--年龄-->
             <EditText
@@ -108,14 +109,15 @@
             <!--职业-->
             <com.zhy.autolayout.AutoRelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/relativeJob">
 
                 <TextView
                     android:id="@+id/textHintJob"
                     style="@style/EditInput"
-                    android:textColor="@color/text_gray_dark"
+                    android:textColor="@color/text_black"
                     android:layout_marginTop="30px"
-                    android:text="@string/activity_perfect_job_hint"
+                    android:hint="@string/activity_perfect_job_hint"
                     />
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -126,6 +128,7 @@
                     android:layout_alignRight="@+id/textHintJob"
                     android:layout_alignTop="@+id/textHintJob"
                     android:gravity="center_vertical"
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:paddingLeft="20px"
                     android:paddingRight="20px">
@@ -152,10 +155,10 @@
             <!--地址-->
             <TextView
                 android:id="@+id/textAddress"
-                android:textColor="@color/text_gray_dark"
+                android:textColor="@color/text_black"
                 style="@style/EditInput"
                 android:layout_marginTop="30px"
-                android:text="@string/activity_perfect_address_hint"
+                android:hint="@string/activity_perfect_address_hint"
                 />
             <!--小结-->
             <com.zhy.autolayout.AutoRelativeLayout
@@ -188,5 +191,5 @@
                 style="@style/TextButton"
                 android:text="@string/common_finish"/>
         </com.zhy.autolayout.AutoLinearLayout>
-    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+    </ScrollView>
 </com.zhy.autolayout.AutoLinearLayout>

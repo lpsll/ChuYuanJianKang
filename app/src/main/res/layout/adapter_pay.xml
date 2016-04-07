@@ -30,8 +30,8 @@
             android:id="@+id/imagePayIcon"
             android:layout_marginLeft="20px"
             android:layout_marginRight="10px"
-            android:layout_width="40px"
-            android:layout_height="40px"
+            android:layout_width="60px"
+            android:layout_height="wrap_content"
             android:src="@mipmap/adapter_pay_weixin"
           />
         <TextView

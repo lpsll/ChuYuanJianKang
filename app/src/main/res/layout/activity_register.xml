@@ -18,6 +18,7 @@
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <EditText
+        android:id="@+id/editUsername"
         style="@style/EditInput"
         android:layout_marginTop="150px"
         android:hint="@string/common_username_hint"
@@ -58,9 +59,10 @@
             style="@style/EditInput"
             android:layout_marginTop="30px"
             android:hint="@string/common_password_hint"
-            android:inputType="number"/>
+            android:inputType="textPassword"/>
 
         <CheckBox
+            android:id="@+id/checkBoxEye"
             style="@style/EyeCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,19 +87,21 @@
         android:paddingLeft="70px">
 
         <CheckBox
+            android:id="@+id/checkBox"
             style="@style/SquareCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingRight="20px"
             android:checked="true"
             android:gravity="center"/>
 
         <TextView
+            android:id="@+id/textCheckBoxHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10px"
             android:text="@string/activity_register_protocol_hint"
             android:textColor="@color/text_gray_dark"
-            android:textSize="20px"/>
+            android:textSize="24px"/>
 
         <TextView
             android:id="@+id/textButtonProtocol"
@@ -105,6 +109,6 @@
             android:layout_height="wrap_content"
             android:text="@string/activity_register_protocol"
             android:textColor="@color/text_red"
-            android:textSize="20px"/>
+            android:textSize="24px"/>
     </com.zhy.autolayout.AutoLinearLayout>
 </com.zhy.autolayout.AutoLinearLayout>

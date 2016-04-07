@@ -12,14 +12,16 @@
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <EditText
+        android:id="@+id/editUsername"
         android:layout_marginTop="150px"
         style="@style/EditInput"
         android:inputType="number"
         android:hint="@string/common_username_hint"/>
     <EditText
+        android:id="@+id/editPassword"
         android:layout_marginTop="30px"
         style="@style/EditInput"
-        android:inputType="number"
+        android:inputType="textPassword"
         android:hint="@string/common_password_hint"/>
     <TextView
         android:id="@+id/textButtonForget"
@@ -29,7 +31,7 @@
         android:paddingTop="20px"
         android:paddingBottom="20px"
         android:gravity="end|right"
-        android:textSize="20px"
+        android:textSize="24px"
         android:textColor="@color/text_gray_dark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +47,7 @@
         android:layout_height="wrap_content"
         android:gravity="center">
         <TextView
-            android:textSize="20px"
+            android:textSize="24px"
             android:textColor="@color/text_gray_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +56,7 @@
             android:id="@+id/textButtonRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20px"
+            android:textSize="24px"
             android:textColor="@color/text_red"
             android:text="@string/activity_login_register"/>
     </com.zhy.autolayout.AutoLinearLayout>

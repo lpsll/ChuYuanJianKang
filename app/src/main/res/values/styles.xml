@@ -119,6 +119,19 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:gravity">bottom</item>
     </style>
+    <style name="CenterDialog" parent="android:style/Theme.Dialog">
+        <!-- 设置底层可见 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--是否有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@mipmap/dialog_bg</item>
+    </style>
     <style name="LinearLayoutWithText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

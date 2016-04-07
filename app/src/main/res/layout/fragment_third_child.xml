@@ -33,6 +33,7 @@
             <com.htlc.cyjk.app.widget.ScrollListView
                 style="@style/ListView"
                 android:divider="@null"
+                android:focusable="false"
                 android:dividerHeight="0px"
                 android:layout_height="wrap_content"/>
             <TextView

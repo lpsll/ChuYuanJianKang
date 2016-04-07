@@ -27,14 +27,14 @@
             android:layout_height="70px"
             android:layout_marginLeft="30px"
             android:layout_marginRight="30px"
-            android:src="@color/text_black"/>
+            android:src="@mipmap/ic_launcher"/>
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
             android:textSize="26px"
-            android:text="双方的了解"/>
+            android:text=""/>
     </com.zhy.autolayout.AutoLinearLayout>
 
 

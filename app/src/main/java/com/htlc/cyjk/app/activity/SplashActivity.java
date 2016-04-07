@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import com.htlc.cyjk.R;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by sks on 2016/2/15.
  */
@@ -27,6 +29,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        JPushInterface.onResume(this);
         ValueAnimator animator = ValueAnimator.ofFloat(0.4f, 1.0f);
         animator.setDuration(1000).start();
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -44,14 +47,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                Intent intent = null;
-                if (application.isLogin()) {
-                    intent = new Intent(SplashActivity.this, MainActivity.class);
-                }else {
-                    intent = new Intent(SplashActivity.this, LoginActivity.class);
-                }
-                startActivity(intent);
-                finish();
+                goNextActivity();
             }
 
             @Override
@@ -65,5 +61,46 @@ public class SplashActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    private void goNextActivity() {
+        application.initLoginStatus();
+        if (application.isLogin()) {
+            String flag = application.getUserBean().flag;
+            switch (flag){
+                case "2":
+                case "3":
+                    goLogin();
+                    break;
+                case "0":
+                default:
+                    goMain();
+            }
+        }else {
+            goLogin();
+        }
+    }
+
+    private void goMain() {
+        MainActivity.start(this, null);
+        finish();
+    }
+
+    private void goLogin() {
+        LoginActivity.start(this, null);
+        finish();
+    }
+
+    private void goRecommendation() {
+        Intent intent = new Intent(SplashActivity.this, RecommendationActivity.class);
+        intent.putExtra(RecommendationActivity.IsLoginBind,true);
+        startActivity(intent);
+        finish();
     }
 }

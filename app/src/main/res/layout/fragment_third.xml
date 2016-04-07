@@ -23,6 +23,14 @@
             <com.htlc.cyjk.app.widget.ScrollListView
                 android:id="@+id/listView"
                 style="@style/ListView"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/text_gray"
+                android:textSize="38px"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="没有更多知识！\n点击重试！"/>
             <!--********************************-->
         </com.zhy.autolayout.AutoLinearLayout>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>

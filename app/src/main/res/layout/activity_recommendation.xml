@@ -8,20 +8,20 @@
 
     <com.zhy.autolayout.AutoRelativeLayout
         style="@style/TitleBarRelative">
-
         <ImageView
             android:id="@+id/imageBack"
             style="@style/TitleBarRelativeLeftImage"/>
-
         <TextView
             style="@style/TitleBarRelativeMiddleText"
             android:text="@string/activity_recommendation"/>
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <EditText
+        android:id="@+id/editBindNumber"
         style="@style/EditInput"
         android:layout_marginTop="150px"
         android:inputType="number"
+        android:hint="请输入推荐码"
         />
 
     <TextView

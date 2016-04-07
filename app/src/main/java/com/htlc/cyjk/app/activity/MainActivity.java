@@ -1,5 +1,7 @@
 package com.htlc.cyjk.app.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -11,6 +13,9 @@ import com.htlc.cyjk.app.fragment.FourthFragment;
 import com.htlc.cyjk.app.fragment.HomeFragment;
 import com.htlc.cyjk.app.fragment.SecondFragment;
 import com.htlc.cyjk.app.fragment.ThirdFragment;
+import com.htlc.cyjk.app.util.AppManager;
+import com.htlc.cyjk.core.ActionCallbackListener;
+import com.htlc.cyjk.model.ContactBean;
 
 import java.util.ArrayList;
 
@@ -18,9 +23,19 @@ public class MainActivity extends BaseActivity {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
+    public static void start(Context context, Intent extras) {
+        Intent intent = new Intent();
+        intent.setClass(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppManager.getAppManager().finishBeforeActivity();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupView();
@@ -60,6 +75,23 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+        getContactList();
+    }
+    private void getContactList() {
+        application.initRongIMUserInfoProvider();
+        String userId = application.getUserBean().userid;
+        appAction.contactList(userId, new ActionCallbackListener<ArrayList<ContactBean>>() {
+            @Override
+            public void onSuccess(ArrayList<ContactBean> data) {
+                application.setContactList(data);
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                if(handleNetworkOnFailure(errorEvent, message)) return;
+//                ToastUtil.showToast(getActivity(), message);
             }
         });
     }

@@ -9,7 +9,11 @@
 
     <com.zhy.autolayout.AutoRelativeLayout
         style="@style/TitleBarRelative">
-
+        <TextView
+            android:id="@+id/textLeft"
+            android:visibility="gone"
+            style="@style/TitleBarRelativeLeftText"
+            android:text="取消"/>
         <ImageView
             android:id="@+id/imageBack"
             style="@style/TitleBarRelativeLeftImage"/>
@@ -33,9 +37,10 @@
             android:text="@string/activity_person_head"
            />
         <com.htlc.cyjk.app.widget.CircleImageView
+            android:id="@+id/imageHead"
             android:layout_width="100px"
             android:layout_height="100px"
-            android:src="@drawable/simple_head"/>
+            android:src="@mipmap/ic_launcher"/>
     </com.zhy.autolayout.AutoLinearLayout>
     <include layout="@layout/layout_divider_horizontal"/>
 
@@ -49,8 +54,12 @@
             android:text="@string/activity_person_name"
             />
         <EditText
+            android:id="@+id/editName"
             style="@style/PersonActivityLinearEditText"
-            android:text="昵称"
+            android:editable="true"
+            android:enabled="false"
+            android:focusable="false"
+            android:text=""
             />
     </com.zhy.autolayout.AutoLinearLayout>
     <include layout="@layout/layout_divider_horizontal"/>
@@ -63,6 +72,7 @@
             android:text="@string/activity_person_gender"
             />
         <EditText
+            android:id="@+id/editGender"
             style="@style/PersonActivityLinearEditText"
             android:text="男"
             />
@@ -77,7 +87,12 @@
             android:text="@string/activity_person_age"
             />
         <EditText
+            android:id="@+id/editAge"
             style="@style/PersonActivityLinearEditText"
+            android:editable="true"
+            android:enabled="false"
+            android:focusable="false"
+            android:inputType="number"
             android:text="0"
             />
     </com.zhy.autolayout.AutoLinearLayout>
@@ -93,8 +108,9 @@
             android:text="@string/activity_person_department"
             />
         <EditText
+            android:id="@+id/editDepartment"
             style="@style/PersonActivityLinearEditText"
-            android:text="妇科"
+            android:text=""
             />
     </com.zhy.autolayout.AutoLinearLayout>
     <include layout="@layout/layout_divider_horizontal"/>
@@ -107,8 +123,9 @@
             android:text="@string/activity_person_doctor"
             />
         <EditText
+            android:id="@+id/editDoctor"
             style="@style/PersonActivityLinearEditText"
-            android:text="李xx"
+            android:text=""
             />
     </com.zhy.autolayout.AutoLinearLayout>
     <include layout="@layout/layout_divider_horizontal"/>
@@ -123,8 +140,10 @@
             android:text="@string/activity_person_tel"
             />
         <EditText
+            android:id="@+id/editUsername"
+            android:focusable="false"
             style="@style/PersonActivityLinearEditText"
-            android:text="18828283434"
+            android:text=""
             />
     </com.zhy.autolayout.AutoLinearLayout>
     <include layout="@layout/layout_divider_horizontal"/>
@@ -134,18 +153,20 @@
         >
         <TextView
             style="@style/PersonActivityLinearLabelText"
-            android:text="@string/activity_person_doctor"
+            android:text="@string/activity_person_address"
             />
         <EditText
+            android:id="@+id/editAddress"
             style="@style/PersonActivityLinearEditText"
-            android:text="黄浦江路1号"
+            android:text=""
             />
     </com.zhy.autolayout.AutoLinearLayout>
     <include layout="@layout/layout_divider_horizontal"/>
 
-    <!--tel-->
+    <!--discharge-->
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_marginTop="30px"
+        android:id="@+id/linearDischargeSummary"
         style="@style/PersonActivityLinearLayout"
         >
         <TextView

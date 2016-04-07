@@ -14,9 +14,15 @@ import android.widget.ScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.htlc.cyjk.R;
+import com.htlc.cyjk.api.Api;
+import com.htlc.cyjk.app.App;
 import com.htlc.cyjk.app.activity.WebActivity;
 import com.htlc.cyjk.app.adapter.ThirdAdapter;
 import com.htlc.cyjk.app.util.LogUtil;
+import com.htlc.cyjk.app.util.ToastUtil;
+import com.htlc.cyjk.core.ActionCallbackListener;
+import com.htlc.cyjk.model.InformationBean;
+import com.htlc.cyjk.model.UserBean;
 
 import java.util.ArrayList;
 
@@ -29,6 +35,7 @@ public class ThirdFragment extends HomeFragment implements AdapterView.OnItemCli
     private ListView mListView;
     private BaseAdapter mAdapter;
     private ArrayList mList = new ArrayList();
+    private int mPage = 0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,24 +76,56 @@ public class ThirdFragment extends HomeFragment implements AdapterView.OnItemCli
     }
 
     private void initData() {
-        for(int i=0; i<9;i++){
-            mList.add(true);
-        }
-        mAdapter.notifyDataSetChanged();
-        mScrollView.onRefreshComplete();
+        String username = baseActivity.application.getUserBean().username;
+        mPage = 0;
+        baseActivity.appAction.informationList(username, mPage, new ActionCallbackListener<ArrayList<InformationBean>>() {
+            @Override
+            public void onSuccess(ArrayList<InformationBean> data) {
+                mList.clear();
+                mList.addAll(data);
+                mPage++;
+                mAdapter.notifyDataSetChanged();
+                mScrollView.onRefreshComplete();
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                mScrollView.onRefreshComplete();
+                if(handleNetworkOnFailure(errorEvent, message)) return;
+                ToastUtil.showToast(getActivity(),message);
+
+            }
+        });
+
     }
 
     public void getMoreData() {
-        mScrollView.onRefreshComplete();
+        String username = baseActivity.application.getUserBean().username;
+        baseActivity.appAction.informationList(username, mPage, new ActionCallbackListener<ArrayList<InformationBean>>() {
+            @Override
+            public void onSuccess(ArrayList<InformationBean> data) {
+                mList.addAll(data);
+                mAdapter.notifyDataSetChanged();
+                mScrollView.onRefreshComplete();
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                mScrollView.onRefreshComplete();
+                if(handleNetworkOnFailure(errorEvent, message)) return;
+                ToastUtil.showToast(getActivity(), message);
+            }
+        });
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Object bean = mList.get(position);
+        UserBean userBean = App.app.getUserBean();
+        InformationBean bean = (InformationBean) mList.get(position);
         LogUtil.e(this, "position:" + position);
         Intent intent = new Intent(getActivity(), WebActivity.class);
-        intent.putExtra(WebActivity.Title,"百度一下");
-        intent.putExtra(WebActivity.Url, "http://www.baidu.com/");
+        intent.putExtra(WebActivity.Title,bean.title);
+        intent.putExtra(WebActivity.Url, Api.InformationDetail+"?id="+bean.id+"&userid="+userBean.userid+"&token="+userBean.token);
         startActivity(intent);
     }
 }

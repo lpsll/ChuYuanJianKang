@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.widget.LengthItem;
+import com.htlc.cyjk.model.PriceBean;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by sks on 2016/1/28.
  */
-public class LengthAdapter extends BaseAdapter{
+public class LengthAdapter extends BaseAdapter {
     private Activity mActivity;
     private ArrayList mList;
 
@@ -42,12 +43,13 @@ public class LengthAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView == null){
-            convertView = View.inflate(mActivity, R.layout.adapter_length_item, null);
-            //对于listview，注意添加这一行，即可在item上使用高度
-            AutoUtils.autoSize(convertView);
-        }
+        LengthItem view = (LengthItem) View.inflate(mActivity, R.layout.adapter_length_item, null);
+        //对于listview，注意添加这一行，即可在item上使用高度
+        AutoUtils.autoSize(view);
         //具体数据处理
-        return convertView;
+        PriceBean bean = (PriceBean) mList.get(position);
+        view.getTextLength().setText(bean.durationDes);
+        view.getTextMoney().setText(bean.price);
+        return view;
     }
 }

@@ -17,4 +17,7 @@ public class BaseFragment extends Fragment{
         super.onCreate(savedInstanceState);
         baseActivity = (BaseActivity) getActivity();
     }
+    public boolean handleNetworkOnFailure(String errorEvent, String message){
+        return baseActivity.handleNetworkOnFailure(errorEvent, message);
+    }
 }

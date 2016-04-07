@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.htlc.cyjk.R;
+import com.htlc.cyjk.app.bean.FirstChildAdapterBean;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
@@ -54,6 +55,9 @@ public class FirstChildAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
         //具体数据处理
+        FirstChildAdapterBean bean = (FirstChildAdapterBean) mList.get(position);
+        holder.imageView.setImageResource(bean.imageId);
+        holder.textView.setText(bean.name);
         return convertView;
     }
     class ViewHolder{

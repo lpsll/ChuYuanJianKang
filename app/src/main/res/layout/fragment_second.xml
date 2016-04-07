@@ -15,13 +15,14 @@
             android:layout_height="60px"
             android:orientation="horizontal"
             android:layout_centerInParent="true"
-            android:background="@mipmap/fragment_contact_title_bg">
+            android:background="@mipmap/fragment_chat_list_title_bg">
             <TextView
                 android:id="@+id/textChart"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:enabled="false"
                 android:textSize="28px"
                 android:textColor="@color/text_color_white_blue_selector"
                 android:text="@string/fragment_second_chat_list"/>
@@ -32,7 +33,6 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="28px"
-                android:enabled="false"
                 android:textColor="@color/text_color_white_blue_selector"
                 android:text="@string/fragment_second_contact"/>
 

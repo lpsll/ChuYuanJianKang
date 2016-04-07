@@ -17,9 +17,9 @@ import com.htlc.cyjk.app.util.CommonUtil;
 
 public class SideBar extends View {
 	private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
-	public static String[] b = { "A", "B", "C", "D", "E", "F", "G", "H", "I",
+	public static String[] b = { "#", "A", "B", "C", "D", "E", "F", "G", "H", "I",
 			"J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
-			"W", "X", "Y", "Z", "#" };
+			"W", "X", "Y", "Z"};
 	private int choose = -1;// 选中
 	private Paint paint = new Paint();
 

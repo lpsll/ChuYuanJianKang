@@ -1,1 +1,1 @@
-include ':app', ':pull-to-refresh', ':library_strip', ':IMKit'
+include ':app', ':pull-to-refresh', ':library_strip', ':IMKit', ':pickerview'

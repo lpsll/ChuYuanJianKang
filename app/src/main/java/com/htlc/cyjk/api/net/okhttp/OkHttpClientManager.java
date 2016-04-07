@@ -7,6 +7,7 @@ import android.os.Looper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.htlc.cyjk.api.net.okhttp.callback.ResultCallback;
+import com.htlc.cyjk.app.util.LogUtil;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -141,12 +142,14 @@ public class OkHttpClientManager
             public void onFailure(final Request request, final IOException e)
             {
                 //TODO when cancel , should do?
+                e.printStackTrace();
                 sendFailResultCallback(request, e, resCallBack);
             }
 
             @Override
             public void onResponse(final Response response)
             {
+                LogUtil.e("OkHttp:response.code=",response.code()+"");
                 if (response.code() >= 400 && response.code() <= 599)
                 {
                     try
@@ -161,7 +164,9 @@ public class OkHttpClientManager
 
                 try
                 {
-                    final String string = response.body().string();
+                    final String stringTemp = response.body().string();
+                    String string = stringTemp.substring(stringTemp.indexOf("{"));
+                    LogUtil.e("OkHttp",string);
                     if (resCallBack.mType == String.class)
                     {
                         sendSuccessResultCallback(string, resCallBack);

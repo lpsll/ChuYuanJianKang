@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.htlc.cyjk.R;
+import com.htlc.cyjk.model.InformationBean;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
@@ -46,7 +48,8 @@ public class ThirdAdapter extends BaseAdapter{
             holder = new ViewHolder();
             convertView = View.inflate(mActivity, R.layout.adapter_third_fragment, null);
             holder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
-            holder.textView = (TextView) convertView.findViewById(R.id.textView);
+            holder.textView = (TextView) convertView.findViewById(R.id.textTitle);
+            holder.textDes = (TextView) convertView.findViewById(R.id.textDes);
             convertView.setTag(holder);
             //对于listview，注意添加这一行，即可在item上使用高度
             AutoUtils.autoSize(convertView);
@@ -54,10 +57,14 @@ public class ThirdAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
         //具体数据处理
+        InformationBean bean = (InformationBean) mList.get(position);
+        ImageLoader.getInstance().displayImage(bean.img,holder.imageView);
+        holder.textView.setText(bean.title);
+        holder.textDes.setText(bean.introduce);
         return convertView;
     }
     class ViewHolder{
         ImageView imageView;
-        TextView textView;
+        TextView textView,textDes;
     }
 }

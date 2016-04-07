@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        style="@style/TitleBarRelative">
+
+        <ImageView
+            android:id="@+id/imageBack"
+            style="@style/TitleBarRelativeLeftImage"/>
+
+        <TextView
+            style="@style/TitleBarRelativeMiddleText"
+            android:text="@string/activity_change_username"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/linearUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="30px"
+            android:paddingLeft="40px"
+            android:paddingRight="40px"
+            android:paddingTop="30px"
+            android:text="当前绑定的手机:"
+            android:textColor="@color/text_gray_dark"
+            android:textSize="28px"/>
+
+        <TextView
+            android:id="@+id/textUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40px"
+            android:paddingRight="40px"
+            android:text=""
+            android:textColor="@color/text_black"
+            android:textSize="36px"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <EditText
+        android:layout_marginTop="30px"
+        android:layout_marginBottom="30px"
+        android:id="@+id/editInput"
+        style="@style/EditInput"
+        android:hint="请输入登录密码"
+        android:inputType="textPassword"
+        android:visibility="gone"/>
+
+    <TextView
+        style="@style/TextButton"
+        android:text="更换"/>
+</com.zhy.autolayout.AutoLinearLayout>

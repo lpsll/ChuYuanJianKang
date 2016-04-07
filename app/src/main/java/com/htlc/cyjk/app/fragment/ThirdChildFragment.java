@@ -1,37 +1,50 @@
 package com.htlc.cyjk.app.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.htlc.cyjk.R;
+import com.htlc.cyjk.app.activity.DrugsActivity;
 import com.htlc.cyjk.app.adapter.ThirdChildAdapter;
 import com.htlc.cyjk.app.adapter.ThirdChildFootAdapter;
 import com.htlc.cyjk.app.util.DateFormat;
+import com.htlc.cyjk.app.util.JsonUtil;
 import com.htlc.cyjk.app.util.LogUtil;
+import com.htlc.cyjk.app.util.ToastUtil;
+import com.htlc.cyjk.core.ActionCallbackListener;
+import com.htlc.cyjk.model.DrugBean;
+import com.htlc.cyjk.model.MedicalHistoryItemBean;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by sks on 2016/1/29.
  */
 public class ThirdChildFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+    public static final int RequestCode = 0;
+    public static final String DrugName = "DrugName";
+    public static final String DrugId = "DrugId";
+
     private PullToRefreshScrollView mScrollView;
     private ListView mListView;
     private ArrayList mList = new ArrayList();
@@ -41,8 +54,25 @@ public class ThirdChildFragment extends BaseFragment implements View.OnClickList
     private ArrayList mFootList = new ArrayList();
     private FirstFragment mFirstFragment;
     private ArrayList mDeleteItems = new ArrayList<>();
-    private TextView mTextTime;
+    private TextView mTextTime,mTextButton;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//反注册EventBus
+    }
+
+    public void onEventMainThread(DrugBean event) {
+        String msg = "onEventMainThread收到了消息：";
+        mList.add(event);
+        mAdapter.notifyDataSetChanged();
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,20 +90,6 @@ public class ThirdChildFragment extends BaseFragment implements View.OnClickList
             }
         });
         mScrollView.setMode(PullToRefreshBase.Mode.DISABLED);
-        mScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
-            @Override
-            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                LogUtil.i(ThirdChildFragment.this, "Home fragment 刷新。。。。。。");
-                if (refreshView.isShownHeader()) {
-                    LogUtil.i("refreshView", "pull-to-refresh-------------------------------------------");
-                    initData();
-
-                } else if (refreshView.isShownFooter()) {//上拉加载
-                    LogUtil.i("refreshView", "pull-to-load-more------------------------------------------");
-                    getMoreData();
-                }
-            }
-        });
 
         mFirstFragment = (FirstFragment) getParentFragment();
         mFirstFragment.mTextLeft.setOnClickListener(this);
@@ -83,6 +99,8 @@ public class ThirdChildFragment extends BaseFragment implements View.OnClickList
         mTextTime = (TextView) view.findViewById(R.id.textTime);
         mTextTime.setText(time);
         mTextTime.setOnClickListener(this);
+        mTextButton = (TextView) view.findViewById(R.id.textButton);
+        mTextButton.setOnClickListener(this);
         //---------------------------------------
         mListView = (ListView) view.findViewById(R.id.listView);
         mAdapter = new ThirdChildAdapter(mList, getActivity());
@@ -92,20 +110,26 @@ public class ThirdChildFragment extends BaseFragment implements View.OnClickList
         mFootListView = (ListView) view.findViewById(R.id.listViewFoot);
         mFootAdapter = new ThirdChildFootAdapter(mFootList, getActivity());
         mFootListView.setAdapter(mFootAdapter);
+        mFootListView.setOnItemClickListener(this);
         initData();
     }
 
     private void initData() {
-        for(int i=0; i<3;i++){
-            mList.add("i"+i);
-            mFootList.add("i"+i);
-        }
-        mAdapter.notifyDataSetChanged();
-        mFootAdapter.notifyDataSetChanged();
-    }
+        String userId = baseActivity.application.getUserBean().userid;
+        baseActivity.appAction.medicineHistory(userId, new ActionCallbackListener<ArrayList<MedicalHistoryItemBean>>() {
+            @Override
+            public void onSuccess(ArrayList<MedicalHistoryItemBean> data) {
+                mFootList.clear();
+                mFootList.addAll(data);
+                mFootAdapter.notifyDataSetChanged();
+            }
 
-    public void getMoreData() {
-
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                if(handleNetworkOnFailure(errorEvent, message)) return;
+                LogUtil.e(ThirdChildFragment.this,message);
+            }
+        });
     }
 
     @Override
@@ -120,7 +144,20 @@ public class ThirdChildFragment extends BaseFragment implements View.OnClickList
             case R.id.textTime:
                 textTime();
                 break;
+            case R.id.textButton:
+                addDrug();
+                break;
+
         }
+    }
+
+    /**
+     * 添加药品
+     */
+    private void addDrug() {
+        if(((ThirdChildAdapter)mAdapter).isDeleteState()) return;
+        Intent intent = new Intent(getActivity(), DrugsActivity.class);
+        startActivity(intent);
     }
 
     private void textTime() {
@@ -151,13 +188,46 @@ public class ThirdChildFragment extends BaseFragment implements View.OnClickList
             LogUtil.e(ThirdChildFragment.this,"确定qian mlist.size="+mList.size());
             ((ThirdChildAdapter)mAdapter).setDeleteState(false);
             mList.removeAll(mDeleteItems);
+            ((ThirdChildAdapter) mAdapter).getHashMap().clear();
             mAdapter.notifyDataSetChanged();
             mFirstFragment.mTextLeft.setText("删除");
             mFirstFragment.mTextRight.setText("保存");
             LogUtil.e(ThirdChildFragment.this, "确定hou mlist.size=" + mList.size());
         }else {
             LogUtil.e(this,"保存用药记录");
+            postDrugs();
         }
+    }
+
+    /**
+     * 提交用药记录
+     */
+    private void postDrugs() {
+        String userId = baseActivity.application.getUserBean().userid;
+        String date = mTextTime.getText().toString();
+        if(mList.size()>0){
+            String drugsJson = new Gson().toJson(mList);
+            LogUtil.e(this,drugsJson);
+            drugsJson = Base64.encodeToString(drugsJson.getBytes(),Base64.DEFAULT);
+            LogUtil.e(this,drugsJson);
+            LogUtil.e(this,"base64decode:"+Base64.decode(drugsJson,Base64.DEFAULT));
+            baseActivity.appAction.postDrugs(userId, date, drugsJson, new ActionCallbackListener<Void>() {
+                @Override
+                public void onSuccess(Void data) {
+                    ToastUtil.showToast(getActivity(),"保存成功！");
+                    mList.clear();
+                    mAdapter.notifyDataSetChanged();
+                    initData();
+                }
+
+                @Override
+                public void onFailure(String errorEvent, String message) {
+                    if(handleNetworkOnFailure(errorEvent, message)) return;
+                    ToastUtil.showToast(getActivity(),message);
+                }
+            });
+        }
+
     }
 
     private void textLeft() {
@@ -182,6 +252,7 @@ public class ThirdChildFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(parent == mListView){
+            mScrollView.scrollTo(view.getScrollX(),view.getScrollY());
             if(((ThirdChildAdapter)mAdapter).isDeleteState()){
                 LogUtil.e(ThirdChildFragment.this, "delete=" + position);
                 ImageView imageSelect = (ImageView) view.findViewById(R.id.imageSelect);
@@ -194,7 +265,11 @@ public class ThirdChildFragment extends BaseFragment implements View.OnClickList
                 }
             }
         }else {
-
+            if(((ThirdChildAdapter)mAdapter).isDeleteState()) return;
+            MedicalHistoryItemBean bean = (MedicalHistoryItemBean) mFootList.get(position);
+            mList.clear();
+            mList.addAll(bean.drug);
+            mAdapter.notifyDataSetChanged();
         }
     }
 }
