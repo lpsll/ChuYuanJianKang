@@ -88,7 +88,7 @@
         <item>袋</item>
         <item>毫升</item>
     </string-array>
-    <string name="fragment_second">我的医生</string>
+    <string name="fragment_second">医患沟通</string>
     <string name="fragment_second_contact">通讯录</string>
     <string name="fragment_second_chat_list">聊天</string>
     <string name="fragment_third">健康知识</string>

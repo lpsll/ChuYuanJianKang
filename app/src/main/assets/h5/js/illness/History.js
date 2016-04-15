@@ -1,13 +1,17 @@
 window.onload = function() {
 	id = bridge.getUserId();
 	token = bridge.getToken();
+//	id = 149;
+//	token = "";
 	getUrl()
 }
 var id = "";
 var token = "";
-var mflag = 0;
+var mflag = "";
+var deleteType = "";
 
 function getUrl() {
+	
 	var mUrl = location.search;
 	var mArr = mUrl.split('?');
 	var mValArr = mArr[1].split('=');
@@ -22,51 +26,64 @@ var gflag = 0;
 var typeFlag = 0;
 
 function getValType() {
+	
 	gnum = 0;
 	gflag = 1;
 	if (mflag == "tiwen") {
 		gtype = 1;
 		typeFlag = 1;
+		deleteType = 'onenum';
 		getHisData();
 	}else if(mflag == "maibo"){
 		gtype = 2;
 		typeFlag = 1;
+		deleteType = 'onenum';
 		getHisData();
 	}else if(mflag == "huxi"){
 		gtype = 3;
 		typeFlag = 1;
+		deleteType = 'onenum';
 		getHisData();
 	}else if(mflag == "xueyang"){
 		gtype = 4;
 		typeFlag = 1;
+		deleteType = 'onenum';
 		getHisData();
 	}else if(mflag == "tizhong"){
 		gtype = 5;
 		typeFlag = 1;
+		deleteType = 'onenum';
 		getHisData();
 	}else if(mflag == "yundong"){
 		gtype = 6;
 		typeFlag = 1;
+		deleteType = 'onenum';
 		getHisData();
 	}else if(mflag == "chouyan"){
 		gtype = 7;
 		typeFlag = 1;
+		deleteType = 'onenum';
 		getHisData();
 	}else if(mflag == "yinjiu"){
 		gtype = 8;
 		typeFlag = 1;
+		deleteType = 'onenum';
 		getHisData();
 	}else if(mflag == "xueya"){
 		typeFlag = 2;
 		getBloodHisData();
+		deleteType = 'twonum';
 	}else if(mflag == "shuimian"){
 		typeFlag = 3;
+		deleteType = 'twotime';
 		getShuimianHisData();
 	}else if(mflag == "yinshi"){
 		typeFlag = 4;
+		deleteType = 'twochoose';
 		getYinshiHisData();
 	}else if(mflag == "xuetang"){
 		typeFlag = 5;
+		deleteType = 'oneandone';
 		getXuetangHisData();
 		
 	}
@@ -342,516 +359,213 @@ function getYinshiHisData(){
 	});
 }
 
-var valueArr = new Array();
-function getValueArray() {
+function deleteT(a){
 	
-	var ReLength = result.dataArray.length;
-	var i = 0;
-	var iFlag = 1;
-	var j = 0;
-	var NowLength = result.dataArray.length;
+	var Hisid = a.getAttribute('id');
 	
-	for (i = 0; i < ReLength; i++) {
-		if (iFlag == 8) {
-			if(typeFlag == 1 || typeFlag == 3){
-				DrawPic();
-			}else if(typeFlag == 2){
-				DrawBloodPic();
-			}else if(typeFlag == 5){
-				DrawXueTangPic();
-			}else if(typeFlag == 4){
-				DrawYinshiPic();
+	$.ajax({
+		type:"post",
+		url:myUrl+"infowrite_delinfowrite",
+		data:{
+			'id':Hisid,
+			'token':token,
+			'type':deleteType
+		},
+		success:function(result){
+			var m = eval("("+result+")");
+			if(m.code == 1){
+//				getPopInfo(m.msg);
+				alert(m.msg)
+				location.reload();
+			}else{
+				getPopInfo(m.msg);
 			}
-			iFlag = 1;
-			j = 0;
-			i--;
-
-		} else {
-			valueArr[j] = result.dataArray[i];
-			if( NowLength == 1 && iFlag < 8){
-				if(typeFlag == 1 || typeFlag == 3){
-					DrawPic();
-				}else if(typeFlag == 2){
-					DrawBloodPic();
-				}else if(typeFlag == 5){
-					DrawXueTangPic();
-				}else if(typeFlag == 4){
-					DrawYinshiPic();
-				}
-			}
-			j++;
-			iFlag++;
-			NowLength--;
+		},
+		error:function(e){
+//			getPopInfo("网络错误");
+			alert("网络错误")
 		}
-
-	}
-
+	});
 }
 
-var dId = 0;
-function DrawPic() {
-	dId++;
+
+function getValueArray() {
 	var html = "";
-	html += '<div class="ImgBox">'
-	html += '<div class="ImgTitle">'
-	if(dId == 1){
-		html += '最近一周'
-	}else{
-		html += valueArr[0].date;
+	var ReLength = result.dataArray;
+	if (mflag == "tiwen") {
+		ReLength.forEach(function(e){
+			html += '<div class="HisList">'
+			html += '<span class="HisDate mm">'+e.date+'</span>'
+			html +=	'<span class="HisValue mm">'+e.numericOne+'</span>'
+			html +=	'<span class="HisUnit mm">度</span>'
+			html +=	'<span class="HisDelete" id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+		})
+	}else if(mflag == "maibo"){
+		ReLength.forEach(function(e){
+			html += '<div class="HisList">'
+			html += '<span class="HisDate mm">'+e.date+'</span>'
+			html +=	'<span class="HisValue mm">'+e.numericOne+'</span>'
+			html +=	'<span class="HisUnit mm">bpm</span>'
+			html +=	'<span class="HisDelete" id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+		})
+	}else if(mflag == "huxi"){
+		ReLength.forEach(function(e){
+			html += '<div class="HisList">'
+			html += '<span class="HisDate mm">'+e.date+'</span>'
+			html +=	'<span class="HisValue mm">'+e.numericOne+'</span>'
+			html +=	'<span class="HisUnit mm">次/分钟</span>'
+			html +=	'<span class="HisDelete" id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+		})
+	}else if(mflag == "xueyang"){
+		ReLength.forEach(function(e){
+			html += '<div class="HisList">'
+			html += '<span class="HisDate  mm">'+e.date+'</span>'
+			html +=	'<span class="HisValue mm">'+e.numericOne+'</span>'
+			html +=	'<span class="HisUnit mm">mmHg</span>'
+			html +=	'<span class="HisDelete" id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+		})
+		
+	}else if(mflag == "tizhong"){
+		ReLength.forEach(function(e){
+			html += '<div class="HisList">'
+			html += '<span class="HisDate mm">'+e.date+'</span>'
+			html +=	'<span class="HisValue mm">'+e.numericOne+'</span>'
+			html +=	'<span class="HisUnit mm">Kg</span>'
+			html +=	'<span class="HisDelete" id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+		})
+	}else if(mflag == "yundong"){
+		ReLength.forEach(function(e){
+			html += '<div class="HisList">'
+			html += '<span class="HisDate mm">'+e.date+'</span>'
+			html +=	'<span class="HisValue mm">'+e.numericOne+'</span>'
+			html +=	'<span class="HisUnit  mm">Km</span>'
+			html +=	'<span class="HisDelete" id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+		})
+	}else if(mflag == "chouyan"){
+		ReLength.forEach(function(e){
+			html += '<div class="HisList">'
+			html += '<span class="HisDate mm">'+e.date+'</span>'
+			html +=	'<span class="HisValue mm">'+e.numericOne+'</span>'
+			html +=	'<span class="HisUnit mm">根</span>'
+			html +=	'<span class="HisDelete" id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+		})
+	}else if(mflag == "yinjiu"){
+		ReLength.forEach(function(e){
+			html += '<div class="HisList">'
+			html += '<span class="HisDate mm">'+e.date+'</span>'
+			html +=	'<span class="HisValue mm">'+e.numericOne+'</span>'
+			html +=	'<span class="HisUnit mm">mL</span>'
+			html +=	'<span class="HisDelete" id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+		})
+	}else if(mflag == "xueya"){
+		ReLength.forEach(function(e){
+			html += '<div class="HisList">'
+			html +=	'<span class="YaName mm">'+e.date+'</span><br />'
+			html +=	'<span class="YaName mm">高压 ：'+e.numericOne+'kpa</span>'
+			html +=	'<span class="YaName yaMar mm">低压：'+e.numericTwo+'kpa</span>'
+			html +=	'<span class="HisDelete Ya"  id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+			
+		})
+	}else if(mflag == "shuimian"){
+		ReLength.forEach(function(e){
+			var type = '';
+			if(e.numericOne == 1){
+				type = "无"
+			}else if(e.numericOne == 2){
+				type = "多汗"
+			}else if(e.numericOne == 3){
+				type = "起夜"
+			}else if(e.numericOne == 4){
+				type = "多梦"
+			}
+			html += '<div class="HisList">'
+			html +=	'<span class="YaName">睡眠质量：'+type+'</span><br />'
+			html +=	'<span class="YaName">睡觉时间：'+e.startTime+'</span><br/>'
+			html +=	'<span class="YaName">起床时间：'+e.endTime+'</span>'
+			html +=	'<span class="HisDelete SM"  id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+			
+		})
+	}else if(mflag == "yinshi"){
+		ReLength.forEach(function(e){
+			var type2 = '';
+			var type1 = '';
+			if(e.numericOne == 1){
+				type1 = "无"
+			}else if(e.numericOne == 2){
+				type1 = "油腻"
+			}else if(e.numericOne == 3){
+				type1 = "一般"
+			}else if(e.numericOne == 4){
+				type1 = "清淡"
+			}
+			
+			if(e.numericTwo == 1){
+				type2 = "无"
+			}else if(e.numericTwo == 2){
+				type2 = "咸"
+			}else if(e.numericTwo == 3){
+				type2 = "一般"
+			}else if(e.numericTwo == 4){
+				type2 = "淡"
+			}
+			html += '<div class="HisList">'
+			html +=	'<span class="YaName">'+e.date+'</span><br />'
+			html +=	'<span class="YaName">饮食情况：'+type1+'</span><br/>'
+			html +=	'<span class="YaName">食盐情况：'+type2+'</span>'
+			html +=	'<span class="HisDelete SM"  id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+		})
+		
+		
+	}else if(mflag == "xuetang"){
+		ReLength.forEach(function(e){
+			var type = "";
+			if(e.type == 1){
+				type = "早餐前";
+			}else if(e.type == 2){
+				type = "早餐后";
+			}else if(e.type == 3){
+				type = "午餐前";
+			}else if(e.type == 4){
+				type = "午餐后";
+			}else if(e.type == 5){
+				type = "晚餐前";
+			}else if(e.type == 6){
+				type = "晚餐后";
+			}else if(e.type == 7){
+				type = "晚上三点";
+			}
+			
+			
+			html += '<div class="HisList">'
+			html +=	'<span class="YaName">'+e.date+'</span><br />'
+			html +=	'<span class="YaName">血糖值：'+e.numericOne+'mmol/L</span><br/>'
+			html +=	'<span class="YaName">测量时间：'+type+'</span>'
+			html +=	'<span class="HisDelete SM"  id='+e.id+' onclick="deleteT(this)">删除</span>'
+			html +=	'</div>'
+			
+		})
 	}
+	$("#ContDiv").append(html);
 	
-	html += '</div>'
-	html += '<div class="ImgDataDraw" id='+dId+' >'
-
-	html += '</div> '
-	html += '</div>'
-	$("#Content").append(html);
-	
-	
-	var date = [];
-	var data = {};
-	var mvalue = [];
-	var nvalue = [];
-	var dataArr = valueArr;
-	var OlDate = [];
-	dataArr.forEach(function(e) {
-		OlDate.push(e.date);
-		mvalue.push(Number(e.valueone));
-	});
-	date = OlDate.reverse();
-	data.name = "";
-	data.data = mvalue.reverse();
-	data.color = 'red';
-	$('#'+dId).highcharts({
-		chart: {
-			type: 'line',
-//			margin: [6, 2, 22, 30],
-			fontSize: 10,
-			fontColor: '#ffffff',
-			backgroundColor: '#ffffff',
-		},
-		legend: {
-			enabled: false
-		},
-		title: {
-			text: ''
-		},
-		xAxis: {
-			categories: date,
-			lineColor: '#000000',
-			lineWidth: 2,
-			tickColor: "#000000",
-			labels: {
-				style: {
-					color: '#000000',
-					fontSize: 8
-				}
-			}
-
-		},
-		yAxis: {
-			title: {
-				text: ''
-			},
-			gridLineColor: '#000000',
-			gridLineWidth: 2,
-			lineColor: '#000000',
-			lineWidth: 2,
-			labels: {
-				style: {
-					color: '#000000',
-					fontSize: 8
-				}
-			},
-			tickInterval: 3,
-			endOnTick: false,
-			maxPadding: 0.5
-		},
-		plotOptions: {
-			line: {
-				dataLabels: {
-					color:"blue",
-					enabled: true 
-				},
-				enableMouseTracking: false
-			},
-			series: {
-				events: {
-					legendItemClick: function(e) {
-						return false; // 直接 return false 即可禁用图例点击事件
-					}
-				}
-			}
-		},
-		series: [data]
-	});
 	var reload = document.getElementById("reload");
 	var loading = document.getElementById("loading");
+	var outLoad = document.getElementById("outLoad");
 	reload.style.display = 'block';
 	loading.style.display = "none";
-
-valueArr = new Array();
+	outLoad.style.display = "none";
 }
 
-var bloodId = 0;
-function DrawBloodPic() {
-	bloodId++;
-	var html = "";
-	html += '<div class="ImgBox">'
-	html += '<div class="ImgTitle">'
-	if(bloodId == 1){
-		html += '最近一周'
-	}else{
-		html += valueArr[0].date;
-	}
-	
-	html += '</div>'
-	html += '<div class="ImgDataDraw" id='+bloodId+' >'
-
-	html += '</div> '
-	html += '</div>'
-	$("#Content").append(html);
-	
-	
-	var date = [];
-	var data = {};
-	var data2 = {};
-	var mvalue = [];
-	var nvalue = [];
-	var dataArr = valueArr;
-	var OlDate = [];
-	dataArr.forEach(function(e) {
-		OlDate.push(e.date);
-		mvalue.push(Number(e.valueone));
-		nvalue.push(Number(e.valuetwo));
-	});
-	date = OlDate.reverse();
-	
-	$('#'+bloodId).highcharts({
-		chart: {
-			type: 'line',
-//			margin: [6, 2, 22, 30],
-			fontSize: 10,
-			fontColor: '#ffffff',
-			backgroundColor: '#ffffff',
-
-
-
-		},
-		legend: {
-			enabled: true
-		},
-		title: {
-			text: ''
-		},
-		xAxis: {
-			categories: date,
-			lineColor: '#000000',
-			lineWidth: 2,
-			tickColor: "#000000",
-			labels: {
-				style: {
-					color: '#000000',
-					fontSize: 8
-				}
-			}
-
-		},
-		yAxis: {
-			title: {
-				text: ''
-			},
-			gridLineColor: '#000000',
-			gridLineWidth: 2,
-			lineColor: '#000000',
-			lineWidth: 2,
-			labels: {
-				style: {
-					color: '#000000',
-					fontSize: 8
-				}
-			},
-			tickInterval: 3,
-			endOnTick: false,
-			maxPadding: 0.5
-		},
-		plotOptions: {
-			line: {
-				dataLabels: {
-					color:"blue",
-					enabled: true 
-				},
-				enableMouseTracking: false
-			},
-			series: {
-				events: {
-					legendItemClick: function(e) {
-						return false; // 直接 return false 即可禁用图例点击事件
-					}
-				}
-			}
-		},
-		series: [{name:"高血压",data:mvalue.reverse(),color:'#c36f2e'},{name:"低血压",data:nvalue.reverse(),color:'#f23c13'}]
-	});
-	var reload = document.getElementById("reload");
-	var loading = document.getElementById("loading");
-	reload.style.display = 'block';
-	loading.style.display = "none";
-
-
-valueArr = new Array();
-}
-
-
-var XTId = 0;
-function DrawXueTangPic() {
-	
-	XTId++;
-	var html = "";
-	html += '<div class="ImgBox">'
-	html += '<div class="ImgTitle">'
-	if(XTId == 1){
-		html += '最近一周'
-	}else{
-		html += valueArr[0].date;
-	}
-	
-	html += '</div>'
-	html += '<div class="ImgDataDraw" id='+XTId+' >'
-
-	html += '</div> '
-	html += '</div>'
-	$("#Content").append(html);
-	
-	
-	var date = [];
-	var mvalue = [];
-	var nvalue = [];
-	var avalue = [];
-	var bvalue = [];
-	var cvalue = [];
-	var dvalue = [];
-	var evalue = [];
-	 
-	var dataArr = valueArr;
-	var OlDate = [];
-	dataArr.forEach(function(e) {
-		OlDate.push(e.date);
-		mvalue.push(Number(e.value1));
-		nvalue.push(Number(e.value2));
-		avalue.push(Number(e.value3));
-		bvalue.push(Number(e.value4));
-		cvalue.push(Number(e.value5));
-		dvalue.push(Number(e.value6));
-		evalue.push(Number(e.value7));
-	});
-	date = OlDate.reverse();
-	
-	$('#'+XTId).highcharts({
-		chart: {
-			type: 'line',
-//			margin: [6, 2, 22, 30],
-			fontSize: 10,
-			fontColor: '#ffffff',
-			backgroundColor: '#ffffff',
-
-
-
-		},
-		legend: {
-			enabled: true
-		},
-		title: {
-			text: ''
-		},
-		xAxis: {
-			categories: date,
-			lineColor: '#000000',
-			lineWidth: 2,
-			tickColor: "#000000",
-			labels: {
-				style: {
-					color: '#000000',
-					fontSize: 8
-				}
-			}
-
-		},
-		yAxis: {
-			title: {
-				text: ''
-			},
-			gridLineColor: '#000000',
-			gridLineWidth: 2,
-			lineColor: '#000000',
-			lineWidth: 2,
-			labels: {
-				style: {
-					color: '#000000',
-					fontSize: 8
-				}
-			},
-			tickInterval: 3,
-			endOnTick: false,
-			maxPadding: 0.5
-		},
-		plotOptions: {
-			line: {
-				dataLabels: {
-//												enabled: true 
-				},
-				enableMouseTracking: false
-			},
-			series: {
-				events: {
-					legendItemClick: function(e) {
-						return false; // 直接 return false 即可禁用图例点击事件
-					}
-				}
-			}
-		},
-		series: [
-		{name:"早餐前",data:mvalue.reverse(),color:'#c36f2e'},
-		{name:"早餐后",data:nvalue.reverse(),color:'#f23c13'},
-		{name:"午餐前",data:avalue.reverse(),color:'#e7739a'},
-		{name:"午餐后",data:bvalue.reverse(),color:'#e8e5d2'},
-		{name:"晚餐前",data:cvalue.reverse(),color:'#fee554'},
-		{name:"晚餐后",data:dvalue.reverse(),color:'#009714'},
-		{name:"晚上三点",data:evalue.reverse(),color:'#ff243d'},
-		]
-	});
-	var reload = document.getElementById("reload");
-	var loading = document.getElementById("loading");
-	reload.style.display = 'block';
-	loading.style.display = "none";
-
-
-valueArr = new Array();
-}
-
-
-var YSId = 0;
-function DrawYinshiPic() {
-	
-	YSId++;
-	var html = "";
-	html += '<div class="ImgBox">'
-	html += '<div class="ImgTitle">'
-	if(YSId == 1){
-		html += '最近一周'
-	}else{
-		html += valueArr[0].date;
-	}
-	
-	html += '</div>'
-	html += '<div class="ImgDataDraw" id='+YSId+' >'
-
-	html += '</div> '
-	html += '</div>'
-	$("#Content").append(html);
-	
-	
-	var date = [];
-	var mvalue = [];
-	var nvalue = [];
-	 
-	var dataArr = valueArr;
-	var OlDate = [];
-	dataArr.forEach(function(e) {
-		OlDate.push(e.date);
-		mvalue.push(Number(e.numericOne));
-		nvalue.push(Number(e.numericTwo));
-	});
-	date = OlDate.reverse();
-	
-	$('#'+YSId).highcharts({
-		chart: {
-			type: 'line',
-//			margin: [6, 2, 22, 30],
-			fontSize: 10,
-			fontColor: '#ffffff',
-			backgroundColor: '#ffffff',
-
-
-
-		},
-		legend: {
-			enabled: true
-		},
-		title: {
-			text: ''
-		},
-		xAxis: {
-			categories: date,
-			lineColor: '#000000',
-			lineWidth: 2,
-			tickColor: "#000000",
-			labels: {
-				style: {
-					color: '#000000',
-					fontSize: 8
-				}
-			}
-
-		},
-		yAxis: {
-			title: {
-				text: ''
-			},
-			gridLineColor: '#000000',
-			gridLineWidth: 2,
-			lineColor: '#000000',
-			lineWidth: 2,
-			labels: {
-				style: {
-					color: '#000000',
-					fontSize: 8
-				}
-			},
-			tickInterval: 3,
-			endOnTick: false,
-			maxPadding: 0.5
-		},
-		plotOptions: {
-			line: {
-						dataLabels: {
-							enabled: true ,
-							 formatter: function () {
-//		                        return  '咸';
-		                        if(this.y == 1){
-		                        	return '无'
-		                        }else if(this.y == 2){
-		                        	return '油腻'
-		                        }else if(this.y == 3){
-		                        	return '一般'
-		                        }else if(this.y == 4){
-		                        	return '清淡'
-		                        }
-		                    }
-						},
-				enableMouseTracking: false
-			},
-			series: {
-				events: {
-					legendItemClick: function(e) {
-						return false; // 直接 return false 即可禁用图例点击事件
-					}
-				}
-			}
-		},
-		series: [
-		{name:"饮食情况",data:mvalue.reverse(),color:'#c36f2e'},
-//		{name:"早餐后",data:nvalue.reverse(),color:'#f23c13'},
-		]
-	});
-	var reload = document.getElementById("reload");
-	var loading = document.getElementById("loading");
-	reload.style.display = 'block';
-	loading.style.display = "none";
-
-
-	valueArr = new Array();
-}
 //调用安卓弹出提示信息方法
 function getPopInfo(msg) {
 	bridge.alert(msg);

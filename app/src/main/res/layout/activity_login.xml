@@ -31,7 +31,7 @@
         android:paddingTop="20px"
         android:paddingBottom="20px"
         android:gravity="end|right"
-        android:textSize="24px"
+        android:textSize="26px"
         android:textColor="@color/text_gray_dark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,16 +47,18 @@
         android:layout_height="wrap_content"
         android:gravity="center">
         <TextView
-            android:textSize="24px"
+            android:textSize="26px"
             android:textColor="@color/text_gray_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_login_register_hint"/>
         <TextView
             android:id="@+id/textButtonRegister"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24px"
+            android:textSize="26px"
             android:textColor="@color/text_red"
             android:text="@string/activity_login_register"/>
     </com.zhy.autolayout.AutoLinearLayout>

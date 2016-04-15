@@ -1,6 +1,8 @@
 window.onload = function(){
 	id = bridge.getUserId();
 	token = bridge.getToken();
+//	id=48;
+//	token="";
 	
 //	console.log("id="+id);
 	DrawData()
@@ -26,16 +28,73 @@ function DrawData() {
 		},
 		success: function(m) {
 			var result = eval("("+m+")");
-			var date = [];
+			console.log(m)
+			var date = ["","","","","","","",""];
 			var data = {};
 			var mvalue = [];
+			var mval1 = [];
+			var mval2 = [];
 			var nvalue = [];
-			var dataArr = result.dataArray.reverse();
-			dataArr.forEach(function(e) {
-					date.push(e.date);
-					mvalue.push(parseInt(e.valueone));
-					nvalue.push(parseInt(e.valuetwo));
-			});
+			var nval1 = [];
+			var nval2 = [];
+			var dataArr = result.dataArray;
+			var c = 0;
+			var d = 0;
+			 
+
+			var Ndate = "";
+			$.each(dataArr, function(i,k) {
+				if(c == 0){
+					date[4] = i;
+					c++;
+				}else{
+					date[0] = i;
+				}
+				$.each(k, function(j,l) { 
+					var o = 0;
+					
+					$.each(l, function(f,h) {
+						if(o == 0){
+							if(d == 0){
+								if(h == null){
+									mval2.push(null);
+								}else{
+									mval2.push(parseInt(h));
+								}
+							}else{
+								if(h == null){
+									mval1.push(null);
+								}else{
+									mval1.push(parseInt(h));
+								}
+							}
+							o++;
+						}else{
+							if(d == 0){
+								if(h == null){
+									nval2.push(null);
+								}else{
+									nval2.push(parseInt(h));
+								}
+							}else{
+								if(h == null){
+									nval1.push(null);
+								}else{
+									nval1.push(parseInt(h));
+								}
+							}
+							
+						}
+					});					
+				});
+				d++;
+
+			}); 
+			
+			mval1 = mval1.concat(mval2);
+			nval1 = nval1.concat(nval2);
+			console.log(mval1.length)
+			console.log(nvalue)
 			$('#DataImgDraw').highcharts({
 				chart: {
 					type: 'line',
@@ -92,17 +151,18 @@ function DrawData() {
 					        legendItemClick: function(e) {
 					            return false; // 直接 return false 即可禁用图例点击事件
 					        }
-					    }
+					    },
+					    connectNulls: true
 					  }
 				},
 				series: [{
 						color:'#ffffff',
 			            name: '高压',
-			            data: mvalue
+			            data: mval1
 			        },{
 			        	color:'#fe8f8f',
 			            name: '低压',
-			            data: nvalue
+			            data: nval1
 			        },
 				]
 			});

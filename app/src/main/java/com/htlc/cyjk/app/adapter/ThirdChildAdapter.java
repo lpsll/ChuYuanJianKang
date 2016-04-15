@@ -36,12 +36,10 @@ import java.util.HashMap;
 /**
  * Created by sks on 2016/1/28.
  */
-public class ThirdChildAdapter extends BaseAdapter{
+public class ThirdChildAdapter extends BaseAdapter {
     private Activity mActivity;
     private ArrayList mList;
-    //定义一个HashMap，用来存放EditText的值，Key是position
-    private HashMap<Integer, String> mHashMap = new HashMap<Integer, String>();
-    private boolean isDeleteState;
+
 
     public ThirdChildAdapter(ArrayList list, Activity activity) {
         this.mList = list;
@@ -66,7 +64,7 @@ public class ThirdChildAdapter extends BaseAdapter{
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
         ViewHolder holder = null;
-        if(convertView == null){
+        if (convertView == null) {
             holder = new ViewHolder();
             convertView = View.inflate(mActivity, R.layout.adapter_third_child_fragment, null);
             holder.linearItem = (LinearLayout) convertView.findViewById(R.id.linearItem);
@@ -75,105 +73,69 @@ public class ThirdChildAdapter extends BaseAdapter{
             holder.textName = (TextView) convertView.findViewById(R.id.textName);
             holder.editCount = (EditText) convertView.findViewById(R.id.editCount);
             holder.textUnit = (TextView) convertView.findViewById(R.id.textUnit);
-            holder.editCount.setTag(position);
-            holder.editCount.addTextChangedListener(new NumTextWatcher(holder));
             convertView.setTag(holder);
             //对于listview，注意添加这一行，即可在item上使用高度
             AutoUtils.autoSize(convertView);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
             holder.editCount.setTag(position);
         }
         //具体数据处理
         DrugBean bean = (DrugBean) mList.get(position);
         bean.position = position;
-        LogUtil.e(this,bean.toString()+":position="+position);
         holder.textName.setText(bean.medicine);
-        if(!TextUtils.isEmpty(bean.unit)){
+        if (!TextUtils.isEmpty(bean.unit)) {
             holder.textUnit.setText(bean.unit);
         }
         final ViewHolder finalHolder = holder;
         holder.linearUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isDeleteState()) {
-                    LogUtil.e(ThirdChildAdapter.this, "unit=" + position);
-                    showPopupWindow(v, finalHolder, position);
-                }
-
+                showPopupWindow(v, finalHolder, position);
             }
         });
-        if(isDeleteState){
-            holder.imageSelect.setVisibility(View.VISIBLE);
-            holder.editCount.setEnabled(false);
-            holder.editCount.setFocusable(false);
-        }else {
-            holder.imageSelect.setVisibility(View.GONE);
-            holder.imageSelect.setSelected(false);
-            holder.editCount.setEnabled(true);
-            holder.editCount.setFocusable(true);
-            holder.editCount.setFocusableInTouchMode(true);
-            holder.editCount.requestFocus();
-        }
-        //如果hashMap不为空，就设置的editText
-        String num = mHashMap.get(position);
-        LogUtil.e(ThirdChildAdapter.this,"getView: position="+position+";num="+num);
-        if(!TextUtils.isEmpty(num)){
-            holder.editCount.setText(num);
-            bean.num = num;
-            DrugBean o = (DrugBean) mList.get(position);
-            LogUtil.e(ThirdChildAdapter.this,"bean.num="+ o.num);
-        }else {
-            if(!TextUtils.isEmpty(bean.num)){
-                holder.editCount.setText(bean.num);
+        finalHolder.editCount.setText(bean.num);
+        finalHolder.editCount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                EditText editText = (EditText) v;
+                if (hasFocus) {
+                    editText.setText("");
+                } else {
+                    if (mList.size() > position) {
+                        String temp = editText.getText().toString();
+                        if(TextUtils.isEmpty(temp)){
+                            editText.setText("1");
+                            ((DrugBean) mList.get(position)).num = "1";
+                        }else {
+                            int tempNum = Integer.parseInt(temp);
+                            if(tempNum == 0){
+                                editText.setText("1");
+                                ((DrugBean) mList.get(position)).num = "1";
+                            }else {
+                                editText.setText(tempNum+"");
+                                ((DrugBean) mList.get(position)).num = tempNum+"";
+                            }
+                        }
+                    }
+                }
             }
-        }
+        });
+        holder.imageSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
         return convertView;
     }
-    class NumTextWatcher implements TextWatcher{
 
-        private ViewHolder mHolder;
-
-        public NumTextWatcher(ViewHolder holder) {
-            this.mHolder = holder;
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            if (!TextUtils.isEmpty(s.toString())) {
-                int position = (Integer) mHolder.editCount.getTag();
-                LogUtil.e(ThirdChildAdapter.this,"afterTextChanged: tag="+position+";num="+s.toString());
-                mHashMap.put(position, s.toString());// 当EditText数据发生改变的时候存到data变量中
-            }
-        }
-    }
-    class ViewHolder{
+    class ViewHolder {
         LinearLayout linearItem, linearUnit;
         ImageView imageSelect;
         EditText editCount;
-        TextView textName,textUnit;
-    }
-
-    public boolean isDeleteState() {
-        return isDeleteState;
-    }
-
-    public void setDeleteState(boolean isDeleteState) {
-        this.isDeleteState = isDeleteState;
-    }
-
-    public HashMap<Integer, String> getHashMap() {
-        return mHashMap;
+        TextView textName, textUnit;
     }
 
     private void showPopupWindow(View v, final ViewHolder finalHolder, final int beanPosition) {
@@ -181,8 +143,8 @@ public class ThirdChildAdapter extends BaseAdapter{
         String[] units = CommonUtil.getResourceStringArray(R.array.fragment_third_child_adapter_unit);
         final ArrayList<String> unitList = new ArrayList<String>();
         String currentUnit = finalHolder.textUnit.getText().toString().trim();
-        for(String unit : units){
-            if(!currentUnit.equals(unit)){
+        for (String unit : units) {
+            if (!currentUnit.equals(unit)) {
                 unitList.add(unit);
             }
         }
@@ -190,7 +152,7 @@ public class ThirdChildAdapter extends BaseAdapter{
         ListView contentView = (ListView) LayoutInflater.from(mActivity).inflate(
                 R.layout.pop_window_third_child_adapter, null);
         // 设置按钮的点击事件
-        BaseAdapter adapter = new PopWindowThirdChildAdapter(unitList,mActivity);
+        BaseAdapter adapter = new PopWindowThirdChildAdapter(unitList, mActivity);
         contentView.setAdapter(adapter);
 
 
@@ -208,8 +170,8 @@ public class ThirdChildAdapter extends BaseAdapter{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 LogUtil.e(ThirdChildAdapter.this, "点击了单位：" + unitList.get(position));
                 finalHolder.textUnit.setText(unitList.get(position));
-                ((DrugBean)(mList.get(beanPosition))).unit = unitList.get(position);
-                if(popupWindow != null){
+                ((DrugBean) (mList.get(beanPosition))).unit = unitList.get(position);
+                if (popupWindow != null) {
                     popupWindow.dismiss();
                 }
             }
@@ -232,7 +194,7 @@ public class ThirdChildAdapter extends BaseAdapter{
         WindowManager m = mActivity.getWindowManager();
         Display d = m.getDefaultDisplay();
         int padding = 5 * d.getHeight() / Constant.ScreenHeight;
-        popupWindow.showAsDropDown(v, 0,padding);
+        popupWindow.showAsDropDown(v, 0, padding);
 
     }
 }

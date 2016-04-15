@@ -130,6 +130,7 @@ public class DischargeSummaryActivity extends BaseActivity implements View.OnCli
                     @Override
                     public void onSuccess(Void data) {
                         ToastUtil.showToast(DischargeSummaryActivity.this,"提交成功");
+                        finish();
                     }
 
                     @Override

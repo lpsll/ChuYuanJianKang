@@ -211,6 +211,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onFailure(String errorEvent, String message) {
                 if (handleNetworkOnFailure(errorEvent, message)) return;
+                LogUtil.e(this,"commitPayMethodAndLength:  "+message);
                 ToastUtil.showToast(App.app, message);
             }
         });

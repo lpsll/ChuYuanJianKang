@@ -198,42 +198,42 @@ public class DischargeSummaryActivity2 extends BaseActivity implements View.OnCl
             mEditOutDiagnosis.setEnabled(true);
             mEditOutDiagnosis.setFocusable(true);
             mEditOutDiagnosis.setFocusableInTouchMode(true);
-            mEditOutDiagnosis.requestFocus();
+//            mEditOutDiagnosis.requestFocus();
 
             mEditEffect.setEnabled(true);
             mEditEffect.setFocusable(true);
             mEditEffect.setFocusableInTouchMode(true);
-            mEditEffect.requestFocus();
+//            mEditEffect.requestFocus();
 
             mEditSpecialItem.setEnabled(true);
             mEditSpecialItem.setFocusable(true);
             mEditSpecialItem.setFocusableInTouchMode(true);
-            mEditSpecialItem.requestFocus();
+//            mEditSpecialItem.requestFocus();
 
             mEditInStatus.setEnabled(true);
             mEditInStatus.setFocusable(true);
             mEditInStatus.setFocusableInTouchMode(true);
-            mEditInStatus.requestFocus();
+//            mEditInStatus.requestFocus();
 
             mEditAtStatus.setEnabled(true);
             mEditAtStatus.setFocusable(true);
             mEditAtStatus.setFocusableInTouchMode(true);
-            mEditAtStatus.requestFocus();
+//            mEditAtStatus.requestFocus();
 
             mEditOutStatus.setEnabled(true);
             mEditOutStatus.setFocusable(true);
             mEditOutStatus.setFocusableInTouchMode(true);
-            mEditOutStatus.requestFocus();
+//            mEditOutStatus.requestFocus();
 
             mEditOutConsideration.setEnabled(true);
             mEditOutConsideration.setFocusable(true);
             mEditOutConsideration.setFocusableInTouchMode(true);
-            mEditOutConsideration.requestFocus();
+//            mEditOutConsideration.requestFocus();
 
             mEditInDiagnosis.setEnabled(true);
             mEditInDiagnosis.setFocusable(true);
             mEditInDiagnosis.setFocusableInTouchMode(true);
-            mEditInDiagnosis.requestFocus();
+//            mEditInDiagnosis.requestFocus();
 
             mTextRight.setText("保存");
             mTextLeft.setVisibility(View.VISIBLE);

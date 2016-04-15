@@ -11,10 +11,12 @@ import com.htlc.cyjk.api.ApiImpl;
 import com.htlc.cyjk.api.ApiResponse;
 import com.htlc.cyjk.api.net.okhttp.callback.ResultCallback;
 import com.htlc.cyjk.app.App;
+import com.htlc.cyjk.app.db.DbManager;
 import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.Constant;
 import com.htlc.cyjk.app.util.JsonUtil;
 import com.htlc.cyjk.app.util.LogUtil;
+import com.htlc.cyjk.app.util.SharedPreferenceUtil;
 import com.htlc.cyjk.model.ChargeBean;
 import com.htlc.cyjk.model.ContactBean;
 import com.htlc.cyjk.model.DischargeSummaryBean;
@@ -22,8 +24,10 @@ import com.htlc.cyjk.model.DrugBean;
 import com.htlc.cyjk.model.InformationBean;
 import com.htlc.cyjk.model.MedicalHistoryItemBean;
 import com.htlc.cyjk.model.MessageBean;
+import com.htlc.cyjk.model.NetworkCityBean;
 import com.htlc.cyjk.model.PersonBean;
 import com.htlc.cyjk.model.PriceBean;
+import com.htlc.cyjk.model.UpdateCityBean;
 import com.htlc.cyjk.model.UserBean;
 import com.squareup.okhttp.Request;
 
@@ -653,6 +657,29 @@ public class AppActionImpl implements AppAction {
             public void onResponse(ApiResponse<ChargeBean> response) {
                 if ("1".equals(response.code)) {
                     listener.onSuccess(response.data);
+                } else {
+                    listener.onFailure(ErrorEvent.RESULT_ILLEGAL, response.msg);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getAllCity(final ActionCallbackListener<ArrayList<NetworkCityBean>> listener) {
+        String lastModifyDate = SharedPreferenceUtil.getString(App.app, DbManager.DATABASE_LAST_MODIFY,"0");
+        LogUtil.e("getAllCity",lastModifyDate);
+        api.getAllCity(lastModifyDate, new ResultCallback<ApiResponse<UpdateCityBean>>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                e.printStackTrace();
+                listener.onFailure(ErrorEvent.NETWORK_ERROR, CommonUtil.getResourceString(R.string.common_network_error));
+            }
+
+            @Override
+            public void onResponse(ApiResponse<UpdateCityBean> response) {
+                if ("1".equals(response.code)) {
+                    SharedPreferenceUtil.putString(App.app, DbManager.DATABASE_LAST_MODIFY, response.data.update);
+                    listener.onSuccess(response.data.city);
                 } else {
                     listener.onFailure(ErrorEvent.RESULT_ILLEGAL, response.msg);
                 }

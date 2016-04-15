@@ -1,13 +1,17 @@
 window.onload = function(){
 	id = bridge.getUserId();
 	token = bridge.getToken();
+//	id=149;
+//	token="";
 	console.log("id="+id);
 	DrawData(id)
 
 }
 
 var id = "";
-var token = "";
+var token = "";  
+
+
 
 function DrawData(id) {
 
@@ -25,21 +29,50 @@ function DrawData(id) {
 		success: function(m) {
 			console.log("success="+m);
 			var result = eval("("+m+")");
-			var date = [];
+			var date = ["","","","","","","",""];
 			var data = {};
 			var mvalue = [];
-			var dataArr = result.dataArray.reverse();
-			dataArr.forEach(function(e) {
-					date.push(e.date);
-					mvalue.push(parseInt(e.valueone));				
-			});
+			var val1 = [];
+			var val2 = [];
+			var dataArr = result.dataArray;
+			var c = 0;
+			var d = 0;			 
+
+			var Ndate = "";
+			$.each(dataArr, function(i,k) {
+				if(c == 0){
+					date[4] = i;
+					c++;
+				}else{
+					date[0] = i;
+				}
+				$.each(k, function(j,l) { 
+					if(d == 0){
+						if(l == null){
+							val2.push(null)
+						}else{
+							val2.push(parseInt(l))
+						}
+					}else{
+						if(l == null){
+							val1.push(null)
+						}else{
+							val1.push(parseInt(l))
+						}
+					}
+				});
+				d++;
+			}); 
+			
+			val1 = val1.concat(val2);
+			
 			data.name = "体温";
-			data.data = mvalue;
+			data.data = val1;
 			data.color='#ffffff'
 			$('#DataImgDraw').highcharts({
 				chart: {
 					type: 'line',
-					margin: [6, 2, 22, 30],
+					margin: [6, 2, 30, 30],
 					fontSize:10,
 					fontColor:'#ffffff',
 					backgroundColor: '#498EDB',
@@ -59,7 +92,7 @@ function DrawData(id) {
 					labels: {
 		                style: {
 		                    color: 'white',
-		                    fontSize:8
+		                    fontSize:6
 		                }
 		            }
 
@@ -94,7 +127,8 @@ function DrawData(id) {
 					        legendItemClick: function(e) {
 					            return false; // 直接 return false 即可禁用图例点击事件
 					        }
-					    }
+					    },
+					    connectNulls: true
 					  }
 				},
 				series: [data]

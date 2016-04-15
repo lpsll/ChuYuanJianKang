@@ -4,18 +4,23 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.htlc.cyjk.app.db.DbManager;
+import com.htlc.cyjk.app.db.ProvinceDao;
 import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.Constant;
 import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.app.util.RongIMUtil;
 import com.htlc.cyjk.app.util.SharedPreferenceUtil;
+import com.htlc.cyjk.core.ActionCallbackListener;
 import com.htlc.cyjk.core.AppAction;
 import com.htlc.cyjk.core.AppActionImpl;
 import com.htlc.cyjk.model.ContactBean;
+import com.htlc.cyjk.model.NetworkCityBean;
 import com.htlc.cyjk.model.UserBean;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -51,8 +56,28 @@ public class App extends Application {
         initImageLoader(this);
         initRongIM();
         initJPush();
+        LogUtil.e("App OnCreate","App OnCreate");
 
     }
+
+    /**
+     * 初始化数据库
+     */
+    public void initDatabase() {
+        appAction.getAllCity(new ActionCallbackListener<ArrayList<NetworkCityBean>>() {
+            @Override
+            public void onSuccess(final ArrayList<NetworkCityBean> data) {
+                new ProvinceDao().updateCityListTable(data);
+                LogUtil.e("initDatabase","入库成攻？"+data);
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                LogUtil.e("initDatabase", message);
+            }
+        });
+    }
+
     private void initJPush() {
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);

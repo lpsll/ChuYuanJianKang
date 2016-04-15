@@ -24,16 +24,43 @@ function DrawData(id) {
 		success: function(m) {
 			console.log("success="+m);
 			var result = eval("("+m+")");
-			var date = [];
+			var date = ["","","","","","","",""];
 			var data = {};
 			var mvalue = [];
-			var dataArr = result.dataArray.reverse();
-			dataArr.forEach(function(e) {
-					date.push(e.date);
-					mvalue.push(parseInt(e.valueone));				
+			var val1 = [];
+			var val2 = [];
+			var dataArr = result.dataArray;
+			var c = 0;
+			var d = 0;			 
+
+			var Ndate = "";
+			$.each(dataArr, function(i,k) {
+				if(c == 0){
+					date[4] = i;
+					c++;
+				}else{
+					date[0] = i;
+				}
+				$.each(k, function(j,l) { 
+					if(d == 0){
+						if(l == null){
+							val2.push(null)
+						}else{
+							val2.push(parseInt(l))
+						}
+					}else{
+						if(l == null){
+							val1.push(null)
+						}else{
+							val1.push(parseInt(l))
+						}
+					}
+				});
+				d++;
 			}); 
+			val1 = val1.concat(val2);
 			data.name = "脉搏";
-			data.data = mvalue;
+			data.data = val1;
 			data.color='#ffffff'
 			$('#DataImgDraw').highcharts({
 				chart: {
@@ -85,15 +112,15 @@ function DrawData(id) {
 					line: {
 						dataLabels: {
 //							enabled: true 
-						},
-						enableMouseTracking: false
+						}
 					},
 					series: {
 					    events: {
 					        legendItemClick: function(e) {
 					            return false; // 直接 return false 即可禁用图例点击事件
 					        }
-					    }
+					    },
+					    connectNulls: true
 					  }
 				},
 				series: [data]
@@ -168,11 +195,10 @@ function saveData(){
 				PopInfo = result.msg;
 				if(result.code == 1){
 					getPopInfo("保存成功");
-					getPopInfo("back="+canBack)
 					if(canBack){
 						AndroidBack()
 					}else{
-						getPopInfo("con=jinrulefalse")
+						getPopInfo(PopInfo)
 						DrawData(id)
 					}
 				}else{

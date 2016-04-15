@@ -1,6 +1,8 @@
 window.onload = function(){
 	id = bridge.getUserId();
 	token = bridge.getToken();
+//	id = "48";
+//	token = ""
 	console.log("id="+id);
 	DrawData(id)
 }
@@ -31,7 +33,12 @@ function DrawData(id) {
 			var dataArr = result.dataArray.reverse();
 			dataArr.forEach(function(e) {
 					date.push(e.date);
-					mvalue.push(parseInt(e.valueone));				
+					if(e.valueone == null){
+						mvalue.push(null);
+					}else{
+						mvalue.push(parseInt(e.valueone));
+					}
+									
 			});
 			data.name = "运动";
 			data.data = mvalue;
@@ -94,7 +101,8 @@ function DrawData(id) {
 					        legendItemClick: function(e) {
 					            return false; // 直接 return false 即可禁用图例点击事件
 					        }
-					    }
+					    },
+					    connectNulls: true
 					  }
 				},
 				series: [data]

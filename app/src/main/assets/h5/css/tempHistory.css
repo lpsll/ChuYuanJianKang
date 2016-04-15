@@ -47,3 +47,47 @@
 	margin-left: 5%;
 	margin-top: 10px;
 }
+.HisList{
+	position: relative;
+	background-color: white;
+	/*height: 40px;*/
+	line-height: 40px;
+	margin-top: 5px;
+	padding-left: 14px;
+	/*overflow: hidden;*/
+}
+.HisValue{
+	margin-left: 10px;
+	margin-right: 3px;
+}
+.HisDelete{
+	position: absolute;
+	height: 100%;
+	font-size: 12px;
+	margin-bottom: 3px;
+	background-color: #DDDDDD;
+	margin-top: 0px;
+	color: #BBBBBB;
+	padding-bottom: 2px;
+	float: right;
+	padding-left: 9px;
+	padding-right: 9px;
+	right: 0;
+}
+.yaMar{
+	margin-left: 30px;
+}
+.Ya{
+	margin-top: -40px !important;
+	line-height: 80px;
+}
+.SM{
+	margin-top: -80px !important;
+	line-height: 120px;
+}
+.YaName{
+	font-size: 14px;
+}
+.mm{
+	font-size: 14px !important;
+}

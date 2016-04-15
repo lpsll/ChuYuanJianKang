@@ -95,6 +95,22 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
 
         mEditName = (EditText) findViewById(R.id.editName);
         mEditAge = (EditText) findViewById(R.id.editAge);
+        mEditName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(isEditable && hasFocus){
+                    ((EditText)v).setText("");
+                }
+            }
+        });
+        mEditAge.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(isEditable && hasFocus){
+                    ((EditText)v).setText("");
+                }
+            }
+        });
 
         mEditDepartment = (EditText) findViewById(R.id.editDepartment);
         mEditDoctor = (EditText) findViewById(R.id.editDoctor);
@@ -124,7 +140,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                if(handleNetworkOnFailure(errorEvent, message)) return;
+                if (handleNetworkOnFailure(errorEvent, message)) return;
             }
         });
     }
@@ -206,8 +222,12 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
         citys.clear();
         countys.clear();
         provinces.addAll(new ProvinceDao().getProvinces());
-        citys.addAll(new ProvinceDao().getCities(provinces.get(0).area_code));
-        countys.addAll(new ProvinceDao().getCounties(citys.get(0).area_code));
+        if(provinces.size()>0){
+            citys.addAll(new ProvinceDao().getCities(provinces.get(0).area_code));
+        }
+        if (citys.size()>0){
+            countys.addAll(new ProvinceDao().getCounties(citys.get(0).area_code));
+        }
 
         //三级不联动效果  false
         mPickViePwOptions.setPicker(provinces, citys, countys, false);
@@ -255,9 +275,20 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onOptionsSelect(int options1, int option2, int options3) {
                 //返回的分别是三个级别的选中位置
-                mAddress = provinces.get(options1).area_name + citys.get(option2).area_name + countys.get(options3).area_name;
-                mEditAddress.setText(mAddress);
-                mAddressId = countys.get(options3).area_code+"";
+                if(citys.size()<1){
+                    mAddress = provinces.get(options1).area_name;
+                    mEditAddress.setText(mAddress);
+                    mAddressId = provinces.get(options1).area_code+"";
+                }else if(countys.size()<1){
+                    mAddress = provinces.get(options1).area_name + citys.get(option2).area_name ;
+                    mEditAddress.setText(mAddress);
+                    mAddressId = citys.get(option2).area_code+"";
+                }else {
+                    mAddress = provinces.get(options1).area_name + citys.get(option2).area_name + countys.get(options3).area_name;
+                    mEditAddress.setText(mAddress);
+                    mAddressId = countys.get(options3).area_code+"";
+                }
+
             }
         });
         mPickViePwOptions.show();
@@ -304,12 +335,14 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
             mEditName.setEnabled(true);
             mEditName.setFocusable(true);
             mEditName.setFocusableInTouchMode(true);
-            mEditName.requestFocus();
+//            mEditName.requestFocus();
 
             mEditAge.setEnabled(true);
             mEditAge.setFocusable(true);
             mEditAge.setFocusableInTouchMode(true);
-            mEditAge.requestFocus();
+//            mEditAge.requestFocus();
+
+            mTextRight.requestFocus();
 
             mTextRight.setText("保存");
             mTextLeft.setVisibility(View.VISIBLE);

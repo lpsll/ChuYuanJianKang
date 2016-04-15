@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.htlc.cyjk.R;
+import com.htlc.cyjk.app.App;
+import com.htlc.cyjk.app.util.SharedPreferenceUtil;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -14,6 +16,7 @@ import cn.jpush.android.api.JPushInterface;
  * Created by sks on 2016/2/15.
  */
 public class SplashActivity extends BaseActivity {
+    public static final String IsFirstStart = "IsFirstStart";
 
     private ImageView mImageView;
 
@@ -23,6 +26,7 @@ public class SplashActivity extends BaseActivity {
         mImageView = new ImageView(this);
         mImageView.setImageResource(R.mipmap.ic_launcher);
         setContentView(mImageView);
+        App.app.initDatabase();
 
     }
 
@@ -70,21 +74,29 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void goNextActivity() {
-        application.initLoginStatus();
-        if (application.isLogin()) {
-            String flag = application.getUserBean().flag;
-            switch (flag){
-                case "2":
-                case "3":
-                    goLogin();
-                    break;
-                case "0":
-                default:
-                    goMain();
-            }
+        int isFirst = SharedPreferenceUtil.getInt(this, IsFirstStart, -1);
+        if(isFirst == -1){
+            Intent intent = new Intent(this,GuideActivity.class);
+            startActivity(intent);
+            finish();
         }else {
-            goLogin();
+            application.initLoginStatus();
+            if (application.isLogin()) {
+                String flag = application.getUserBean().flag;
+                switch (flag){
+                    case "2":
+                    case "3":
+                        goLogin();
+                        break;
+                    case "0":
+                    default:
+                        goMain();
+                }
+            }else {
+                goLogin();
+            }
         }
+
     }
 
     private void goMain() {

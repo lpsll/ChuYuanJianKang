@@ -70,7 +70,7 @@ public class FirstFragment extends HomeFragment {
                         textView.setTextColor(getResources().getColor(R.color.text_blue));
                         if(i==2){
                             mTextRight.setVisibility(View.VISIBLE);
-                            mTextLeft.setVisibility(View.VISIBLE);
+                            mTextLeft.setVisibility(View.INVISIBLE);
                         }else {
                             mTextRight.setVisibility(View.INVISIBLE);
                             mTextLeft.setVisibility(View.INVISIBLE);

@@ -9,8 +9,10 @@ import com.htlc.cyjk.model.DischargeSummaryBean;
 import com.htlc.cyjk.model.InformationBean;
 import com.htlc.cyjk.model.MedicalHistoryItemBean;
 import com.htlc.cyjk.model.MessageBean;
+import com.htlc.cyjk.model.NetworkCityBean;
 import com.htlc.cyjk.model.PersonBean;
 import com.htlc.cyjk.model.PriceBean;
+import com.htlc.cyjk.model.UpdateCityBean;
 import com.htlc.cyjk.model.UserBean;
 
 import java.io.File;
@@ -41,6 +43,12 @@ public interface Api {
     String ConversationPermission = Host + "sundry_getlimit";
     String GetPriceList = Host + "pay_getdoctorprice";
     String PayToDoctor = Host + "pay_payto";
+
+
+    String GetProvince = Host + "city_getprovince";
+    String GetCity = Host + "city_getcity";
+    String GetCounty = Host + "city_getarea";
+    String GetAllCity = Host + "city_getall";
 
 
 
@@ -197,4 +205,6 @@ public interface Api {
     void getPriceList(String doctorId,ResultCallback<ApiResponse<PriceBean>> callback);
 
     void payToDoctor(String doctorId,String timeLengthId,String channel, ResultCallback<ApiResponse<ChargeBean>> callback);
+
+    void getAllCity(String lastModifyData, ResultCallback<ApiResponse<UpdateCityBean>> callback);
 }

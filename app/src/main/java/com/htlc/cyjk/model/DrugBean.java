@@ -8,6 +8,7 @@ public class DrugBean implements Comparable<DrugBean> {
     public String group;
     public int position;
 
+
     @Override
     public int compareTo(DrugBean another) {
         if(this.group.compareTo(another.group)==0){

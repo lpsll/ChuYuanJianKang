@@ -3,20 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
+    android:gravity="center_horizontal"
     android:orientation="horizontal"
     android:descendantFocusability= "afterDescendants" >
-
-    <View
-        android:layout_width="20px"
-        android:layout_height="1px"/>
-
-    <ImageView
-        android:id="@+id/imageSelect"
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:visibility="gone"
-        android:src="@drawable/adapter_third_child_selector"/>
 
     <View
         android:layout_width="20px"
@@ -95,6 +84,16 @@
                 android:src="@mipmap/arrow_down"/>
 
         </com.zhy.autolayout.AutoLinearLayout>
+        <View
+            android:layout_width="20px"
+            android:layout_height="1px"/>
+
+        <ImageView
+            android:id="@+id/imageSelect"
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:visibility="visible"
+            android:src="@drawable/adapter_third_child_selector"/>
     </com.zhy.autolayout.AutoLinearLayout>
 
 

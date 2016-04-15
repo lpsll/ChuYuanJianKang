@@ -8,6 +8,7 @@ import com.htlc.cyjk.model.DrugBean;
 import com.htlc.cyjk.model.InformationBean;
 import com.htlc.cyjk.model.MedicalHistoryItemBean;
 import com.htlc.cyjk.model.MessageBean;
+import com.htlc.cyjk.model.NetworkCityBean;
 import com.htlc.cyjk.model.PersonBean;
 import com.htlc.cyjk.model.PriceBean;
 import com.htlc.cyjk.model.UserBean;
@@ -171,4 +172,6 @@ public interface AppAction {
     void getPriceList(String doctorId,ActionCallbackListener<ArrayList<PriceBean>> listener);
 
     void payToDoctor(String doctorId, String timeLengthId, String channel,ActionCallbackListener<ChargeBean> listener);
+
+    void getAllCity(ActionCallbackListener<ArrayList<NetworkCityBean>> listener);
 }

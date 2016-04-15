@@ -1,13 +1,15 @@
 window.onload = function() {
 	id = bridge.getUserId();
 	token = bridge.getToken();
+//	id = 41
+//	token = ""
 	console.log("id="+id);
 	DrawData(id)
 }
 
 var id = "";
-var token = "";
-function DrawData(id) {
+var token = ""; 
+function DrawData(id) { 
 
 	$.ajax({
 		url: myUrl+"infowrite_eathistory",
@@ -30,8 +32,17 @@ function DrawData(id) {
 			var dataArr = result.dataArray.reverse();
 			dataArr.forEach(function(e) {
 					date.push(e.date);
-					mvalue.push(parseInt(e.numericOne));
-					nvalue.push(parseInt(e.numericTwo));
+					if(e.numericOne == null){
+						mvalue.push(null);
+					}else{
+						mvalue.push(parseInt(e.numericOne));
+					}
+					if(e.numericTwo == null){
+						nvalue.push(null);
+					}else{
+						nvalue.push(parseInt(e.numericTwo));
+					}
+					
 			});
 //			data.name = "饮食";
 			console.log(mvalue);
@@ -108,7 +119,8 @@ function DrawData(id) {
 					        legendItemClick: function(e) {
 					            return false; // 直接 return false 即可禁用图例点击事件
 					        }
-					    }
+					    },
+					    connectNulls: true
 					},
 //				  	columnrange: {
 //		                dataLabels: {

@@ -18,6 +18,7 @@ import com.htlc.cyjk.model.MedicalHistoryItemBean;
 import com.htlc.cyjk.model.MessageBean;
 import com.htlc.cyjk.model.PersonBean;
 import com.htlc.cyjk.model.PriceBean;
+import com.htlc.cyjk.model.UpdateCityBean;
 import com.htlc.cyjk.model.UserBean;
 
 import java.io.File;
@@ -375,6 +376,15 @@ public class ApiImpl implements Api {
         params.put("priceid", timeLengthId);
         params.put("channel", channel);
         String url = Api.PayToDoctor;
+        LogUtil.e(this, url);
+        new OkHttpRequest.Builder().url(url).params(params).post(callback);
+    }
+
+    @Override
+    public void getAllCity(String lastModifyData, ResultCallback<ApiResponse<UpdateCityBean>> callback) {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("date", lastModifyData);
+        String url = Api.GetAllCity;
         LogUtil.e(this, url);
         new OkHttpRequest.Builder().url(url).params(params).post(callback);
     }

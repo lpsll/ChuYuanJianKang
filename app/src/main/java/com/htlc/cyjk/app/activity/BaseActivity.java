@@ -23,6 +23,7 @@ import com.htlc.cyjk.app.App;
 import com.htlc.cyjk.app.util.AppManager;
 import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.Constant;
+import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.core.AppAction;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -92,6 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 // 点击EditText的事件，忽略它。
                 return false;
             } else {
+                v.clearFocus();
                 return true;
             }
         }

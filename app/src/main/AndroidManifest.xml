@@ -12,31 +12,50 @@
         android:supportsRtl="true"
         android:name="com.htlc.cyjk.app.App"
         android:theme="@style/AppTheme">
-        <activity android:name="com.htlc.cyjk.app.activity.SplashActivity">
+        <activity android:name="com.htlc.cyjk.app.activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".app.activity.LoginActivity"/>
-        <activity android:name=".app.activity.RegisterActivity"/>
-        <activity android:name=".app.activity.PerfectInfoActivity"/>
-        <activity android:name=".app.activity.DischargeSummaryActivity"/>
-        <activity android:name=".app.activity.DischargeSummaryActivity2"/>
+        <activity android:name=".app.activity.LoginActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.GuideActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.RegisterActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.PerfectInfoActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.DischargeSummaryActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.DischargeSummaryActivity2"
+                  android:screenOrientation="portrait"/>
 
         <activity android:name=".app.activity.MainActivity"
                   android:exported="true"
-                  android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".app.activity.PersonActivity"/>
-        <activity android:name=".app.activity.ChangeUsernameActivity"/>
-        <activity android:name=".app.activity.PayActivity"/>
-        <activity android:name=".app.activity.SelectContactActivity"/>
-        <activity android:name=".app.activity.SettingActivity"/>
-        <activity android:name=".app.activity.MessageCenterActivity"/>
-        <activity android:name=".app.activity.RecommendationActivity"/>
-        <activity android:name=".app.activity.WebActivity"/>
-        <activity android:name=".app.activity.MeasureActivity"/>
-        <activity android:name=".app.activity.DrugsActivity"/>
+                  android:windowSoftInputMode="adjustPan"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.PersonActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.ChangeUsernameActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.PayActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.SelectContactActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.SettingActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.MessageCenterActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.RecommendationActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.WebActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.MeasureActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.DrugsActivity"
+                  android:screenOrientation="portrait"/>
 
         <meta-data android:name="design_width" android:value="750">
         </meta-data>

@@ -32,6 +32,7 @@ import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.app.util.ToastUtil;
 import com.htlc.cyjk.app.widget.PickPhotoDialog;
 import com.htlc.cyjk.core.ActionCallbackListener;
+import com.htlc.cyjk.model.UserBean;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -187,8 +188,12 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
         citys.clear();
         countys.clear();
         provinces.addAll(new ProvinceDao().getProvinces());
-        citys.addAll(new ProvinceDao().getCities(provinces.get(0).area_code));
-        countys.addAll(new ProvinceDao().getCounties(citys.get(0).area_code));
+        if(provinces.size()>0){
+            citys.addAll(new ProvinceDao().getCities(provinces.get(0).area_code));
+        }
+        if (citys.size()>0){
+            countys.addAll(new ProvinceDao().getCounties(citys.get(0).area_code));
+        }
 
         //三级不联动效果  false
         mPickViePwOptions.setPicker(provinces, citys, countys, false);
@@ -235,9 +240,19 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onOptionsSelect(int options1, int option2, int options3) {
                 //返回的分别是三个级别的选中位置
-                mAddress = provinces.get(options1).area_name + citys.get(option2).area_name + countys.get(options3).area_name;
-                mAddressId = countys.get(options3).area_code + "";
-                mTextAddress.setText(mAddress);
+                if(citys.size()<1){
+                    mAddress = provinces.get(options1).area_name;
+                    mTextAddress.setText(mAddress);
+                    mAddressId = provinces.get(options1).area_code+"";
+                }else if(countys.size()<1){
+                    mAddress = provinces.get(options1).area_name + citys.get(option2).area_name ;
+                    mTextAddress.setText(mAddress);
+                    mAddressId = citys.get(option2).area_code+"";
+                }else {
+                    mAddress = provinces.get(options1).area_name + citys.get(option2).area_name + countys.get(options3).area_name;
+                    mTextAddress.setText(mAddress);
+                    mAddressId = countys.get(options3).area_code+"";
+                }
             }
         });
         mPickViePwOptions.show();
@@ -258,6 +273,9 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Void data) {
                 dismissProgressHUD();
+                UserBean bean = new UserBean();
+                bean.flag = "0";
+                application.setUserBean(bean);
                 goMain();
             }
 

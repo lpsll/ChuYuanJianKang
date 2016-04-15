@@ -43,7 +43,6 @@ public class ThirdChildFootAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LogUtil.e(this,"mlist.size="+mList.size());
         ViewHolder holder = null;
         if(convertView == null){
             holder = new ViewHolder();
@@ -59,7 +58,11 @@ public class ThirdChildFootAdapter extends BaseAdapter{
         //具体数据处理
         MedicalHistoryItemBean bean = (MedicalHistoryItemBean) mList.get(position);
         holder.textTime.setText(bean.date);
-        holder.textDrugName.setText(bean.drug.get(0).medicine);
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i=0; i<bean.drug.size(); i++){
+            stringBuilder.append(bean.drug.get(i).medicine+"  ");
+        }
+        holder.textDrugName.setText(stringBuilder.toString());
         return convertView;
     }
     class ViewHolder{
