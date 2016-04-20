@@ -30,7 +30,7 @@
             android:id="@+id/imagePayIcon"
             android:layout_marginLeft="20px"
             android:layout_marginRight="10px"
-            android:layout_width="60px"
+            android:layout_width="70px"
             android:layout_height="wrap_content"
             android:src="@mipmap/adapter_pay_weixin"
           />
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="微信支付"
             android:textColor="@color/text_gray_dark"
-            android:textSize="26px"/>
+            android:textSize="28px"/>
     </com.zhy.autolayout.AutoLinearLayout>
 
 

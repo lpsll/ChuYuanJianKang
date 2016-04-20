@@ -114,7 +114,7 @@ public class FirstFragment extends HomeFragment {
          pstsShouldExpand   如果设置为true，每个标签是相同的控件，均匀平分整个屏幕，默认是false
          pstsTextAllCaps    如果为true，所有标签都是大写字母，默认为true
          */
-        mIndicator.setTextSize(CommonUtil.dp2px(getActivity(),14));
+        mIndicator.setTextSize(CommonUtil.dp2px(getActivity(),15));
 //        mIndicator.setTextColor(this.getResources().getColor(R.color.black_blue_color_selector));
 //        mIndicator.setTextColorResource(R.color.text_color_red_gray_selector);
         //设置下划线

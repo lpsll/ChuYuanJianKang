@@ -20,7 +20,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">32px</item>
+        <item name="android:textSize">34px</item>
     </style>
     <style name="TitleBarRelativeLeftText">
         <item name="android:id">@id/textLeft</item>
@@ -91,7 +91,7 @@
         <item name="android:paddingLeft">30px</item>
         <item name="android:paddingRight">30px</item>
         <item name="android:textColor">@color/text_black</item>
-        <item name="android:textSize">26px</item>
+        <item name="android:textSize">28px</item>
         <item name="android:background">@drawable/edit_rectangle_shape</item>
     </style>
     <style name="TextButton">
@@ -105,7 +105,7 @@
         <item name="android:padding">20px</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">30px</item>
+        <item name="android:textSize">32px</item>
         <item name="android:background">@mipmap/button_bg</item>
     </style>
     <style name="TextButton.White" parent="TextButton">
@@ -168,7 +168,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/text_black</item>
-        <item name="android:textSize">28px</item>
+        <item name="android:textSize">30px</item>
         <item name="android:paddingTop">27px</item>
         <item name="android:paddingBottom">27px</item>
     </style>

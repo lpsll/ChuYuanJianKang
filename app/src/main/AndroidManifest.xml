@@ -56,6 +56,8 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".app.activity.DrugsActivity"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".app.activity.PhotoActivity"
+                  android:screenOrientation="portrait"/>
 
         <meta-data android:name="design_width" android:value="750">
         </meta-data>

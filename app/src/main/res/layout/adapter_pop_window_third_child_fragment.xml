@@ -17,7 +17,7 @@
         android:paddingRight="30px"
         android:text="片"
         android:textColor="@color/text_gray_dark"
-        android:textSize="26px"/>
+        android:textSize="28px"/>
     <ImageView
         android:visibility="invisible"
         android:layout_width="wrap_content"

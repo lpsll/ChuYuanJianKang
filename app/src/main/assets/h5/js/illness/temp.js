@@ -168,24 +168,18 @@ function AndroidBack(){
 
 var PopInfo = "";
 function saveData(){
-	var reg = /^[1-9]+[0-9]*([.]{1}[0-9]{1,2})?$|^[0-9]{1}[.]{1}[0]*[1-9]+[0]*$|^0$/g;
 	var Temp = document.getElementById("Temp");
-	var GetTime = document.getElementById("TempTime");
-	var TempValue = Temp.value;
-	var Tvalue = GetTime.getAttribute('val');
-	var flag = reg.test(TempValue);
-	if(TempValue.length == 0){
-		Temp.value = "";
-		Temp.setAttribute('placeholder','请输入体温');
-		return false;
-	}else if(flag !== true){
+	var Tvalue = document.getElementById("TempTime").getAttribute('val');
+	if(Temp.value.length == 0 || Number(Temp.value)>45 || Number(Temp.value)<35){
 		Temp.value = "";
 		Temp.setAttribute('placeholder','请输入正确的体温值');
 		return false;
 	}else if(Tvalue.length == 0){
-		GetTime.innerHTML = "<span style='color:#777777'>请选择时间</span>";
+		document.getElementById("TempTime").innerHTML = "<span style='color:#777777'>请选择时间</span>";
 		return false;
 	}else{ 
+		
+		var TempValue = Number(Temp.value).toFixed(2);
 		$.ajax({
 			type:"post",
 			url:myUrl+"infowrite_infowrite",
@@ -200,7 +194,7 @@ function saveData(){
 				var result = eval("("+m+")");
 				PopInfo = result.msg;
 				if(result.code == 1){
-					getPopInfo("保存成功");
+					getPopInfo("保存成功"); 
 					if(canBack){
 						AndroidBack()
 					}else{

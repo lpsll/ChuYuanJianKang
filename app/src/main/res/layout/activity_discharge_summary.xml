@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_name"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -45,7 +45,7 @@
                     android:layout_marginLeft="30px"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     android:enabled="false"
                     android:focusable="false"
                     />
@@ -87,7 +87,7 @@
                         android:paddingRight="20px"
                         android:text="@string/common_male"
                         android:textColor="@color/text_gray_dark"
-                        android:textSize="26px"
+                        android:textSize="28px"
                         android:enabled="false"
                         android:focusable="false"/>
 
@@ -102,7 +102,7 @@
                         android:paddingRight="20px"
                         android:text="@string/common_female"
                         android:textColor="@color/text_gray_dark"
-                        android:textSize="26px"
+                        android:textSize="28px"
                         android:enabled="false"
                         android:focusable="false"/>
                 </RadioGroup>
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_age"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -128,7 +128,7 @@
                     android:layout_marginLeft="30px"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     android:enabled="false"
                     android:focusable="false"
                     />
@@ -143,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_job"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -153,7 +153,7 @@
                     android:layout_marginLeft="30px"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     android:enabled="false"
                     android:focusable="false"
                     />
@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_start_time"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <TextView
@@ -179,7 +179,7 @@
                     android:layout_marginLeft="30px"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--出院时间-->
@@ -192,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_end_time"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <TextView
@@ -202,7 +202,7 @@
                     android:layout_marginLeft="30px"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--住院天数-->
@@ -215,7 +215,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_total_time"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <TextView
@@ -225,7 +225,7 @@
                     android:layout_marginLeft="30px"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--入院诊断-->
@@ -239,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_in_diagnosis"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -250,7 +250,7 @@
                     android:minLines="2"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--出院诊断-->
@@ -264,7 +264,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_out_diagnosis"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -275,7 +275,7 @@
                     android:minLines="2"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--治疗结果-->
@@ -288,7 +288,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_effect"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -298,7 +298,7 @@
                     android:layout_marginLeft="30px"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--各种特殊检查号-->
@@ -311,7 +311,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_special_item"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -321,7 +321,7 @@
                     android:layout_marginLeft="30px"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--入院情况-->
@@ -335,7 +335,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_in_status"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -346,7 +346,7 @@
                     android:minLines="2"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--住院情况-->
@@ -360,7 +360,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_at_status"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -371,7 +371,7 @@
                     android:minLines="2"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--出院情况-->
@@ -385,7 +385,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_out_status"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -396,7 +396,7 @@
                     android:minLines="2"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <!--出院医嘱-->
@@ -410,7 +410,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/activity_discharge_summary_out_consideration"
                     android:textColor="@color/text_black"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
 
                 <EditText
@@ -421,7 +421,7 @@
                     android:minLines="2"
                     android:background="@null"
                     android:textColor="@color/text_gray_dark"
-                    android:textSize="26px"
+                    android:textSize="28px"
                     />
             </com.zhy.autolayout.AutoLinearLayout>
             <TextView

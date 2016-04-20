@@ -201,36 +201,25 @@ function AndroidBack(){
 var PopInfo = "";
 
 function saveData(){
-	var reg = /^[1-9]+[0-9]*([.]{1}[0-9]{1,2})?$|^[0-9]{1}[.]{1}[0]*[1-9]+[0]*$|^0$/g;
-	var reg2 = /^[1-9]+[0-9]*([.]{1}[0-9]{1,2})?$|^[0-9]{1}[.]{1}[0]*[1-9]+[0]*$|^0$/g;
 	var Hpre = document.getElementById("Hpre");
 	var Dpre = document.getElementById("Dpre");
-	var GetTime = document.getElementById("TempTime");
-	var Hvalue = Hpre.value;
-	var Dvalue = Dpre.value;
-	var Hflag = reg.test(Hvalue);
-	var Dflag = reg2.test(Dvalue);
-	var Tvalue = GetTime.getAttribute('val');
-	if(Hvalue.length == 0){
-		Hpre.value = "";
-		Hpre.setAttribute('placeholder','请输入高压值');
-		return false;
-	}else if(Hflag !== true){
+	var Tvalue = document.getElementById("TempTime").getAttribute('val');
+	if(Hpre.value.length == 0 || Number(Hpre.value)>200 || Number(Hpre.value)<80){
 		Hpre.value = "";
 		Hpre.setAttribute('placeholder','请输入正确的高压值');
 		return false;
-	}else if(Dvalue.length == 0){
-		Dpre.value = "";
-		Dpre.setAttribute('placeholder','请输入低压值');
-		return false;
-	}else if(Dflag !== true){
+	}else if(Dpre.value.length == 0 || Number(Dpre.value)>110 || Number(Dpre.value)<40){
 		Dpre.value = "";
 		Dpre.setAttribute('placeholder','请输入正确的低压值');
 		return false;
 	}else if(Tvalue.length == 0){
-		GetTime.innerHTML = "<span style='color:#777777'>请选择时间</span>";
+		document.getElementById("TempTime").innerHTML = "<span style='color:#777777'>请选择时间</span>";
 		return false;
 	}else{ 
+		
+		var Hvalue = Number(Hpre.value).toFixed(2);
+		var Dvalue = Number(Dpre.value).toFixed(2);
+		
 		$.ajax({
 			type:"post",
 			url:myUrl+"infowrite_twovaluewrite",

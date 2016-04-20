@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:enabled="false"
-                android:textSize="28px"
+                android:textSize="30px"
                 android:textColor="@color/text_color_white_blue_selector"
                 android:text="@string/fragment_second_chat_list"/>
             <TextView
@@ -32,7 +32,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textSize="28px"
+                android:textSize="30px"
                 android:textColor="@color/text_color_white_blue_selector"
                 android:text="@string/fragment_second_contact"/>
 

@@ -25,7 +25,7 @@
                 android:layout_marginBottom="15px"
                 android:layout_marginLeft="40px"
                 android:layout_marginRight="40px"
-                android:textSize="26px"
+                android:textSize="28px"
                 android:textColor="@color/text_black"
                 android:background="@mipmap/edit_text_bg"
                 android:text="时间"

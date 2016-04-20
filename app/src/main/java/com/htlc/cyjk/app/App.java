@@ -56,7 +56,7 @@ public class App extends Application {
         initImageLoader(this);
         initRongIM();
         initJPush();
-        LogUtil.e("App OnCreate","App OnCreate");
+        LogUtil.e("App OnCreate", "App OnCreate");
 
     }
 
@@ -68,7 +68,7 @@ public class App extends Application {
             @Override
             public void onSuccess(final ArrayList<NetworkCityBean> data) {
                 new ProvinceDao().updateCityListTable(data);
-                LogUtil.e("initDatabase","入库成攻？"+data);
+                LogUtil.e("initDatabase", "入库成攻？" + data);
             }
 
             @Override
@@ -153,22 +153,28 @@ public class App extends Application {
                     new CameraInputProvider(RongContext.getInstance()),//相机
             };
             RongIM.getInstance().resetInputExtensionProvider(Conversation.ConversationType.PRIVATE, provider);
+
+            /**
+             * 设置会话界面操作的监听器。
+             */
+            RongIM.setConversationBehaviorListener(new RongIMUtil.MyConversationBehaviorListener());
         }
     }
 
     /**
      * 返回用户  name,photo
+     *
      * @param userId
      * @return
      */
     private UserInfo findUserById(String userId) {
-        if(userId.equals(getUserBean().userid)){
+        if (userId.equals(getUserBean().userid)) {
             UserBean userBean = getUserBean();
-            return new UserInfo(userBean.userid,userBean.name,Uri.parse(userBean.photo));
+            return new UserInfo(userBean.userid, userBean.name, Uri.parse(userBean.photo));
         }
         for (ContactBean bean : mContactList) {
-            if(userId.equals(bean.userid)){
-                UserInfo userInfo = new UserInfo(bean.userid,bean.name, Uri.parse(bean.photo));
+            if (userId.equals(bean.userid)) {
+                UserInfo userInfo = new UserInfo(bean.userid, bean.name, Uri.parse(bean.photo));
                 return userInfo;
             }
         }
@@ -240,9 +246,9 @@ public class App extends Application {
 
     public void setIsLogin(boolean isLogin) {
         this.isLogin = isLogin;
-        if(isLogin){
+        if (isLogin) {
             JPushInterface.resumePush(getApplicationContext());
-        }else {
+        } else {
             JPushInterface.stopPush(getApplicationContext());
         }
     }
@@ -287,13 +293,13 @@ public class App extends Application {
 
     public UserBean getUserBean() {
         UserBean bean = new UserBean();
-        bean.username = SharedPreferenceUtil.getString(this,Constant.USERNAME,"");
-        bean.password = SharedPreferenceUtil.getString(this,Constant.PASSWORD,"");
-        bean.userid = SharedPreferenceUtil.getString(this,Constant.USER_ID,"");
-        bean.name = SharedPreferenceUtil.getString(this,Constant.NAME,"");
-        bean.photo = SharedPreferenceUtil.getString(this,Constant.IMAGE,"");
-        bean.token = SharedPreferenceUtil.getString(this,Constant.TOKEN,"");
-        bean.flag = SharedPreferenceUtil.getString(this,Constant.USER_INFO_FLAG,"");
+        bean.username = SharedPreferenceUtil.getString(this, Constant.USERNAME, "");
+        bean.password = SharedPreferenceUtil.getString(this, Constant.PASSWORD, "");
+        bean.userid = SharedPreferenceUtil.getString(this, Constant.USER_ID, "");
+        bean.name = SharedPreferenceUtil.getString(this, Constant.NAME, "");
+        bean.photo = SharedPreferenceUtil.getString(this, Constant.IMAGE, "");
+        bean.token = SharedPreferenceUtil.getString(this, Constant.TOKEN, "");
+        bean.flag = SharedPreferenceUtil.getString(this, Constant.USER_INFO_FLAG, "");
         return bean;
     }
 }

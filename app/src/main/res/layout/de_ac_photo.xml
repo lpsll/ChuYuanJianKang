@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.zhy.autolayout.AutoRelativeLayout
+        style="@style/TitleBarRelative">
+        <ImageView
+            android:id="@+id/imageBack"
+            style="@style/TitleBarRelativeLeftImage"/>
+
+        <TextView
+            style="@style/TitleBarRelativeMiddleText"
+            android:text="图片详情"/>
+        <TextView
+            style="@style/TitleBarRelativeRightText"
+            android:text="保存"
+            android:visibility="visible"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+    <fragment
+        android:id="@+id/photo_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="io.rong.imkit.tools.PhotoFragment" />
+</LinearLayout>

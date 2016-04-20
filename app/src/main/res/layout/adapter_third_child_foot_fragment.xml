@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="2016-01-01 18:20"
             android:textColor="@color/text_black"
-            android:textSize="26px"/>
+            android:textSize="28px"/>
 
         <TextView
             android:id="@+id/textDrugName"
@@ -33,7 +33,7 @@
             android:ellipsize="end"
             android:text="药品名称"
             android:textColor="@color/text_black"
-            android:textSize="26px"/>
+            android:textSize="28px"/>
 
 
 

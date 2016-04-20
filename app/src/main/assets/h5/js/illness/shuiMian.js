@@ -159,6 +159,9 @@ function saveData(){
 	var Svalue = SleepTime.getAttribute('val');
 	var Gvalue = GetUpTime.getAttribute('val');
 	
+
+	var timestamp1 = Date.parse(new Date(Svalue));
+	var timestamp2 = Date.parse(new Date(Gvalue));
 	
 	if(Svalue.length == 0){
 		SleepTime.innerHTML = "<span style='color:#777777'>请选择时间</span>";
@@ -168,6 +171,9 @@ function saveData(){
 		return false;
 	}else if(mvalue.length == 0){
 		return false;
+	}else if(timestamp1>timestamp2){
+		SleepTime.innerHTML = "<span style='color:#777777'>请选择正确的睡觉时间</span>";
+		GetUpTime.innerHTML = "<span style='color:#777777'>请选择正确的起床时间</span>";
 	}else{
 		$.ajax({
 			type:"post",

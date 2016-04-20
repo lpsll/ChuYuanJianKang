@@ -23,11 +23,11 @@
             <com.zhy.autolayout.AutoRelativeLayout
                 android:layout_width="match_parent"
                 android:background="@mipmap/fragment_fourth_bg"
-                android:layout_height="300px">
+                android:layout_height="320px">
                 <com.htlc.cyjk.app.widget.CircleImageView
                     android:id="@+id/imageHead"
-                    android:layout_width="158px"
-                    android:layout_height="158px"
+                    android:layout_width="175px"
+                    android:layout_height="175px"
                     app:civ_border_color="@android:color/white"
                     app:civ_border_width="4px"
                     app:civ_border_overlay="true"
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
-                    android:textSize="32px"
+                    android:textSize="34px"
                     android:text="昵称"/>
 
             </com.zhy.autolayout.AutoRelativeLayout>

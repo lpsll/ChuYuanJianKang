@@ -54,7 +54,7 @@ public class SideBar extends View {
 			paint.setColor(CommonUtil.getResourceColor(R.color.text_black));
 			paint.setTypeface(Typeface.DEFAULT);
 			paint.setAntiAlias(true);
-			paint.setTextSize(CommonUtil.dp2px(getContext(),10));
+			paint.setTextSize(CommonUtil.dp2px(getContext(),12));
 
 			if (i == choose) {
 //				paint.setColor(Color.parseColor("#ffffff"));

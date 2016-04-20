@@ -163,24 +163,16 @@ function AndroidBack(){
 
 var PopInfo = '';
 function saveData(){
-	var reg = /^[1-9]+[0-9]*([.]{1}[0-9]{1,2})?$|^[0-9]{1}[.]{1}[0]*[1-9]+[0]*$|^0$/g;
 	var Temp = document.getElementById("Temp");
-	var GetTime = document.getElementById("TempTime");
-	var TempValue = Temp.value;
-	var Tvalue = GetTime.getAttribute('val');
-	var flag = reg.test(TempValue);
-	if(TempValue.length == 0){
+	var Tvalue = document.getElementById("TempTime").getAttribute('val');
+	if(Temp.value.length == 0 || Number(Temp.value)<0 || Number(Temp.value)>100){
 		Temp.value = "";
-		Temp.setAttribute('placeholder','请输入呼吸次数');
-		return false;
-	}else if(flag !== true){
-		Temp.value = "";
-		Temp.setAttribute('placeholder','请输入正确的呼吸次数');
-		return false;
+		Temp.setAttribute('placeholder',"请输入正确的呼吸次数")
 	}else if(Tvalue.length == 0){
-		GetTime.innerHTML = "请选择时间";
+		document.getElementById("TempTime").innerHTML = "请选择时间";
 		return false;
 	}else{ 
+		var TempValue = Number(Temp.value).toFixed(2);
 		$.ajax({
 			type:"post",
 			url:myUrl+"infowrite_infowrite",

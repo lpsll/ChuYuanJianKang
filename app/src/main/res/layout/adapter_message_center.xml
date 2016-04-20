@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:maxLines="2"
             android:ellipsize="end"
-            android:textSize="24px"
+            android:textSize="28px"
             android:textColor="@color/text_gray_dark"
             android:text="消息中内容这个逻辑来看据了解路况啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦"/>
     </com.zhy.autolayout.AutoLinearLayout>
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end|right"
-        android:textSize="20px"
+        android:textSize="24px"
         android:textColor="@color/text_gray_dark"
         android:text="2014-07-01"/>
 

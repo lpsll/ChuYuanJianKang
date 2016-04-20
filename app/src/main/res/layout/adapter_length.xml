@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="一个月"
             android:textColor="@color/text_gray_dark"
-            android:textSize="26px"/>
+            android:textSize="28px"/>
         <TextView
             android:id="@+id/textMoney"
             android:padding="20px"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="￥300"
             android:textColor="@color/text_gray_dark"
-            android:textSize="26px"/>
+            android:textSize="28px"/>
     </com.zhy.autolayout.AutoLinearLayout>
 
 

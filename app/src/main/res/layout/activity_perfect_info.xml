@@ -27,10 +27,10 @@
             <!--********************************-->
             <com.htlc.cyjk.app.widget.CircleImageView
                 android:id="@+id/imageHead"
-                android:layout_width="150px"
-                android:layout_height="150px"
+                android:layout_width="160px"
+                android:layout_height="160px"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50px"
+                android:layout_marginTop="55px"
                 android:src="@mipmap/activity_perfect_info_head"/>
             <!--姓名-->
             <EditText
@@ -90,7 +90,7 @@
                         android:paddingRight="20px"
                         android:text="@string/common_male"
                         android:textColor="@color/text_gray_dark"
-                        android:textSize="26px"/>
+                        android:textSize="28px"/>
 
                     <RadioButton
                         android:id="@+id/radioButton1"
@@ -103,7 +103,7 @@
                         android:paddingRight="20px"
                         android:text="@string/common_female"
                         android:textColor="@color/text_gray_dark"
-                        android:textSize="26px"/>
+                        android:textSize="28px"/>
                 </RadioGroup>
             </com.zhy.autolayout.AutoRelativeLayout>
             <!--职业-->
@@ -143,7 +143,7 @@
                         android:paddingTop="20px"
                         android:text="请选择"
                         android:textColor="@color/text_gray_dark"
-                        android:textSize="26px"/>
+                        android:textSize="28px"/>
 
                     <ImageView
                         android:layout_width="wrap_content"
