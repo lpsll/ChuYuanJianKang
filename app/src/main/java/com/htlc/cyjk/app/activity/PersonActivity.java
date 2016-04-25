@@ -63,6 +63,11 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
     private ArrayList<String> genders = new ArrayList<>();
 
     @Override
+    public boolean isNeedHideKeyboard() {
+        return false;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
@@ -172,6 +177,8 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.textRight:
                 if(isEditable){
+                    v.setFocusable(true);
+                    v.requestFocus();
                     postPersonInfo();
                 }else {
                     changeEditStatus();

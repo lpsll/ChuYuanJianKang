@@ -49,10 +49,10 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
 
 
     private void initData() {
-        mBannerList.add(R.mipmap.ic_launcher);
-        mBannerList.add(R.mipmap.ic_launcher);
-        mBannerList.add(R.mipmap.ic_launcher);
-        mBannerList.add(R.mipmap.ic_launcher);
+        mBannerList.add(R.mipmap.guide_1);
+        mBannerList.add(R.mipmap.guide_2);
+        mBannerList.add(R.mipmap.guide_3);
+        mBannerList.add(R.mipmap.guide_4);
         mLinearPointContainer.removeAllViews();
         for (int i = 0; i < mBannerList.size(); i++) {
 //            ImageView pointer = (ImageView) View.inflate(this, R.layout.layout_point, null);

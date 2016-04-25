@@ -17,7 +17,7 @@
                 android:id="@+id/gridView"
                 android:paddingTop="30px"
                 android:paddingBottom="30px"
-                android:paddingLeft="30px"
+                android:paddingLeft="50px"
                 android:paddingRight="30px"
                 android:numColumns="2"
                 android:verticalSpacing="20px"

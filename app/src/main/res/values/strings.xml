@@ -100,6 +100,7 @@
         <item>设置</item>
         <item>消息</item>
         <item>推荐码</item>
+        <item>药品订单</item>
     </string-array>
     <string name="fragment_fourth_title">个人中心</string>
 
@@ -135,6 +136,8 @@
     </string-array>
 
     <string name="activity_message_center">消息中心</string>
+
+    <string name="activity_order">药品订单</string>
 
     <string name="activity_recommendation">推荐码</string>
     <string name="activity_recommendation_binding">绑定</string>

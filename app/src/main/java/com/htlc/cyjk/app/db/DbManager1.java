@@ -1,18 +1,23 @@
 package com.htlc.cyjk.app.db;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.htlc.cyjk.app.App;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by sks on 2016/1/4.
  */
-public class DbManager {
+public class DbManager1 {
     public static final String DATABASE_LAST_MODIFY = "database_last_modify";
 
     static final String DATABASE_NAME = "city_list.db";
@@ -44,32 +49,13 @@ public class DbManager {
         }
     }
 
-    //版本3-----------------------
-    private static DbManager instance;
-    private AtomicInteger mOpenCounter = new AtomicInteger();
-    private SQLiteDatabase mDatabase;
-    private DbManager(){
+    //版本2-----------------------
+    public static SQLiteDatabase getDatabase(Context context) {
         if (databaseHelper == null) {
-            databaseHelper = new DatabaseHelper(App.app);
+            databaseHelper = new DatabaseHelper(context);
         }
-    }
-    public static synchronized DbManager getInstance() {
-        if(instance == null){
-            instance = new DbManager();
-        }
-        return instance;
-    }
-    public synchronized SQLiteDatabase openDatabase() {
-        if(mOpenCounter.incrementAndGet() == 1) {
-            mDatabase = databaseHelper.getWritableDatabase();
-        }
-        return mDatabase;
+        return databaseHelper.getWritableDatabase();
     }
 
-    public synchronized void closeDatabase() {
-        if(mOpenCounter.decrementAndGet() == 0) {
-            mDatabase.close();
-        }
-    }
 }
 

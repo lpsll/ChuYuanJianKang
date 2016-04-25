@@ -144,6 +144,8 @@ public class DischargeSummaryActivity2 extends BaseActivity implements View.OnCl
                 break;
             case R.id.textRight:
                 if(isEditable){
+                    v.setFocusable(true);
+                    v.requestFocus();
                     commit();
                 }else {
                     changeEditStatus();

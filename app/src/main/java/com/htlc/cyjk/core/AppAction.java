@@ -172,6 +172,7 @@ public interface AppAction {
     void getPriceList(String doctorId,ActionCallbackListener<ArrayList<PriceBean>> listener);
 
     void payToDoctor(String doctorId, String timeLengthId, String channel,ActionCallbackListener<ChargeBean> listener);
+    void createOrder(String drugsJson, ActionCallbackListener<Void> listener);
 
     void getAllCity(ActionCallbackListener<ArrayList<NetworkCityBean>> listener);
 }

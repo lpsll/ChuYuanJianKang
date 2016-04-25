@@ -67,8 +67,14 @@ public class App extends Application {
         appAction.getAllCity(new ActionCallbackListener<ArrayList<NetworkCityBean>>() {
             @Override
             public void onSuccess(final ArrayList<NetworkCityBean> data) {
-                new ProvinceDao().updateCityListTable(data);
-                LogUtil.e("initDatabase", "入库成攻？" + data);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new ProvinceDao().updateCityListTable(data);
+                        LogUtil.e("initDatabase", "入库成攻？");
+                    }
+                }).start();
+
             }
 
             @Override
@@ -79,7 +85,7 @@ public class App extends Application {
     }
 
     private void initJPush() {
-        JPushInterface.setDebugMode(true);
+        JPushInterface.setDebugMode(Constant.isDebug);
         JPushInterface.init(this);
         JPushInterface.stopPush(getApplicationContext());
     }
@@ -229,7 +235,9 @@ public class App extends Application {
         config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
         config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
         config.tasksProcessingOrder(QueueProcessingType.LIFO);
-        config.writeDebugLogs(); // Remove for release app
+        if(Constant.isDebug){
+            config.writeDebugLogs(); // Remove for release app
+        }
 
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());

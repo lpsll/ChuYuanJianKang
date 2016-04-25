@@ -16,6 +16,7 @@ import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.Constant;
 import com.htlc.cyjk.app.util.JsonUtil;
 import com.htlc.cyjk.app.util.LogUtil;
+import com.htlc.cyjk.app.util.RegExUtil;
 import com.htlc.cyjk.app.util.SharedPreferenceUtil;
 import com.htlc.cyjk.model.ChargeBean;
 import com.htlc.cyjk.model.ContactBean;
@@ -39,8 +40,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class AppActionImpl implements AppAction {
@@ -65,9 +64,7 @@ public class AppActionImpl implements AppAction {
             }
             return;
         }
-        Pattern pattern = Pattern.compile("1\\d{10}");
-        Matcher matcher = pattern.matcher(username);
-        if (!matcher.matches()) {
+        if (!RegExUtil.matcherPhoneNumber(username)) {
             if (listener != null) {
                 listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "手机号不正确");
             }
@@ -113,9 +110,7 @@ public class AppActionImpl implements AppAction {
             }
             return;
         }
-        Pattern pattern = Pattern.compile("1\\d{10}");
-        Matcher matcher = pattern.matcher(username);
-        if (!matcher.matches()) {
+        if (!RegExUtil.matcherPhoneNumber(username)) {
             if (listener != null) {
                 listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "手机号不正确");
             }
@@ -198,9 +193,7 @@ public class AppActionImpl implements AppAction {
             }
             return;
         }
-        Pattern pattern = Pattern.compile("1\\d{10}");
-        Matcher matcher = pattern.matcher(username);
-        if (!matcher.matches()) {
+        if (!RegExUtil.matcherPhoneNumber(username)) {
             if (listener != null) {
                 listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "手机号不正确");
             }
@@ -297,9 +290,7 @@ public class AppActionImpl implements AppAction {
             }
             return;
         }
-        Pattern pattern = Pattern.compile("1\\d{10}");
-        Matcher matcher = pattern.matcher(phone);
-        if (!matcher.matches()) {
+        if (!RegExUtil.matcherPhoneNumber(phone)) {
             if (listener != null) {
                 listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "手机号不正确");
             }
@@ -655,6 +646,26 @@ public class AppActionImpl implements AppAction {
 
             @Override
             public void onResponse(ApiResponse<ChargeBean> response) {
+                if ("1".equals(response.code)) {
+                    listener.onSuccess(response.data);
+                } else {
+                    listener.onFailure(ErrorEvent.RESULT_ILLEGAL, response.msg);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void createOrder(String drugsJson, final ActionCallbackListener<Void> listener) {
+        api.createOrder(drugsJson, new ResultCallback<ApiResponse<Void>>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                e.printStackTrace();
+                listener.onFailure(ErrorEvent.NETWORK_ERROR, CommonUtil.getResourceString(R.string.common_network_error));
+            }
+
+            @Override
+            public void onResponse(ApiResponse<Void> response) {
                 if ("1".equals(response.code)) {
                     listener.onSuccess(response.data);
                 } else {

@@ -1,6 +1,8 @@
 window.onload = function(){
 	id = bridge.getUserId();
 	token = bridge.getToken();
+//	id = 41;
+//	token = "";
 	console.log("id="+id);
 	DrawData(id)
 }
@@ -38,10 +40,10 @@ function DrawData(id) {
 			var Ndate = "";
 			$.each(dataArr, function(i,k) {
 				if(c == 0){
-					date[4] = i;
+					date[5] = i;
 					c++;
 				}else{
-					date[0] = i;
+					date[1] = i;
 				}
 				$.each(k, function(j,l) { 
 					if(d == 0){
@@ -68,7 +70,7 @@ function DrawData(id) {
 			$('#DataImgDraw').highcharts({
 				chart: {
 					type: 'line',
-					margin: [6, 2, 22, 30],
+					margin: [2, 2, 40, 30],
 					fontSize:10,
 					fontColor:'#ffffff',
 					backgroundColor: '#498EDB',
@@ -88,9 +90,15 @@ function DrawData(id) {
 					labels: {
 		                style: {
 		                    color: 'white',
-		                    fontSize:8
+		                    fontSize:11
 		                }
-		            }
+		           },
+		           plotLines:[{
+				        color:'white',            //线的颜色，定义为红色
+				        dashStyle:'longdashdot',//标示线的样式，默认是solid（实线），这里定义为长虚线
+				        value:3.5,                //定义在哪个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
+				        width:1                 //标示线的宽度，2px
+				    }]
 
 				},
 				yAxis: {
@@ -104,7 +112,7 @@ function DrawData(id) {
         			labels: {
 		                style: {
 		                    color: 'white',
-		                    fontSize:8
+		                    fontSize:12
 		                }
 		            },
 		            tickInterval: 3,

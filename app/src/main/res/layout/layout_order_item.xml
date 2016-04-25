@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="40px"
+        android:paddingLeft="30px"
+        android:paddingRight="30px">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="630px"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20px"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editName"
+                style="@style/OrderEditText"
+                android:layout_width="match_parent"
+                android:hint="请输入药品名称"/>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editPrice"
+                    style="@style/OrderEditText"
+                    android:hint="价格"
+                    android:inputType="numberDecimal"/>
+
+                <EditText
+                    android:id="@+id/editUnit"
+                    style="@style/OrderEditText"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginRight="30px"
+                    android:hint="规格"/>
+
+                <EditText
+                    android:id="@+id/editNumber"
+                    style="@style/OrderEditText"
+                    android:hint="数量"
+                    android:inputType="number"/>
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <ImageView
+            android:id="@+id/imageDelete"
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@mipmap/adapter_third_child_delete"
+            android:visibility="visible"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+</LinearLayout>

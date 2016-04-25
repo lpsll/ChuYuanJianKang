@@ -1,14 +1,16 @@
 window.onload = function() {
 	id = bridge.getUserId();
 	token = bridge.getToken();
+//	id = 48;
+//	token = "";
 	console.log("id="+id);
 	DrawData(id)
 }
 var id = "";
-var token = "";
+var token = ""; 
 function DrawData(id) {
 
-	$.ajax({
+	$.ajax({ 
 		url:  myUrl+"infowrite_sleephistory",
 		type:"post",
 		data:{
@@ -41,7 +43,7 @@ function DrawData(id) {
 			$('#DataImgDraw').highcharts({
 				chart: {
 					type: 'line',
-					margin: [6, 2, 22, 30],
+					margin: [2, 2, 40, 30],
 					fontSize:10,
 					fontColor:'#ffffff',
 					backgroundColor: '#498EDB',
@@ -61,10 +63,10 @@ function DrawData(id) {
 					labels: {
 		                style: {
 		                    color: 'white',
-		                    fontSize:8
+		                    fontSize:11
 		                }
-		            }
-
+		           },
+		          
 				},
 				yAxis: {
 					title: {
@@ -77,7 +79,7 @@ function DrawData(id) {
         			labels: {
 		                style: {
 		                    color: 'white',
-		                    fontSize:8
+		                    fontSize:12
 		                }
 		            },
 		            tickInterval: 2,

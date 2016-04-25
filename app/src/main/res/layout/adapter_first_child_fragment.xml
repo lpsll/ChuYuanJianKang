@@ -9,8 +9,8 @@
     android:paddingRight="0px"
     android:paddingTop="0px">
     <com.zhy.autolayout.AutoLinearLayout
-        android:layout_width="320px"
-        android:layout_height="330px"
+        android:layout_width="294px"
+        android:layout_height="304px"
         android:orientation="vertical"
         android:background="@mipmap/adapter_first_child_bg"
         android:gravity="center">

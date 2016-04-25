@@ -1,6 +1,8 @@
 package com.htlc.cyjk.app.util;
 
 public interface Constant {
+    boolean isDebug = false;
+
     String USERNAME = "USERNAME";
     String PASSWORD = "PASSWORD";
     String USER_ID = "USER_ID";

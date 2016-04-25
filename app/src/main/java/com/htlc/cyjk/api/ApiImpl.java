@@ -381,6 +381,21 @@ public class ApiImpl implements Api {
     }
 
     @Override
+    public void createOrder(String drugsJson, ResultCallback<ApiResponse<Void>> callback) {
+        Map<String, String> params = new HashMap<String, String>();
+
+        String token = App.app.getUserBean().token;
+        params.put("token", TextUtils.isEmpty(token) ? "" : token);
+        String userId = App.app.getUserBean().userid;
+        params.put("userid", TextUtils.isEmpty(token) ? "" : userId);
+
+        params.put("drug", drugsJson);
+        String url = Api.CreateOrder;
+        LogUtil.e(this, url);
+        new OkHttpRequest.Builder().url(url).params(params).post(callback);
+    }
+
+    @Override
     public void getAllCity(String lastModifyData, ResultCallback<ApiResponse<UpdateCityBean>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("date", lastModifyData);

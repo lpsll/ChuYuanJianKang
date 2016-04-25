@@ -19,6 +19,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.activity.MessageCenterActivity;
+import com.htlc.cyjk.app.activity.OrderActivity;
 import com.htlc.cyjk.app.activity.PayActivity;
 import com.htlc.cyjk.app.activity.PersonActivity;
 import com.htlc.cyjk.app.activity.RecommendationActivity;
@@ -97,7 +98,9 @@ public class FourthFragment extends HomeFragment implements AdapterView.OnItemCl
     }
 
     private void initData() {
-        itemImageIds = new int[]{R.mipmap.fragment_fourth_1, R.mipmap.fragment_fourth_2, R.mipmap.fragment_fourth_3, R.mipmap.fragment_fourth_4, R.mipmap.fragment_fourth_5};
+        itemImageIds = new int[]{R.mipmap.fragment_fourth_1, R.mipmap.fragment_fourth_2,
+                R.mipmap.fragment_fourth_3, R.mipmap.fragment_fourth_4,
+                R.mipmap.fragment_fourth_5, R.mipmap.fragment_fourth_6};
         itemNames = CommonUtil.getResourceStringArray(R.array.fragment_fourth_children);
         for(int i=0; i<itemImageIds.length;i++){
             FourthAdapterBean bean = new FourthAdapterBean();
@@ -149,6 +152,10 @@ public class FourthFragment extends HomeFragment implements AdapterView.OnItemCl
             case 4:
                 Intent intent4 = new Intent(getActivity(), RecommendationActivity.class);
                 startActivity(intent4);
+                break;
+            case 5:
+                Intent intent5 = new Intent(getActivity(), OrderActivity.class);
+                startActivity(intent5);
                 break;
         }
     }

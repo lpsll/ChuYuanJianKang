@@ -43,6 +43,7 @@ public interface Api {
     String ConversationPermission = Host + "sundry_getlimit";
     String GetPriceList = Host + "pay_getdoctorprice";
     String PayToDoctor = Host + "pay_payto";
+    String CreateOrder = Host + "order_createorder";
 
 
     String GetProvince = Host + "city_getprovince";
@@ -205,6 +206,8 @@ public interface Api {
     void getPriceList(String doctorId,ResultCallback<ApiResponse<PriceBean>> callback);
 
     void payToDoctor(String doctorId,String timeLengthId,String channel, ResultCallback<ApiResponse<ChargeBean>> callback);
+
+    void createOrder(String drugsJson, ResultCallback<ApiResponse<Void>> callback);
 
     void getAllCity(String lastModifyData, ResultCallback<ApiResponse<UpdateCityBean>> callback);
 }

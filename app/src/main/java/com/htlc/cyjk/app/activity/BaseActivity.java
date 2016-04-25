@@ -65,13 +65,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN && isNeedHideKeyboard()) {
             View v = getCurrentFocus();
             if (isShouldHideKeyboard(v, ev)) {
                 hideKeyboard(v.getWindowToken());
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+    public boolean isNeedHideKeyboard(){
+        return true;
     }
     /**
      * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时则不能隐藏
@@ -129,6 +132,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加确定按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+                AppManager.getAppManager().finishBeforeActivity();
                 LoginActivity.start(BaseActivity.this,null);
                 finish();
             }

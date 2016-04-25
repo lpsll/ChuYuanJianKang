@@ -20,7 +20,8 @@ public class ProvinceDao {
     private static final String dbfile = "city.db";
 
     public ArrayList<CityBean> getProvinces(){
-        SQLiteDatabase database = DbManager.getDatabase(App.app);
+//        SQLiteDatabase database = DbManager.getDatabase(App.app);
+        SQLiteDatabase database = DbManager.getInstance().openDatabase();
         String[] columns = {"AREA_CODE", "AREA_NAME", "TYPE", "PARENT_ID"};
         String[] where = {"1"};
         Cursor cursor = database.query("area", columns, "TYPE=?", where, null, null, null);
@@ -34,12 +35,14 @@ public class ProvinceDao {
             beans.add(bean);
         }
         cursor.close();
-        database.close();
+//        database.close();
+        DbManager.getInstance().closeDatabase();
         return beans;
     }
 
     public ArrayList<CityBean> getCities(int parentId){
-        SQLiteDatabase database = DbManager.getDatabase(App.app);
+//        SQLiteDatabase database = DbManager.getDatabase(App.app);
+        SQLiteDatabase database = DbManager.getInstance().openDatabase();
         String[] columns = {"AREA_CODE", "AREA_NAME", "TYPE", "PARENT_ID"};
         String[] where = {parentId+""};
         Cursor cursor = database.query("area", columns, "PARENT_ID=?", where, null, null, null);
@@ -54,12 +57,14 @@ public class ProvinceDao {
             beans.add(bean);
         }
         cursor.close();
-        database.close();
+//        database.close();
+        DbManager.getInstance().closeDatabase();
         return beans;
     }
 
     public ArrayList<CityBean> getCounties(int parentId){
-        SQLiteDatabase database = DbManager.getDatabase(App.app);
+//        SQLiteDatabase database = DbManager.getDatabase(App.app);
+        SQLiteDatabase database = DbManager.getInstance().openDatabase();
         String[] columns = {"AREA_CODE", "AREA_NAME", "TYPE", "PARENT_ID"};
         String[] where = {parentId+""};
         Cursor cursor = database.query("area", columns, "PARENT_ID=?", where, null, null, null);
@@ -73,18 +78,16 @@ public class ProvinceDao {
             beans.add(bean);
         }
         cursor.close();
-        database.close();
+        // database.close();
+        DbManager.getInstance().closeDatabase();
         return beans;
     }
 
     public void updateCityListTable(ArrayList<NetworkCityBean> list){
-        SQLiteDatabase database = DbManager.getDatabase(App.app);
+        SQLiteDatabase database = DbManager.getInstance().openDatabase();
         database.beginTransaction();
         for(int i=0; i<list.size(); i++){
            NetworkCityBean bean = list.get(i);
-            if("110000".equals(bean.pid)){
-                LogUtil.e("updateCityListTable",bean.toString());
-            }
             if("3".equals(bean.flag)){
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("AREA_CODE",bean.id);
@@ -105,7 +108,8 @@ public class ProvinceDao {
         }
         database.setTransactionSuccessful(); // 设置事务处理成功，不设置会自动回滚不提交
         database.endTransaction(); // 处理完成
-        database.close();
+//        database.close();
+        DbManager.getInstance().closeDatabase();
     }
 
 }

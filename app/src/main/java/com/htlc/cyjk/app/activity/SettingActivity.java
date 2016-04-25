@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.adapter.FourthAdapter;
 import com.htlc.cyjk.app.bean.FourthAdapterBean;
+import com.htlc.cyjk.app.util.AppManager;
 import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.app.util.ToastUtil;
@@ -143,6 +144,7 @@ public class SettingActivity extends BaseActivity implements AdapterView.OnItemC
     }
     private void logout() {
         application.clearUserBean();
+        AppManager.getAppManager().finishBeforeActivity();
         LoginActivity.start(this,null);
         finish();
     }

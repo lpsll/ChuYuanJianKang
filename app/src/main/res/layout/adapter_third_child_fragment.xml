@@ -7,9 +7,6 @@
     android:orientation="horizontal"
     android:descendantFocusability= "afterDescendants" >
 
-    <View
-        android:layout_width="20px"
-        android:layout_height="1px"/>
 
     <com.zhy.autolayout.AutoLinearLayout
         android:id="@+id/linearItem"
@@ -86,14 +83,14 @@
         </com.zhy.autolayout.AutoLinearLayout>
         <View
             android:layout_width="20px"
-            android:layout_height="1px"/>
+            android:layout_height="20px"/>
 
         <ImageView
             android:id="@+id/imageSelect"
-            android:layout_width="20px"
-            android:layout_height="20px"
+            android:layout_width="40px"
+            android:layout_height="40px"
             android:visibility="visible"
-            android:src="@drawable/adapter_third_child_selector"/>
+            android:src="@mipmap/adapter_third_child_delete"/>
     </com.zhy.autolayout.AutoLinearLayout>
 
 

@@ -44,7 +44,7 @@ function DrawData(id) {
 			$('#DataImgDraw').highcharts({
 				chart: {
 					type: 'line',
-					margin: [6, 2, 22, 30],
+					margin: [2, 2, 40, 30],
 					fontSize:10,
 					fontColor:'#ffffff',
 					backgroundColor: '#498EDB',
@@ -64,7 +64,7 @@ function DrawData(id) {
 					labels: {
 		                style: {
 		                    color: 'white',
-		                    fontSize:8
+		                    fontSize:11
 		                }
 		            }
 
@@ -80,7 +80,7 @@ function DrawData(id) {
         			labels: {
 		                style: {
 		                    color: 'white',
-		                    fontSize:8
+		                    fontSize:12
 		                }
 		            },
 		            tickInterval: 3,

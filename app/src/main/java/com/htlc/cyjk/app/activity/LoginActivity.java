@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText mEditUsername,mEditPassword;
 
     public static void start(Context context, Intent extras) {
+        LogUtil.e("LoginActivity","begin: " + System.currentTimeMillis());
         Intent intent = new Intent();
         intent.setClass(context, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -41,7 +43,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AppManager.getAppManager().finishBeforeActivity();
+        LogUtil.e("LoginActivity","middle: " + System.currentTimeMillis());
+        LogUtil.e("LoginActivity", "end: " + System.currentTimeMillis());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setupView();

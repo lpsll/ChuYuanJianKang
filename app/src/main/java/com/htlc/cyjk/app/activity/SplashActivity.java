@@ -4,10 +4,12 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.App;
+import com.htlc.cyjk.app.util.AppManager;
 import com.htlc.cyjk.app.util.SharedPreferenceUtil;
 
 import cn.jpush.android.api.JPushInterface;
@@ -23,9 +25,8 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mImageView = new ImageView(this);
-        mImageView.setImageResource(R.mipmap.ic_launcher);
-        setContentView(mImageView);
+        setContentView(R.layout.activity_splash);
+        mImageView = (ImageView) findViewById(R.id.imageView);
         App.app.initDatabase();
 
     }
@@ -40,7 +41,6 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mImageView.setAlpha((Float) animation.getAnimatedValue());
-                mImageView.setScaleX((Float) animation.getAnimatedValue());
             }
         });
         animator.addListener(new Animator.AnimatorListener() {
@@ -105,6 +105,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void goLogin() {
+        AppManager.getAppManager().finishBeforeActivity();
         LoginActivity.start(this, null);
         finish();
     }

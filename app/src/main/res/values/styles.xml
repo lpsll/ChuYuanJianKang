@@ -2,6 +2,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
+    <style name="FullScreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
     <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@android:color/transparent</item>
         <item name="tabIndicatorHeight">0dp</item>
@@ -177,5 +180,18 @@
         <item name="android:editable">false</item>
         <item name="android:background">@null</item>
         <item name="android:textColor">@color/text_gray</item>
+    </style>
+    <style name="OrderEditText">
+        <item name="android:layout_width">0px</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/edit_rectangle_shape</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">30px</item>
+        <item name="android:paddingTop">15px</item>
+        <item name="android:paddingBottom">15px</item>
+        <item name="android:paddingLeft">5px</item>
+        <item name="android:paddingRight">5px</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>

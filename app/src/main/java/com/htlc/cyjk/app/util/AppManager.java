@@ -115,9 +115,11 @@ public class AppManager {
      */
     public void finishBeforeActivity(){
         if(activityStack == null) return;
+        LogUtil.e(this,"关闭前时间："+System.currentTimeMillis());
         while (activityStack.firstElement() != activityStack.lastElement()){
             finishActivity(activityStack.firstElement());
         }
+        LogUtil.e(this,"关闭后时间："+System.currentTimeMillis());
     }
     /**
      * 结束所有Activity

@@ -155,7 +155,7 @@ public class OkHttpClientManager
                     try
                     {
                         sendFailResultCallback(request, new RuntimeException(response.body().string()), resCallBack);
-                    } catch (IOException e)
+                    } catch (Exception e)
                     {
                         e.printStackTrace();
                     }
@@ -166,8 +166,8 @@ public class OkHttpClientManager
                 {
                     final String stringTemp = response.body().string();
                     L.e("body:"+stringTemp);
-//                    String string = stringTemp.substring(stringTemp.indexOf("{"));
-                    String string = stringTemp;
+                    String string = stringTemp.substring(stringTemp.indexOf("{"));
+//                    String string = stringTemp;
                     LogUtil.e("OkHttp",string);
                     if (resCallBack.mType == String.class)
                     {
@@ -181,6 +181,9 @@ public class OkHttpClientManager
                 {
                     sendFailResultCallback(response.request(), e, resCallBack);
                 } catch (com.google.gson.JsonParseException e)//Json解析的错误
+                {
+                    sendFailResultCallback(response.request(), e, resCallBack);
+                } catch (Exception e)
                 {
                     sendFailResultCallback(response.request(), e, resCallBack);
                 }

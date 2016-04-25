@@ -61,7 +61,6 @@
 }
 
 
-
 .HpreInp {
 	width: 70% !important;
 	border: 0 !important;
@@ -69,7 +68,7 @@
 	border: 0px solid white !important;
 	float: right;
 	margin-right: 15px;
-	font-size: 14px;
+	font-size: 18px;
 	overflow: hidden;
 }
 .BQageInput{
@@ -133,7 +132,7 @@
 	background-color: #498EDB;
 	width: 90%;
 	margin-left: 5%;
-	height: 150px;
+	height: 158px;
 	margin-top: 10px;
 }
 
