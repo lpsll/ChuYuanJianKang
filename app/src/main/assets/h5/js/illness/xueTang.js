@@ -1,8 +1,6 @@
 window.onload = function() {
 	id = bridge.getUserId();
 	token = bridge.getToken();
-//	id = "48";
-//	token = ""
 	console.log("id="+id);
 	DrawData(id)
 
@@ -42,20 +40,20 @@ function DrawData(id) {
 			dataArr.forEach(function(e) {
 					date.push(e.date);
 					if(e.value7 == null){
-						avalue.push(null);	
+						gvalue.push(null);	
 					}else{
-						avalue.push(parseInt(e.value7));	
+						gvalue.push(parseInt(e.value7));	
 					}
 					if(e.value6 == null){
-						bvalue.push(null);
+						fvalue.push(null);
 					}else{
-						bvalue.push(parseInt(e.value6));
+						fvalue.push(parseInt(e.value6));
 					}
 					
 					if(e.value5 == null){
-						cvalue.push(null);
+						evalue.push(null);
 					}else{
-						cvalue.push(parseInt(e.value5));
+						evalue.push(parseInt(e.value5));
 					}
 					
 					if(e.value4 == null){
@@ -64,19 +62,19 @@ function DrawData(id) {
 						dvalue.push(parseInt(e.value4));
 					}
 					if(e.value3 == null){
-						evalue.push(null);
+						cvalue.push(null);
 					}else{
-						evalue.push(parseInt(e.value3));
+						cvalue.push(parseInt(e.value3));
 					}
 					if(e.value2 == null){
-						fvalue.push(null);
+						bvalue.push(null);
 					}else{
-						fvalue.push(parseInt(e.value2));
+						bvalue.push(parseInt(e.value2));
 					}
 					if(e.value1 == null){
-						gvalue.push(null);
+						avalue.push(null);
 					}else{
-						gvalue.push(parseInt(e.value1));
+						avalue.push(parseInt(e.value1));
 					}
 					
 					

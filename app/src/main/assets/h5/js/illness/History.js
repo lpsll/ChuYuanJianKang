@@ -1,8 +1,6 @@
 window.onload = function() {
 	id = bridge.getUserId();
 	token = bridge.getToken();
-//	id = 149;
-//	token = "";
 	getUrl()
 }
 var id = "";
@@ -424,7 +422,7 @@ function getValueArray() {
 			html += '<div class="HisList">'
 			html += '<span class="HisDate  mm">'+e.date+'</span>'
 			html +=	'<span class="HisValue mm">'+e.numericOne+'</span>'
-			html +=	'<span class="HisUnit mm">mmHg</span>'
+			html +=	'<span class="HisUnit mm">%</span>'
 			html +=	'<span class="HisDelete" id='+e.id+' onclick="deleteT(this)">删除</span>'
 			html +=	'</div>'
 		})
