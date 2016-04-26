@@ -106,6 +106,7 @@ public class SelectContactFragment extends BaseFragment implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(!isSelect){
+            isSelect = true;
             ContactBean bean = (ContactBean) mList.get(position);
             SelectContactEvent event = new SelectContactEvent();
             event.bean = bean;

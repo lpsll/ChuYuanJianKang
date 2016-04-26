@@ -79,14 +79,18 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onSuccess(ArrayList<PriceBean> data) {
                 for (PriceBean bean : data) {
-                    if ("1".equals(bean.id)) {
+                    if ("1".equals(bean.duration)) {
                         mLengthList.get(0).price = bean.price;
-                    } else if ("2".equals(bean.id)) {
+                        mLengthList.get(0).id = bean.id;
+                    } else if ("3".equals(bean.duration)) {
                         mLengthList.get(1).price = bean.price;
-                    } else if ("3".equals(bean.id)) {
+                        mLengthList.get(1).id = bean.id;
+                    } else if ("6".equals(bean.duration)) {
                         mLengthList.get(2).price = bean.price;
-                    } else if ("4".equals(bean.id)) {
+                        mLengthList.get(2).id = bean.id;
+                    } else if ("12".equals(bean.duration)) {
                         mLengthList.get(3).price = bean.price;
+                        mLengthList.get(3).id = bean.id;
                     }
                 }
                 mLengthAdapter.notifyDataSetChanged();
@@ -148,25 +152,21 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         mPayAdapter.notifyDataSetChanged();
 
         PriceBean priceBean0 = new PriceBean();
-        priceBean0.id = "1";
         priceBean0.duration = "1";
         priceBean0.durationDes = "一个月";
         priceBean0.price = "0";
         mLengthList.add(priceBean0);
         PriceBean priceBean1 = new PriceBean();
-        priceBean1.id = "2";
         priceBean1.duration = "3";
         priceBean1.durationDes = "三个月";
         priceBean1.price = "0";
         mLengthList.add(priceBean1);
         PriceBean priceBean2 = new PriceBean();
-        priceBean2.id = "3";
         priceBean2.duration = "6";
         priceBean2.durationDes = "半年";
         priceBean2.price = "0";
         mLengthList.add(priceBean2);
         PriceBean priceBean3 = new PriceBean();
-        priceBean3.id = "4";
         priceBean3.duration = "12";
         priceBean3.durationDes = "一年";
         priceBean3.price = "0";
