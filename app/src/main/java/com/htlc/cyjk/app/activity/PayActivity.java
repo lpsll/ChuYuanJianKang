@@ -1,28 +1,31 @@
 package com.htlc.cyjk.app.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.alipay.sdk.app.PayTask;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.App;
-import com.htlc.cyjk.app.adapter.FourthAdapter;
 import com.htlc.cyjk.app.adapter.LengthAdapter;
 import com.htlc.cyjk.app.adapter.PayAdapter;
 import com.htlc.cyjk.app.bean.PaymentBean;
 import com.htlc.cyjk.app.event.SelectContactEvent;
-import com.htlc.cyjk.app.fragment.SelectContactFragment;
 import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.app.util.ToastUtil;
@@ -30,19 +33,20 @@ import com.htlc.cyjk.core.ActionCallbackListener;
 import com.htlc.cyjk.model.ChargeBean;
 import com.htlc.cyjk.model.ContactBean;
 import com.htlc.cyjk.model.PriceBean;
-import com.pingplusplus.android.PaymentActivity;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import de.greenrobot.event.EventBus;
+import pay.AliPayUtil;
+import pay.PayResult;
 
 /**
  * Created by sks on 2016/2/15.
  */
 public class PayActivity extends BaseActivity implements View.OnClickListener {
     private PullToRefreshScrollView mScrollView;
-    private static final int REQUEST_CODE_PAYMENT = 100;
+    private static final int ALI_SDK_PAY_FLAG = 1000;//支付宝
     private ListView mLengthListView, mPayListView;
     private ArrayList<PriceBean> mLengthList = new ArrayList();
     private ArrayList mPayList = new ArrayList();
@@ -53,6 +57,9 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private String[] itemPayIds;
     private TextView mTextDoctor;
     private ContactBean mDoctor;
+    private int payPosition;
+    private int lengthPosition;
+    private ProgressDialog payProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,8 +200,8 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void commitPayMethodAndLength() {
-        int lengthPosition = mLengthListView.getCheckedItemPosition();
-        int payPosition = mPayListView.getCheckedItemPosition();
+        lengthPosition = mLengthListView.getCheckedItemPosition();
+        payPosition = mPayListView.getCheckedItemPosition();
         LogUtil.e(this, "lengthPosition:" + lengthPosition + ";payPosition:" + payPosition);
         if (mDoctor == null) {
             ToastUtil.showToast(App.app, "请选择收费医生");
@@ -202,6 +209,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         }
         PriceBean priceBean = mLengthList.get(lengthPosition);
         PaymentBean paymentBean = (PaymentBean) mPayList.get(payPosition);
+        payProgressDialog = ProgressDialog.show(this, "", "请稍等...", true);
         appAction.payToDoctor(mDoctor.userid, priceBean.id, paymentBean.payId, new ActionCallbackListener<ChargeBean>() {
             @Override
             public void onSuccess(ChargeBean data) {
@@ -211,8 +219,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onFailure(String errorEvent, String message) {
                 if (handleNetworkOnFailure(errorEvent, message)) return;
-                LogUtil.e(this,"commitPayMethodAndLength:  "+message);
-                ToastUtil.showToast(App.app, message);
+                showTipsDialog(message, false);
             }
         });
     }
@@ -222,56 +229,135 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         LogUtil.e(this, "解码前：" + chargeBean.charge);
         String charge = new String(decode, Charset.forName("UTF-8"));
         LogUtil.e(this, "解码后：" + charge);
-        Intent intent = new Intent(this, PaymentActivity.class);
-        intent.putExtra(PaymentActivity.EXTRA_CHARGE, charge);
-        startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+        if(payPosition == 0){
+            if(payProgressDialog!=null){
+                payProgressDialog.dismiss();
+            }
+            wxPay(charge);
+        }else if(payPosition == 1){
+            if(payProgressDialog!=null){
+                payProgressDialog.dismiss();
+            }
+            unionPay(charge);
+        }else if(payPosition == 2){
+            if(payProgressDialog!=null){
+                payProgressDialog.dismiss();
+            }
+            aliPay(charge);
+        }
+
+    }
+
+    /**
+     * 支付宝支付
+     */
+    private void aliPay(String charge) {
+        charge = "2016042715050001";
+        double aliPrice = Double.parseDouble(mLengthList.get(lengthPosition).price);
+        final String payInfo = AliPayUtil.getPayInfo("华医医生会员", "华医医生会员费用", aliPrice + "", charge);
+        Runnable payRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                // 构造PayTask 对象
+                PayTask alipay = new PayTask(PayActivity.this);
+                // 调用支付接口，获取支付结果
+                String result = alipay.pay(payInfo, true);
+
+                Message msg = new Message();
+                msg.what = ALI_SDK_PAY_FLAG;
+                msg.obj = result;
+                mHandler.sendMessage(msg);
+            }
+        };
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+    /**
+     * 银联
+     */
+    private void unionPay(String charge) {
+
+    }
+    /**
+     * 微信
+     */
+    private void wxPay(String charge) {
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //支付页面返回处理
-        if (requestCode == REQUEST_CODE_PAYMENT) {
-            if (resultCode == Activity.RESULT_OK) {
-                String result = data.getExtras().getString("pay_result");
-            /* 处理返回值
-             * "success" - 支付成功
-             * "fail"    - 支付失败
-             * "cancel"  - 取消支付
-             * "invalid" - 支付插件未安装（一般是微信客户端未安装的情况）
-             */
-                String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
-                String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
-                LogUtil.e(this, "error:" + errorMsg + ";msg:" + extraMsg);
-                payResult(result);
-            }
-        }
+
     }
 
-    private void payResult(String result) {
-        String tips;
-        if ("success".equals(result)) {
-            tips = "缴费成功";
-        } else if ("fail".equals(result)) {
-            tips = "支付失败";
-        } else if ("cancel".equals(result)) {
-            tips = "支付取消";
-        } else {
-            tips = "交易出错";
+    /**
+     * 处理支付宝支付结果
+     */
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @SuppressWarnings("unused")
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case ALI_SDK_PAY_FLAG: {
+                    PayResult payResult = new PayResult((String) msg.obj);
+                    /**
+                     * 同步返回的结果必须放置到服务端进行验证（验证的规则请看https://doc.open.alipay.com/doc2/
+                     * detail.htm?spm=0.0.0.0.xdvAU6&treeId=59&articleId=103665&
+                     * docType=1) 建议商户依赖异步通知
+                     */
+                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+
+                    String resultStatus = payResult.getResultStatus();
+                    // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        showTipsDialog("支付成功！", true);
+                    } else {
+                        // 判断resultStatus 为非"9000"则代表可能支付失败
+                        // "8000"代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
+                        if (TextUtils.equals(resultStatus, "8000")) {
+                            showTipsDialog("支付结果确认中！", true);
+                        } else {
+                            // 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
+                            showTipsDialog("支付失败！", false);
+                        }
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 显示支付结果
+     *
+     * @param msg
+     */
+    private void showTipsDialog(String msg, final boolean paySuccess) {
+        if (payProgressDialog != null) {
+            payProgressDialog.dismiss();
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("温馨提示");//设置对话框标题
-        builder.setMessage(tips);//设置显示的内容
-        builder.setPositiveButton("完成", new DialogInterface.OnClickListener() {//添加确定按钮
+        builder.setTitle("支付结果");
+        builder.setCancelable(false);
+        builder.setMessage(msg);
+        builder.setInverseBackgroundForced(true);
+        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                if (paySuccess) {
+                    startActivity(new Intent(PayActivity.this, MainActivity.class));
+                }
             }
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-        Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        positiveButton.setTextColor(CommonUtil.getResourceColor(R.color.text_blue));
         Button negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-        negativeButton.setTextColor(CommonUtil.getResourceColor(R.color.text_blue));
+        negativeButton.setTextColor(CommonUtil.getResourceColor(R.color.bg_blue));
+
     }
 }

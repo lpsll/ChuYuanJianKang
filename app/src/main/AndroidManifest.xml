@@ -113,17 +113,8 @@
         </activity>
 
         <!-- **************************************Ping++ SDK******************************************** -->
-        <activity
-            android:name="com.pingplusplus.android.PaymentActivity"
-            android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <!-- 微信支付 -->
-        <activity-alias
-            android:name=".wxapi.WXPayEntryActivity"
-            android:exported="true"
-            android:targetActivity="com.pingplusplus.android.PaymentActivity"/>
 
         <!-- 支付宝 -->
         <activity
