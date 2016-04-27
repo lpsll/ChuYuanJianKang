@@ -364,7 +364,7 @@ public class ApiImpl implements Api {
     }
 
     @Override
-    public void payToDoctor(String doctorId, String timeLengthId, String channel, ResultCallback<ApiResponse<ChargeBean>> callback) {
+    public void payToDoctor(String doctorId, String timeLengthId, String channel, ResultCallback<String> callback) {
         Map<String, String> params = new HashMap<String, String>();
 
         String token = App.app.getUserBean().token;

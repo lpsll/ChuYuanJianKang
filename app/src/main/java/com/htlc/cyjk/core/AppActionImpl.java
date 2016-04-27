@@ -637,7 +637,7 @@ public class AppActionImpl implements AppAction {
 
     @Override
     public void payToDoctor(String doctorId, String timeLengthId, String channel, final ActionCallbackListener<ChargeBean> listener) {
-        api.payToDoctor(doctorId, timeLengthId, channel, new ResultCallback<ApiResponse<ChargeBean>>() {
+        api.payToDoctor(doctorId, timeLengthId, channel, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 e.printStackTrace();
@@ -645,11 +645,22 @@ public class AppActionImpl implements AppAction {
             }
 
             @Override
-            public void onResponse(ApiResponse<ChargeBean> response) {
-                if ("1".equals(response.code)) {
-                    listener.onSuccess(response.data);
-                } else {
-                    listener.onFailure(ErrorEvent.RESULT_ILLEGAL, response.msg);
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.getString("code");
+                    if ("1".equals(code)) {
+                        JSONObject jsonObjStr = jsonObject.getJSONObject("data");
+                        ChargeBean bean = new ChargeBean();
+                        bean.charge = jsonObjStr.getString("charge");
+                        listener.onSuccess(bean);
+                    } else {
+                        String msg = jsonObject.getString("msg");
+                        listener.onFailure(ErrorEvent.RESULT_ILLEGAL, msg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    listener.onFailure(ErrorEvent.NETWORK_ERROR, "网络出错！");
                 }
             }
         });

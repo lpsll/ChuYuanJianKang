@@ -225,10 +225,11 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void pay(ChargeBean chargeBean) {
-        byte[] decode = Base64.decode(chargeBean.charge, Base64.DEFAULT);
-        LogUtil.e(this, "解码前：" + chargeBean.charge);
-        String charge = new String(decode, Charset.forName("UTF-8"));
-        LogUtil.e(this, "解码后：" + charge);
+//        byte[] decode = Base64.decode(chargeBean.charge, Base64.DEFAULT);
+//        LogUtil.e(this, "解码前：" + chargeBean.charge);
+//        String charge = new String(decode, Charset.forName("UTF-8"));
+//        LogUtil.e(this, "解码后：" + charge);
+        String charge = chargeBean.charge;
         if(payPosition == 0){
             if(payProgressDialog!=null){
                 payProgressDialog.dismiss();

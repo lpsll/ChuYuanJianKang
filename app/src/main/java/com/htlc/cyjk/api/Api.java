@@ -205,7 +205,7 @@ public interface Api {
 
     void getPriceList(String doctorId,ResultCallback<ApiResponse<PriceBean>> callback);
 
-    void payToDoctor(String doctorId,String timeLengthId,String channel, ResultCallback<ApiResponse<ChargeBean>> callback);
+    void payToDoctor(String doctorId,String timeLengthId,String channel, ResultCallback<String> callback);
 
     void createOrder(String drugsJson, ResultCallback<ApiResponse<Void>> callback);
 
