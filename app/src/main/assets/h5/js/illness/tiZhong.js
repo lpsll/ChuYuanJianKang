@@ -34,7 +34,7 @@ function DrawData(id) {
 					if(e.valueone == null){
 						mvalue.push(null);	
 					}else{
-						mvalue.push(parseInt(e.valueone));	
+						mvalue.push(Number(e.valueone));	
 					}
 								
 			});
@@ -70,6 +70,7 @@ function DrawData(id) {
 
 				},
 				yAxis: {
+					allowDecimals: false,
 					title: {
 						text: ''
 					},
@@ -148,8 +149,7 @@ function saveData(){
 	}else if(Tvalue.length == 0){
 		document.getElementById("TempTime").innerHTML = "请选择时间";
 		return false;
-	}else{ 
-		
+	}else{
 		var TempValue = Number(Temp.value).toFixed(2);
 		
 		$.ajax({

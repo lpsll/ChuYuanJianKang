@@ -35,12 +35,12 @@ function DrawData(id) {
 					if(e.numericOne == null){
 						mvalue.push(null);
 					}else{
-						mvalue.push(parseInt(e.numericOne));
+						mvalue.push(Number(e.numericOne));
 					}
 					if(e.numericTwo == null){
 						nvalue.push(null);
 					}else{
-						nvalue.push(parseInt(e.numericTwo));
+						nvalue.push(Number(e.numericTwo));
 					}
 					
 			});
@@ -76,6 +76,7 @@ function DrawData(id) {
 
 				},
 				yAxis: {
+					allowDecimals: false,
 					title: {
 						text: ''
 					},

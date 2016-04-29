@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">华医医生</string>
+    <string name="app_name">191医生</string>
     <string name="common_modify">修改</string>
     <string name="common_finish">完成</string>
     <string name="common_username_hint">请输入手机号</string>

@@ -253,8 +253,8 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
      * 支付宝支付
      */
     private void aliPay(String charge) {
-        charge = "2016042715050001";
         double aliPrice = Double.parseDouble(mLengthList.get(lengthPosition).price);
+//        aliPrice = 0.01;
         final String payInfo = AliPayUtil.getPayInfo("华医医生会员", "华医医生会员费用", aliPrice + "", charge);
         Runnable payRunnable = new Runnable() {
 
@@ -352,6 +352,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                 dialog.dismiss();
                 if (paySuccess) {
                     startActivity(new Intent(PayActivity.this, MainActivity.class));
+                    finish();
                 }
             }
         });

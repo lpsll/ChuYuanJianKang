@@ -36,7 +36,7 @@ function DrawData() {
 					if(e.valueone == null){
 						mvalue.push(null);	
 					}else{
-						mvalue.push(parseInt(e.valueone));	
+						mvalue.push(Number(e.valueone));	
 					}
 								
 			});
@@ -78,6 +78,7 @@ function DrawData() {
 
 				},
 				yAxis: {
+					allowDecimals: false,
 					title: {
 						text: ''
 					},

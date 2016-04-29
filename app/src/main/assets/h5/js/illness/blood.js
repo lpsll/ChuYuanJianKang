@@ -59,13 +59,13 @@ function DrawData() {
 								if(h == null){
 									mval2.push(null);
 								}else{
-									mval2.push(parseInt(h));
+									mval2.push(Number(h));
 								}
 							}else{
 								if(h == null){
 									mval1.push(null);
 								}else{
-									mval1.push(parseInt(h));
+									mval1.push(Number(h));
 								}
 							}
 							o++;
@@ -74,13 +74,13 @@ function DrawData() {
 								if(h == null){
 									nval2.push(null);
 								}else{
-									nval2.push(parseInt(h));
+									nval2.push(Number(h));
 								}
 							}else{
 								if(h == null){
 									nval1.push(null);
 								}else{
-									nval1.push(parseInt(h));
+									nval1.push(Number(h));
 								}
 							}
 							
@@ -129,6 +129,7 @@ function DrawData() {
 
 				},
 				yAxis: {
+					allowDecimals: false,
 					title: {
 						text: ''
 					},

@@ -47,13 +47,13 @@ function DrawData(id) {
 						if(l == null){
 							val2.push(null)
 						}else{
-							val2.push(parseInt(l))
+							val2.push(Number(l))
 						}
 					}else{
 						if(l == null){
 							val1.push(null)
 						}else{
-							val1.push(parseInt(l))
+							val1.push(Number(l))
 						}
 					}
 				});
@@ -100,6 +100,7 @@ function DrawData(id) {
 
 				},
 				yAxis: {
+					allowDecimals: false,
 					title: {
 						text: ''
 					},

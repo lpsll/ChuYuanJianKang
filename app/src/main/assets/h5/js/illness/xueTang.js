@@ -1,6 +1,8 @@
 window.onload = function() {
 	id = bridge.getUserId();
 	token = bridge.getToken();
+//	id = "41";
+//	token = ""
 	console.log("id="+id);
 	DrawData(id)
 
@@ -42,39 +44,39 @@ function DrawData(id) {
 					if(e.value7 == null){
 						gvalue.push(null);	
 					}else{
-						gvalue.push(parseInt(e.value7));	
+						gvalue.push(Number(e.value7));	
 					}
 					if(e.value6 == null){
 						fvalue.push(null);
 					}else{
-						fvalue.push(parseInt(e.value6));
+						fvalue.push(Number(e.value6));
 					}
 					
 					if(e.value5 == null){
 						evalue.push(null);
 					}else{
-						evalue.push(parseInt(e.value5));
+						evalue.push(Number(e.value5));
 					}
 					
 					if(e.value4 == null){
 						dvalue.push(null);
 					}else{
-						dvalue.push(parseInt(e.value4));
+						dvalue.push(Number(e.value4));
 					}
 					if(e.value3 == null){
 						cvalue.push(null);
 					}else{
-						cvalue.push(parseInt(e.value3));
+						cvalue.push(Number(e.value3));
 					}
 					if(e.value2 == null){
 						bvalue.push(null);
 					}else{
-						bvalue.push(parseInt(e.value2));
+						bvalue.push(Number(e.value2));
 					}
 					if(e.value1 == null){
 						avalue.push(null);
 					}else{
-						avalue.push(parseInt(e.value1));
+						avalue.push(Number(e.value1));
 					}
 					
 					
@@ -124,6 +126,7 @@ function DrawData(id) {
 
 				},
 				yAxis: {
+					allowDecimals: false,
 					title: {
 						text: ''
 					},

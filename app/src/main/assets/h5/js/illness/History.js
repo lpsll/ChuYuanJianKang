@@ -1,6 +1,8 @@
 window.onload = function() {
 	id = bridge.getUserId();
 	token = bridge.getToken();
+//	id = 149;
+//	token = "";
 	getUrl()
 }
 var id = "";
