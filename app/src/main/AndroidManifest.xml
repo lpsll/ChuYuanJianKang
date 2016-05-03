@@ -115,7 +115,12 @@
         <!-- **************************************Ping++ SDK******************************************** -->
 
         <!-- 微信支付 -->
-
+        <!--微信-->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.Translucent"
+            android:launchMode="singleTop"/>
         <!-- 支付宝 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"

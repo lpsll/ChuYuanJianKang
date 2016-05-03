@@ -2,7 +2,8 @@ package com.htlc.cyjk.app.util;
 
 public interface Constant {
     boolean isDebug = false;
-
+    String WX_APP_ID = "wx343d2b19fd2dc64a";
+    String WX_APP_KEY = "wx343d2b19fd2dc64awx343d2b19fd2d";
     String USERNAME = "USERNAME";
     String PASSWORD = "PASSWORD";
     String USER_ID = "USER_ID";

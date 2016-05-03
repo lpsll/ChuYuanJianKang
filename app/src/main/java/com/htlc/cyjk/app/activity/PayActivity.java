@@ -3,8 +3,11 @@ package com.htlc.cyjk.app.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,12 +30,20 @@ import com.htlc.cyjk.app.adapter.PayAdapter;
 import com.htlc.cyjk.app.bean.PaymentBean;
 import com.htlc.cyjk.app.event.SelectContactEvent;
 import com.htlc.cyjk.app.util.CommonUtil;
+import com.htlc.cyjk.app.util.Constant;
 import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.app.util.ToastUtil;
 import com.htlc.cyjk.core.ActionCallbackListener;
 import com.htlc.cyjk.model.ChargeBean;
 import com.htlc.cyjk.model.ContactBean;
 import com.htlc.cyjk.model.PriceBean;
+import com.htlc.cyjk.wxapi.WXPayEntryActivity;
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -67,12 +78,26 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         EventBus.getDefault().register(this);
         setContentView(R.layout.activity_pay);
         setupView();
+        registerWXBroadcastReceiver();
+    }
+    private void registerWXBroadcastReceiver() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(getApplication().getPackageName() + ".action.WX_PAY");
+        registerReceiver(wxPayBroadcastReceiver, filter);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (payProgressDialog != null) {
+            payProgressDialog.dismiss();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);//反注册EventBus
+        unregisterReceiver(wxPayBroadcastReceiver);
     }
 
     public void onEventMainThread(SelectContactEvent event) {
@@ -231,9 +256,6 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
 //        LogUtil.e(this, "解码后：" + charge);
         String charge = chargeBean.charge;
         if(payPosition == 0){
-            if(payProgressDialog!=null){
-                payProgressDialog.dismiss();
-            }
             wxPay(charge);
         }else if(payPosition == 1){
             if(payProgressDialog!=null){
@@ -285,7 +307,32 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
      * 微信
      */
     private void wxPay(String charge) {
-
+        final IWXAPI msgApi = WXAPIFactory.createWXAPI(this, null);
+        // 将该app注册到微信
+        boolean b = msgApi.registerApp(Constant.WX_APP_ID);
+        IWXAPI wxapi = WXAPIFactory.createWXAPI(this, Constant.WX_APP_ID);
+        try {
+            JSONObject json = new JSONObject(charge);
+            PayReq req = new PayReq();
+            req.appId = Constant.WX_APP_ID;  // 测试用appId
+            req.appId = json.getString("appid");
+            req.partnerId = json.getString("partnerid");
+            req.prepayId = json.getString("prepayid");
+            req.nonceStr = json.getString("noncestr");
+            req.timeStamp = json.getString("timestamp");
+            req.packageValue = json.getString("package");
+//            String sign = MD5Util.MD5("appid=" + req.appId
+//                    + "&noncestr=" + req.nonceStr + "&package="
+//                    + req.packageValue + "&partnerid=" + req.partnerId
+//                    + "&prepayid=" + req.prepayId + "&timestamp="
+//                    + req.timeStamp + "&key=" + Constant.WX_APP_KEY).toUpperCase();
+//            req.sign = sign;
+            req.sign = json.getString("sign");
+            //req.extData = "app data";
+            wxapi.sendReq(req);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -362,4 +409,30 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         negativeButton.setTextColor(CommonUtil.getResourceColor(R.color.bg_blue));
 
     }
+    /**
+     *
+     * 处理微信支付结果
+     */
+    private BroadcastReceiver wxPayBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int code = intent.getIntExtra(WXPayEntryActivity.TAG, 1);
+            switch (code) {
+                case 0://支付成功后的界面
+                    showTipsDialog("支付成功！",true);
+                    break;
+                case -1:
+                    //支付错误
+                    showTipsDialog("支付失败！",false);
+                    break;
+                case -2://用户取消支付后的界面
+                    showTipsDialog("支付取消！",false);
+                    break;
+                default:
+                    //支付错误
+                    showTipsDialog("支付失败！",false);
+                    break;
+            }
+        }
+    };
 }
