@@ -40,7 +40,7 @@
             android:id="@+id/imageHead"
             android:layout_width="110px"
             android:layout_height="110px"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/default_head"/>
     </com.zhy.autolayout.AutoLinearLayout>
     <include layout="@layout/layout_divider_horizontal"/>
 
