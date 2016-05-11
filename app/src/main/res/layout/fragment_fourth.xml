@@ -31,6 +31,7 @@
                     app:civ_border_color="@android:color/white"
                     app:civ_border_width="4px"
                     app:civ_border_overlay="true"
+                    app:civ_fill_color="@android:color/white"
                     android:layout_centerInParent="true"
                     android:src="@mipmap/default_head"/>
                 <TextView

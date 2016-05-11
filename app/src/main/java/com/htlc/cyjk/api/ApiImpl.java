@@ -2,6 +2,7 @@
 package com.htlc.cyjk.api;
 
 
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Pair;
 
@@ -9,6 +10,7 @@ import com.htlc.cyjk.api.net.okhttp.callback.ResultCallback;
 import com.htlc.cyjk.api.net.okhttp.request.OkHttpRequest;
 import com.htlc.cyjk.api.utils.EncryptUtil;
 import com.htlc.cyjk.app.App;
+import com.htlc.cyjk.app.util.Constant;
 import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.model.ChargeBean;
 import com.htlc.cyjk.model.ContactBean;
@@ -402,6 +404,20 @@ public class ApiImpl implements Api {
         String url = Api.GetAllCity;
         LogUtil.e(this, url);
         new OkHttpRequest.Builder().url(url).params(params).post(callback);
+    }
+
+    @Override
+    public void checkUpdate(ResultCallback<String> callback) {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("shortcut", Constant.PGY_SHORT_URL);
+        params.put("_api_key", Constant.PGY_API_KEY);
+        String url = Api.CheckUpdate;
+        new OkHttpRequest.Builder().url(url).params(params).post(callback);
+    }
+
+    @Override
+    public void downloadApk(String url, String dir, String fileName, ResultCallback<String> callback) {
+        new OkHttpRequest.Builder().url(url).destFileDir(dir).destFileName(fileName).download(callback);
     }
 
 }

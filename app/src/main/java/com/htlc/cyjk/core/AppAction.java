@@ -1,6 +1,8 @@
 
 package com.htlc.cyjk.core;
 
+import com.htlc.cyjk.api.net.okhttp.callback.ResultCallback;
+import com.htlc.cyjk.model.AppVersionBean;
 import com.htlc.cyjk.model.ChargeBean;
 import com.htlc.cyjk.model.ContactBean;
 import com.htlc.cyjk.model.DischargeSummaryBean;
@@ -175,4 +177,7 @@ public interface AppAction {
     void createOrder(String drugsJson, ActionCallbackListener<Void> listener);
 
     void getAllCity(ActionCallbackListener<ArrayList<NetworkCityBean>> listener);
+
+    void checkUpdate(ActionCallbackListener<AppVersionBean> listener);
+    void downloadApk(String url, String fileName, ResultCallback<String> callback);
 }

@@ -51,6 +51,9 @@ public interface Api {
     String GetCounty = Host + "city_getarea";
     String GetAllCity = Host + "city_getall";
 
+    String CheckUpdate = "http://www.pgyer.com/apiv1/app/getAppKeyByShortcut";
+    String DownloadApk = "http://www.pgyer.com/apiv1/app/install?aId=%1$s&_api_key=%2$s";
+
 
 
     /**
@@ -210,4 +213,7 @@ public interface Api {
     void createOrder(String drugsJson, ResultCallback<ApiResponse<Void>> callback);
 
     void getAllCity(String lastModifyData, ResultCallback<ApiResponse<UpdateCityBean>> callback);
+
+    void checkUpdate(ResultCallback<String> callback);
+    void downloadApk(String url, String dir, String fileName, ResultCallback<String> callback);
 }

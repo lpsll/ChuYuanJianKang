@@ -2,6 +2,7 @@
 package com.htlc.cyjk.core;
 
 import android.content.Context;
+import android.os.Environment;
 import android.text.TextUtils;
 
 import com.google.gson.reflect.TypeToken;
@@ -18,6 +19,7 @@ import com.htlc.cyjk.app.util.JsonUtil;
 import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.app.util.RegExUtil;
 import com.htlc.cyjk.app.util.SharedPreferenceUtil;
+import com.htlc.cyjk.model.AppVersionBean;
 import com.htlc.cyjk.model.ChargeBean;
 import com.htlc.cyjk.model.ContactBean;
 import com.htlc.cyjk.model.DischargeSummaryBean;
@@ -707,5 +709,38 @@ public class AppActionImpl implements AppAction {
                 }
             }
         });
+    }
+
+    @Override
+    public void checkUpdate(final ActionCallbackListener<AppVersionBean> listener) {
+        api.checkUpdate(new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                e.printStackTrace();
+                listener.onFailure(ErrorEvent.NETWORK_ERROR, CommonUtil.getResourceString(R.string.common_network_error));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.getString("code");
+                    if("0".equals(code)){
+                        String data = jsonObject.getString("data");
+                        AppVersionBean appVersionBean = JsonUtil.parseJsonToBean(data, AppVersionBean.class);
+                        listener.onSuccess(appVersionBean);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    listener.onFailure(ErrorEvent.NETWORK_ERROR, CommonUtil.getResourceString(R.string.common_network_error));
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void downloadApk(String url, String fileName, ResultCallback<String> callback) {
+        api.downloadApk(url, Environment.getExternalStorageDirectory().getAbsolutePath(), fileName, callback);
     }
 }

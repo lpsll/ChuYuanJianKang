@@ -55,7 +55,23 @@ public class CommonUtil {
             e.printStackTrace();
             LogUtil.i(getApplication(), "获取版本版本名出错");
         }
-        return "1.2.1";
+        return "0";
+    }
+    /**
+     * 获取当前应用版本号
+     * @return
+     */
+    public static int getVersionCode() {
+        try {
+            String packageName = getApplication().getPackageName();
+            LogUtil.i(getApplication(),packageName);
+            PackageInfo packageInfo = getApplication().getPackageManager().getPackageInfo(packageName, 0);
+            return packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            LogUtil.i(getApplication(), "获取版本版本名出错");
+        }
+        return 1;
     }
 
 

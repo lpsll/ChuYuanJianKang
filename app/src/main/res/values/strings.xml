@@ -132,6 +132,7 @@
     <string-array name="activity_setting_children">
         <item>清除缓存</item>
         <!--<item>查看版本</item>-->
+        <item>检查更新</item>
         <item>退出</item>
     </string-array>
 

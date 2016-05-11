@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.bean.FourthAdapterBean;
+import com.htlc.cyjk.app.util.ImageLoaderCfg;
 import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.model.ContactBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -64,7 +65,7 @@ public class SecondAdapter extends BaseAdapter{
         holder.textType.setText(bean.head);
         LogUtil.e(this,"首字母："+bean.head);
         holder.textView.setText(bean.name);
-        ImageLoader.getInstance().displayImage(bean.photo,holder.imageView);
+        ImageLoader.getInstance().displayImage(bean.photo,holder.imageView, ImageLoaderCfg.options);
         if(position == 0){
             holder.textType.setVisibility(View.VISIBLE);
         }else {

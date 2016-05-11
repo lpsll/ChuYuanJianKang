@@ -27,6 +27,7 @@ import com.htlc.cyjk.app.activity.SettingActivity;
 import com.htlc.cyjk.app.adapter.FourthAdapter;
 import com.htlc.cyjk.app.bean.FourthAdapterBean;
 import com.htlc.cyjk.app.util.CommonUtil;
+import com.htlc.cyjk.app.util.ImageLoaderCfg;
 import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.core.ActionCallbackListener;
 import com.htlc.cyjk.model.UserBean;
@@ -88,7 +89,7 @@ public class FourthFragment extends HomeFragment implements AdapterView.OnItemCl
         String name = baseActivity.application.getUserBean().name;
         String username = baseActivity.application.getUserBean().username;
         if(!TextUtils.isEmpty(imageHeadUrl)){
-            ImageLoader.getInstance().displayImage(imageHeadUrl,mImageHead);
+            ImageLoader.getInstance().displayImage(imageHeadUrl,mImageHead, ImageLoaderCfg.options);
         }
         if(!TextUtils.isEmpty(name)){
             mTextName.setText(name);

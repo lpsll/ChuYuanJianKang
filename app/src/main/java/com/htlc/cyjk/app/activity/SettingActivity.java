@@ -1,7 +1,6 @@
 package com.htlc.cyjk.app.activity;
 
 import android.content.DialogInterface;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -17,11 +16,10 @@ import com.htlc.cyjk.app.util.AppManager;
 import com.htlc.cyjk.app.util.CommonUtil;
 import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.app.util.ToastUtil;
+import com.htlc.cyjk.app.util.UpdateUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
-
-import io.rong.imkit.RongIM;
 
 /**
  * Created by sks on 2016/2/15.
@@ -56,12 +54,12 @@ public class SettingActivity extends BaseActivity implements AdapterView.OnItemC
     }
 
     private void initData() {
-//        itemImageIds = new int[]{R.mipmap.activity_setting_1, R.mipmap.activity_setting_2, R.mipmap.activity_setting_3};
-//        itemNames = CommonUtil.getResourceStringArray(R.array.activity_setting_children);
-//        itemHaveEmptys = new boolean[]{true,false,true};
-        itemImageIds = new int[]{R.mipmap.activity_setting_1, R.mipmap.activity_setting_3};
+        itemImageIds = new int[]{R.mipmap.activity_setting_1, R.mipmap.activity_setting_2, R.mipmap.activity_setting_3};
         itemNames = CommonUtil.getResourceStringArray(R.array.activity_setting_children);
-        itemHaveEmptys = new boolean[]{true,true};
+        itemHaveEmptys = new boolean[]{true,false,true};
+//        itemImageIds = new int[]{R.mipmap.activity_setting_1, R.mipmap.activity_setting_3};
+//        itemNames = CommonUtil.getResourceStringArray(R.array.activity_setting_children);
+//        itemHaveEmptys = new boolean[]{true,true};
         for(int i=0; i<itemImageIds.length;i++){
             FourthAdapterBean bean = new FourthAdapterBean();
             bean.imageId = itemImageIds[i];
@@ -82,10 +80,10 @@ public class SettingActivity extends BaseActivity implements AdapterView.OnItemC
                 clearCache();
                 break;
             case 1:
-                exist();
+                new UpdateUtil(this).canUpdate(true);
                 break;
             case 2:
-
+                exist();
                 break;
         }
     }

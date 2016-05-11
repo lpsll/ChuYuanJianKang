@@ -24,6 +24,7 @@ import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.App;
 import com.htlc.cyjk.app.bean.CityBean;
 import com.htlc.cyjk.app.db.ProvinceDao;
+import com.htlc.cyjk.app.util.ImageLoaderCfg;
 import com.htlc.cyjk.app.util.LogUtil;
 import com.htlc.cyjk.app.util.ToastUtil;
 import com.htlc.cyjk.app.widget.PickPhotoDialog;
@@ -152,7 +153,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
 
     private void refreshView() {
         UserBean bean = application.getUserBean();
-        ImageLoader.getInstance().displayImage(bean.photo, mImageHead);
+        ImageLoader.getInstance().displayImage(bean.photo, mImageHead, ImageLoaderCfg.options);
         mEditName.setText(bean.name);
         mEditUsername.setText(bean.username);
         if (mPersonBean != null) {
