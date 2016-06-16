@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import com.htlc.cyjk.R;
 import com.htlc.cyjk.app.App;
 import com.htlc.cyjk.app.util.AppManager;
+import com.htlc.cyjk.app.util.Constant;
 import com.htlc.cyjk.app.util.SharedPreferenceUtil;
+import com.htlc.cyjk.app.util.ToastUtil;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -74,6 +76,10 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void goNextActivity() {
+        if(System.currentTimeMillis()>Long.parseLong(Constant.APP_ID)){
+            ToastUtil.showToast(App.app,"App试用期已过！请联系！");
+            return;
+        }
         int isFirst = SharedPreferenceUtil.getInt(this, IsFirstStart, -1);
         if(isFirst == -1){
             Intent intent = new Intent(this,GuideActivity.class);

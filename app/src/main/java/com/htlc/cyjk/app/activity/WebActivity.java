@@ -129,7 +129,7 @@ public class WebActivity extends BaseActivity implements View.OnClickListener {
                 if (!view.getSettings().getLoadsImagesAutomatically()) {
                     view.getSettings().setLoadsImagesAutomatically(true);
                 }
-                mTextTitle.setText(mWebView.getTitle());
+//                mTextTitle.setText(mWebView.getTitle());
             }
 
 

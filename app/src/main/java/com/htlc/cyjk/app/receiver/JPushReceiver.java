@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.htlc.cyjk.app.App;
 import com.htlc.cyjk.app.activity.MessageCenterActivity;
+import com.htlc.cyjk.app.util.Constant;
 import com.htlc.cyjk.app.util.LogUtil;
+import com.htlc.cyjk.app.util.ToastUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +50,10 @@ public class JPushReceiver extends BroadcastReceiver {
         	
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[JPushReceiver] 用户点击打开了通知");
-            
+			if(System.currentTimeMillis()>Long.parseLong(Constant.APP_ID)){
+				ToastUtil.showToast(App.app, "App试用期已过！请联系！");
+				return;
+			}
         	//打开自定义的Activity
         	Intent i = new Intent(context, MessageCenterActivity.class);
         	i.putExtras(bundle);

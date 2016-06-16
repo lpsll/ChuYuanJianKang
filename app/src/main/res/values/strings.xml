@@ -20,7 +20,7 @@
 
     <string name="activity_register">注册</string>
     <string name="activity_register_protocol_hint">同意</string>
-    <string name="activity_register_protocol">《雏鹰软件用户协议》</string>
+    <string name="activity_register_protocol">《191医生注册用户协议》</string>
 
     <string name="activity_perfect_info">完善注册信息</string>
     <string name="activity_perfect_name_hint">姓名</string>

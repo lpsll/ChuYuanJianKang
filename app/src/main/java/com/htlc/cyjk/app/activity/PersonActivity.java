@@ -153,7 +153,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
 
     private void refreshView() {
         UserBean bean = application.getUserBean();
-        ImageLoader.getInstance().displayImage(bean.photo, mImageHead, ImageLoaderCfg.options);
+        ImageLoader.getInstance().displayImage(bean.photo, mImageHead);
         mEditName.setText(bean.name);
         mEditUsername.setText(bean.username);
         if (mPersonBean != null) {
@@ -338,6 +338,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
             mTextRight.setText("修改");
             mTextLeft.setVisibility(View.GONE);
             mImageBack.setVisibility(View.VISIBLE);
+            mImageFile = null;
             refreshView();
         } else {
             mEditName.setEnabled(true);
@@ -372,8 +373,9 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onSuccess(Void data) {
                 dismissProgressHUD();
-                getPersonInfo();
                 changeEditStatus();
+                getPersonInfo();
+
             }
 
             @Override

@@ -18,7 +18,7 @@ import com.htlc.cyjk.model.UserBean;
 import java.io.File;
 
 public interface Api {
-    String Host = "http://z3.damaimob.com/index.php/home/";
+    String Host = "http://123.56.243.53/index.php/home/";
     String SendSmsCode = Host + "user_verifycode";
     String Register = Host + "user_enroll";
     String Login = Host + "user_login";
